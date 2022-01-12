@@ -1,0 +1,132 @@
+@media (min-width: 1024px) {
+    .box {
+        width: 100% !important;
+    }
+}
+@media (min-width: 1280px) {
+    .box {
+        width: 90% !important;
+    }
+}
+@media (min-width: 1366px) {
+    .box {
+        width: 80% !important;
+    }
+}
+@media (min-width: 2560px) {
+    .box {
+        width: 60% !important;
+    }
+}
+@media (min-width: 3840px) {
+    .box {
+        width: 40% !important;
+    }
+}
+
+.login {
+    height: 100vh;
+    background-color: #EDF2FF;
+    position: relative;
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        height: 100%;
+    }
+    .row {
+        height: 100%;
+
+        .col-lg-7 {
+            position: relative;
+
+            .img1 {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+            }
+        }
+        .col-lg-5 {
+            .box {
+                width: 50%;
+
+                img {
+                    width: 25%;
+                }
+                h3 {
+                    color: #2672ED;
+                    font-weight: 600;
+                }
+                h6 {
+                    color: #2672ED;
+                    font-weight: 500;
+                }
+                .form-group {
+                    position: relative;
+
+                    .form-control {
+                        border: 2.5px solid #CADCF6 !important;
+                        color: #5482CC;
+                        border-radius: 10px;
+                        box-shadow: none !important;
+                        background-color: transparent !important;
+                        
+                        &::placeholder {
+                            color: #9CB3D7;
+                        }
+                        &:focus {
+                            border-color: #4E96FE !important;
+                        }
+                    }
+                    button {
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        transform: translateY(-50%);
+                        height: 100%;
+                        color: #9CB3D7;
+                    }
+                }
+                .btn {
+                    &.btn-primary {
+                        background-color: #4285F1 !important;
+                        border-radius: 15px;
+                    }
+                }
+                p {
+                    color: #739DE8;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .background {
+        position: absolute;
+        border: 20px solid #DDE8FF;
+        height: 11%;
+        border-radius: 70px;
+
+        &:nth-child(1) {
+            width: 30%;
+            top: 1%;
+            left: .5%;
+        }
+        &:nth-child(2) {
+            right: 0;
+            width: 40%;
+            top: 20%;
+        }
+        &:nth-child(3) {
+            bottom: 1%;
+            width: 40%;
+            right: 5%;
+        }
+        &:nth-child(4) {
+            bottom: 40%;
+            width: 30%;
+            left: .5%;
+        }
+    }
+}

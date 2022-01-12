@@ -1,0 +1,43 @@
+.transaksi {
+    .transaksi-item {
+        .title {
+            h5 {
+                color: #184896;
+                font-weight: 500;
+            }
+            p {
+                color: #739DE8;
+                font-weight: 500;
+            }
+        }
+        .asset {
+            h5 {
+                color: #184896;
+            }
+        }
+        .status {
+            h5 {
+                font-weight: 500;
+                text-transform: capitalize;
+
+                &.text-success {
+                    color: #41AD8D;
+                }
+                &.text-danger {
+                    color: #E47777;
+                }
+                &.text-primary {
+                    color: #528DFF;
+                }
+            }
+            p {
+                color: #A9B7DB;
+            }
+        }
+        .action {
+            .btn {
+                color: #184896;
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+.ref {
+    .ref-container {
+        h5 {
+            font-weight: 500;
+            color: #184896;
+        }
+        h6 {
+            color: #739DE8;
+            font-weight: 500;
+        }
+    }
+    .vendor {
+        .btn-back {
+            color: #739DE8;
+            font-weight: 600;
+        }
+        .vendor-card {
+            h5 {
+                color: #184896;
+                font-weight: 500;
+            }
+            h6 {
+                color: #739DE8;
+                font-weight: 500;
+            }
+            .btn {
+                color: lighten($color: #184896, $amount: 10);
+
+                &:hover {
+                    color: #184896;
+                }
+            }
+        }
+    }
+}
+.modal-info {
+    .title-barang {
+        color: #184896;
+        font-weight: 500;
+    }
+    .barang {
+        background-color: #EEF5FF;
+        border-radius: 10px;
+        max-height: 300px;
+        overflow: auto;
+
+        span {
+            color: #184896;
+            font-weight: 500;
+        }
+        ul {
+            li {
+                color: #184896;
+                font-weight: 500;
+            }
+        }
+    }
+}
+.popover-vendor {
+    .btn {
+        color: #5987D0;
+        font-weight: 500;
+    }
+}
