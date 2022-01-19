@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'http://dev.tikom.elemen.my.id/asset/',
+    baseURL: 'http://192.168.100.37:3750/',
     // baseURL: 'http://192.168.100.37:3650/',
     withCredentials: false,
     headers: {

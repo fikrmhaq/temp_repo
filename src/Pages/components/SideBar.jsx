@@ -112,12 +112,12 @@ function SideBar() {
 
     const [path, setPath] = useState('');
 
-    useEffect(() => {
-        setInterval(() => {
-            setPath(window.location.pathname);
-            sessionStorage.setItem('pathname', content.find(item => item.to == window.location.pathname).name);
-        });
-    })
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         setPath(window.location.pathname);
+    //         sessionStorage.setItem('pathname', content.find(item => item.to == window.location.pathname).name);
+    //     });
+    // })
 
     const logout = () => {
         localStorage.removeItem('logged');

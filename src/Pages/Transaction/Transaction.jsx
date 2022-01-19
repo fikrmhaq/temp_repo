@@ -3,6 +3,7 @@ import Modals from './Modals';
 
 // Component
 import { Card, Pagination } from '../../components';
+import { Dialog } from '../components/Modal/Modal';
 
 class Transaction extends React.Component {
     state = {
@@ -211,6 +212,9 @@ class Transaction extends React.Component {
                     ))}
                 </div>
                 {this.state.data != null && <Pagination data={this.state.dataSearch == null ? this.state.data : this.state.dataSearch} get={(data) => this.setState({ pagination: data })}></Pagination>}
+                <Dialog open={true} >
+                    Tes
+                </Dialog>
             </div>
         );
     }
