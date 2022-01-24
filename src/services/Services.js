@@ -9,7 +9,7 @@ const apiClient = axios.create({
         'Content-Type': 'application/json'
     }
 })
-
+                                                                                                            
 export default {
     getRincian(mst, offset = 0) {
         if (mst == '' || mst == null) return apiClient.get('/rincian_asset');
@@ -109,5 +109,11 @@ export default {
     },
     patchVendor(id, data) {
         return apiClient.patch(`/vendor/${id}`, data);
-    }
+    },
+    postCorePeminjaman(data) {
+        return apiClient.post('/core_peminjaman', data);
+    },
+    postDetailPeminjaman(data) {
+        return apiClient.post('/detail_peminjaman', data);
+    },
 }
