@@ -17,7 +17,7 @@ import SideBarResponsive from "../Pages/components/SideBarResponsive";
 const Routes = ({ global, pathname }) => {
   return (
     <Router>
-      {[null, ""].includes(localStorage.getItem("logged")) ? (
+      {[null, ""].includes(localStorage.getItem("signData")) ? (
         <div>
             <ExportRoutes global={global} />
         </div>

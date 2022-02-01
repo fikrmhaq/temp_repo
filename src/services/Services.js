@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'http://192.168.100.37:3750/',
+    baseURL: 'https://asset.tikomdik-disdikjabar.id/',
     // baseURL: 'http://192.168.100.37:3650/',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization":localStorage.getItem("token")
     }
 })
                                                                                                             
@@ -116,4 +117,8 @@ export default {
     postDetailPeminjaman(data) {
         return apiClient.post('/detail_peminjaman', data);
     },
+
+    postLogin(data){
+        return apiClient.post('/auth', data)
+    }
 }

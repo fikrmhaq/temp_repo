@@ -158,8 +158,8 @@ class Transaction extends React.Component {
   };
 
   componentDidMount() {
-    if (!localStorage.getItem("logged"))
-      window.location.href = "http://192.168.2.16:3000";
+    // if (!localStorage.getItem("logged"))
+    //   window.location.href = "http://192.168.2.16:3000";
 
     
     this.getBarang()

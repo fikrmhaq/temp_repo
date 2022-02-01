@@ -60,7 +60,7 @@ class Core extends React.Component {
     }
 
     componentDidMount() {
-        if (!localStorage.getItem('logged')) window.location.href = 'http://192.168.2.16:3000'
+        // if (!localStorage.getItem('logged')) window.location.href = 'http://192.168.2.16:3000'
         Services.getKontrak().then(res => {
             this.setState({ activeData: res.data.data.filter(item => item.id_jenis_kontrak == 1) });
         })

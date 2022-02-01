@@ -46,8 +46,8 @@ class Ruangan extends React.Component {
   };}
 
   componentDidMount() {
-    if (!localStorage.getItem("logged"))
-      window.location.href = "http://192.168.2.16:3000";
+    // if (!localStorage.getItem("logged"))
+    //   window.location.href = "http://192.168.2.16:3000";
     Services.getRuangan().then((res) => {
       this.setState({
         ruangan: res.data.data.sort((a, b) => {

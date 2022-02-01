@@ -1,16 +1,18 @@
 import React, {useState} from 'react'
 import {Route, Redirect as Direct, Switch} from 'react-router-dom'
 import Login from '../Pages/Login/Login'
-import Dashboard from '../Pages/Dashboard/Dashboard'
+// import Dashboard from '../Pages/Dashboard/Dashboard'
 import Core from '../Pages/Core/Core'
 import Ruangan from '../Pages/Ruangan/Ruangan'
 import Transaction from '../Pages/Transaction/Transaction'
 import Ref from '../Pages/Ref/Ref'
+import Dashboard from '../controllers/Dashboard'
+import { useAuth } from '../functions/hooks/auth'
 
 export const path = [ // Rute
     {
         name:'Login',
-        path:'/',
+        path:'/oauth-callback',
     },
     {
         name: 'Dashboard',
@@ -31,6 +33,10 @@ export const path = [ // Rute
     {
         name: 'Ref',
         path: '/ref'
+    },
+    {
+        name: 'OAuth',
+        path: '/oauth-callback?code='
     }
 ]
 

@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        if (!localStorage.getItem('logged')) window.location.href = 'http://192.168.2.16:3000'
+        // if (!localStorage.getItem('logged')) window.location.href = 'http://192.168.2.16:3000'
         const month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
         const color = ['#F4AAAA', '#5F9CFF'];
         const dataBar = month.map(() => Math.floor(Math.random() * 100));
@@ -182,7 +182,7 @@ class Dashboard extends React.Component {
                         <div className="row threeData me-5 pe-5">
                             <div className="col-lg-4">
                                 <Card>
-                                    <h5>Total Aset</h5>
+                                    <h5>Total Aset {this.props.tes}</h5>
                                     <h3 className={"mt-4 mb-0 " + (this.state.threeData.aset == null && 'placeholder-wave')}>{this.state.threeData.aset != null ? this.state.threeData.aset.toString().split('').reverse().map((item, index, elem) => {
                                         if (!((index + 1) % 3) && index + 1 < elem.length) return item + '.';
                                         return item;
