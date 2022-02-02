@@ -1,6 +1,8 @@
 import React from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
 import Services from '../../services/Services';
+import { Form } from '../components/Form/Form';
+import { KategoriBarang, Vendor } from './components';
 
 class EditCore extends React.Component {
     constructor(props) {
@@ -10,6 +12,12 @@ class EditCore extends React.Component {
             inputVendor: {
                 nama: ''
             },
+            input: {
+
+                unit:''
+            },
+            unit:false,
+            unit_list:[],
             rincian_asset: [],
             history_id: [],
             lapisan: 0
@@ -79,8 +87,9 @@ class EditCore extends React.Component {
     }
 
     render() { 
+        const { input, unit_list } = this.state
         return (
-            <Modal toggle={this.props.toggle} isOpen={this.props.isOpen} className='edit-core' centered>
+            <Modal size='lg' toggle={this.props.toggle} isOpen={this.props.isOpen} className='edit-core' centered>
                 <ModalBody>
                     <div className="d-flex mb-2 justify-content-between">
                         <h5 className='modal-title my-auto'>Edit Barang</h5>
@@ -111,114 +120,35 @@ class EditCore extends React.Component {
                                 </div>
                             </div>
                         </Collapse>
-                        <div className="detail px-2 py-3 mt-3 rounded-3">
-                            <div className="form-group">
-                                <input type="text" name="search" id="search" className="form-control" placeholder="Search" onChange={this.vendorSearch} />
+                        <Vendor dataVendor={
+                            this.state.dataVendor != null ?
+                            this.state.dataVendor
+                            :
+                            []
+                        } dataSearchVendor={this.state.dataSearchVendor} id_vendor={this.props.data.id_vendor} onChange={(id) =>this.props.changeData('id_vendor', id)} />
+                    </div>
+                    <div className="detail-container mb-2">
+                        <div className="d-flex justify-content-between">
+                            <div className="mt-auto">
+                                Unit
                             </div>
-                            <ul className="nav flex-column mt-3 px-1">
-                                {this.state.dataVendor != null ? (
-                                    this.state.dataSearchVendor.map(item => {
-                                        return (
-                                            <li className={"nav-item py-2 px-3 rounded-3 mb-2 " + (this.props.data.id_vendor == item.id_vendor && 'active')} onClick={() => {this.props.changeData('id_vendor', item.id_vendor)}}>
-                                                {item.nama}
-                                            </li>
-                                        );
-                                    })
-                                ) : "Loading..."}
-                            </ul>
+                            <div>
+                                <button className="btn btn-primary btn-sm" onClick={() => this.setState({ unit: !this.state.unit })}>+</button>
+                            </div>
                         </div>
+                        <Collapse isOpen={this.state.unit}>
+                            <div className="d-flex pt-3">
+                                <div className="form-group w-100">
+                                    <input type="text" name="Unit" id="vendor" className="form-control" placeholder="Unit" onChange={(e) => this.setState({ input: {...input, unit: e.target.value} })} value={input.unit} />
+                                </div>
+                                <div>
+                                    <button className="btn btn-primary ms-3 btn-sm" onClick={() => this.setState({ unit_list: [...unit_list, { nama:input.unit }] })}><i class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </Collapse>
+                        <Form.Selection list={unit_list.map((item, i) => { return {...item, id:i.toString()} })} />
                     </div>
-                    <div className="kategori-container">
-                        <label htmlFor="kategori">Kategori</label>
-                        <p className='m-0'>Memasukan barang ke “{this.state.history_id[this.state.history_id.length - 1] == 100000000000 ? 'Asset' : (typeof this.state.rincian_asset[this.state.rincian_asset.length - 2] != 'undefined' && this.state.rincian_asset[this.state.rincian_asset.length - 2].find(item => item.id_rincian_asset == this.state.history_id[this.state.history_id.length - 1]).rincian_asset)}”</p>
-                        <div className="kategori-isi py-3">
-                            {this.state.rincian_asset.length > 0 ? (
-                                <ul>
-                                    {this.state.rincian_asset[0].map(item => (
-                                        <>
-                                            <li>
-                                                <div className="form-check">
-                                                    <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item.id_rincian_asset, 1)} checked={item.id_rincian_asset == this.state.history_id[1]} />
-                                                    <label htmlFor="check" className='form-check-label'>{item.rincian_asset}</label>
-                                                </div>
-                                            </li>
-                                            {typeof this.state.history_id[1] != 'undefined' && this.state.history_id[1] == item.id_rincian_asset && (
-                                                <ul>
-                                                    {this.state.rincian_asset[1] != null && this.state.rincian_asset[1].map(item1 => (
-                                                        <li>
-                                                            <>
-                                                                <div className="form-check">
-                                                                    <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item1.id_rincian_asset, 2)} checked={item1.id_rincian_asset == this.state.history_id[2]} />
-                                                                    <label htmlFor="check" className='form-check-label'>{item1.rincian_asset}</label>
-                                                                </div>
-                                                                {typeof this.state.history_id[2] != 'undefined' && this.state.history_id[2] == item1.id_rincian_asset && (
-                                                                    <ul>
-                                                                        {this.state.rincian_asset[2] != null && this.state.rincian_asset[2].map(item2 => (
-                                                                            <li>
-                                                                                <>
-                                                                                    <div className="form-check">
-                                                                                        <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item2.id_rincian_asset, 3)} checked={item2.id_rincian_asset == this.state.history_id[3]} />
-                                                                                        <label htmlFor="check" className='form-check-label'>{item2.rincian_asset}</label>
-                                                                                    </div>
-                                                                                    {typeof this.state.history_id[3] != 'undefined' && this.state.history_id[3] == item2.id_rincian_asset && (
-                                                                                        <ul>
-                                                                                            {this.state.rincian_asset[3] != null && this.state.rincian_asset[3].map(item3 => (
-                                                                                                <li>
-                                                                                                    <>
-                                                                                                        <div className="form-check">
-                                                                                                            <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item3.id_rincian_asset, 4)} checked={item3.id_rincian_asset == this.state.history_id[4]} />
-                                                                                                            <label htmlFor="check" className='form-check-label'>{item3.rincian_asset}</label>
-                                                                                                        </div>
-                                                                                                        {typeof this.state.history_id[4] != 'undefined' && this.state.history_id[4] == item3.id_rincian_asset && (
-                                                                                                            <ul>
-                                                                                                                {this.state.rincian_asset[4] != null && this.state.rincian_asset[4].map(item4 => (
-                                                                                                                    <li>
-                                                                                                                        <>
-                                                                                                                            <div className="form-check">
-                                                                                                                                <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item4.id_rincian_asset, 5)} checked={item4.id_rincian_asset == this.state.history_id[5]} />
-                                                                                                                                <label htmlFor="check" className='form-check-label'>{item4.rincian_asset}</label>
-                                                                                                                            </div>
-                                                                                                                            {typeof this.state.history_id[5] != 'undefined' && this.state.history_id[5] == item4.id_rincian_asset && (
-                                                                                                                                <ul>
-                                                                                                                                    {this.state.rincian_asset[5] != null && this.state.rincian_asset[5].map(item5 => (
-                                                                                                                                        <li>
-                                                                                                                                            <>
-                                                                                                                                                <div className="form-check">
-                                                                                                                                                    <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => this.nextLapisan(item5.id_rincian_asset, 6)} checked={item5.id_rincian_asset == this.state.history_id[6]} />
-                                                                                                                                                    <label htmlFor="check" className='form-check-label'>{item5.rincian_asset}</label>
-                                                                                                                                                </div>
-                                                                                                                                                
-                                                                                                                                            </>
-                                                                                                                                        </li>
-                                                                                                                                    ))}
-                                                                                                                                </ul>
-                                                                                                                            )}
-                                                                                                                        </>
-                                                                                                                    </li>
-                                                                                                                ))}
-                                                                                                            </ul>
-                                                                                                        )}
-                                                                                                    </>
-                                                                                                </li>
-                                                                                            ))}
-                                                                                        </ul>
-                                                                                    )}
-                                                                                </>
-                                                                            </li>
-                                                                        ))}
-                                                                    </ul>
-                                                                )}
-                                                            </>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </>
-                                    ))}
-                                </ul>
-                            ) : 'Loading...'}
-                        </div>
-                    </div>
+                    <KategoriBarang history_id={this.state.history_id} rincian_asset={this.state.rincian_asset} />
                     <button className="btn btn-primary mt-3 col-12" onClick={this.props.submit}>Simpan</button>
                 </ModalBody>
             </Modal>
