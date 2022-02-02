@@ -10,47 +10,24 @@ const apiClient = axios.create({
     }
 })
 
-const asset_rak = {
-    getAssetRak() {
-        return apiClient.get('/asset_rak');
-    },
-    postAssetRak(data) {
-        return apiClient.post('/asset_rak', data);
-    },
-    getOneAssetRak(id) {
-        return apiClient.get(`/asset_rak/${id}`);
-    },
-    patchAssetRak(id, data) {
-        return apiClient.patch(`/asset_rak/${id}`, data);
-    },
-    deleteAssetRak(id) {
-        return apiClient.delete(`/asset_rak/${id}`);
+const config = {
+    timeout: 10000,
+    validateStatus: function(status){
+        // console.log(status, status < 400 && status != 204)
+        return status < 400 && status != 204
     }
 }
 
-const asset_ruangan = {
-    getAssetRuangan() {
-        return apiClient.get('/asset_ruangan');
-    },
-    postAssetRuangan(data) {
-        return apiClient.post('/asset_ruangan', data);
-    },
-    getOneAssetRuangan(id) {
-        return apiClient.get(`/asset_ruangan/${id}`);
-    },
-    patchAssetRuangan(id, data) {
-        return apiClient.patch(`/asset_ruangan/${id}`, data);
-    },
-    deleteAssetRuangan(id) {
-        return apiClient.delete(`/asset_ruangan/${id}`);
-    }
+
+const headers =  {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    "Authorization":localStorage.getItem("token")
 }
 
-const core_kontrak = {
+export const instance = axios.create({
+    ...config,
+    headers:headers,
+    baseURL: 'https://asset.tikomdik-disdikjabar.id/'
+})
 
-}
-
-export {
-    asset_rak,
-
-}

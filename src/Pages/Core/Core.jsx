@@ -10,6 +10,7 @@ import Kontrak from './Kontrak';
 import { Card, Pagination, Toast } from '../../components';
 import Search from '../../components/Search';
 
+
 class Core extends React.Component {
     state = {
         activeData: null,

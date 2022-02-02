@@ -7979,7 +7979,8 @@ textarea.form-control-lg {
 
 .breadcrumb {
   background-color: #EDF2FE;
-  box-shadow: 5px 5px 20px 0px #B4C1D573, -5px -5px 25px 0px #FFFFFFBF; }
+  box-shadow: 5px 5px 20px 0px #B4C1D573,
+ -5px -5px 25px 0px #FFFFFFBF; }
   .breadcrumb.breadcrumb-custom .breadcrumb-item:hover button {
     color: #37517A; }
   .breadcrumb.breadcrumb-custom .breadcrumb-item.active button {
@@ -8026,11 +8027,13 @@ textarea.form-control-lg {
 
 .detail-barang {
   background-color: #EDF2FE;
-  box-shadow: 5px 5px 20px 0px #B4C1D573 inset, -5px -5px 25px 0px #FFFFFFBF inset; }
+  box-shadow: 5px 5px 20px 0px #B4C1D573 inset,
+ -5px -5px 25px 0px #FFFFFFBF inset; }
   .detail-barang h6, .detail-barang .h6 {
     color: #37517A; }
   .detail-barang .inside {
-    box-shadow: 5px 5px 20px 0px #B4C1D573, -5px -5px 25px 0px #FFFFFFBF;
+    box-shadow: 5px 5px 20px 0px #B4C1D573,
+ -5px -5px 25px 0px #FFFFFFBF;
     background-color: #EDF2FE; }
     .detail-barang .inside .btn {
       color: #37517A !important; }
@@ -8422,6 +8425,22 @@ textarea.form-control-lg {
 .popover-vendor .btn {
   color: #5987D0;
   font-weight: 500; }
+
+.text-color-dark-blue {
+  color:#184896
+}
+
+.text-color-light-blue {
+  color:#739DE8
+}
+
+.font-weight-400 {
+  font-weight:450
+}
+
+.font-weight-500 {
+  font-weight:510
+}
 
 .card {
   box-shadow: 1px 4px 10px 0px #0000000D;
