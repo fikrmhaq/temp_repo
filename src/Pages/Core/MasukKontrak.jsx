@@ -7,6 +7,7 @@ import DetailBarang from './DetailBarang';
 
 // Component
 import { ActionPopover, Card, DeleteModal, Pagination, Toast } from '../../components';
+import barangModel from '../../models/barangModel';
 
 class MasukKontrak extends React.Component {
     constructor(props) {
@@ -65,8 +66,10 @@ class MasukKontrak extends React.Component {
                     const kontrak = detail_kontrak.find(item2 => item2.id_detail_kontrak == item.id_detail_kontrak);
                     return kontrak != null;
                 })
+                console.log(barang)
                 const final_barang = [];
                 barang.forEach(item => {
+                    const { id_detail_kontrak } = item
                     if (final_barang.find(item2 => item.id_barang == item2.id_barang) == null) final_barang.push({
                         id_barang: item.id_barang,
                         keterangan: item.keterangan,
@@ -75,7 +78,8 @@ class MasukKontrak extends React.Component {
                         id_vendor: item.id_vendor,
                         jumlah: res.data.data.filter(item2 => item2.id_barang == item.id_barang).length,
                         id_rincian_asset: item.id_rincian_asset,
-                        rincian_asset: item.rincian_asset
+                        rincian_asset: item.rincian_asset,
+                        id_detail_kontrak
                     })
                 })
                 this.setState({ barang: final_barang, filtered_barang: final_barang })
@@ -159,7 +163,7 @@ class MasukKontrak extends React.Component {
         this.setState({ dataEdit: this.state.dataEdit });
     }
 
-    submitEdit = () => {
+    submitEdit = (params = []) => {
         const data = {
             nama_barang: this.state.dataEdit.nama_barang,
             id_vendor: this.state.dataEdit.id_vendor,
@@ -202,6 +206,10 @@ class MasukKontrak extends React.Component {
         }).catch(err => {
             this.setMessage(err, true);
         })
+
+        if(params.length > 0) {
+            barangModel.postDetailBarang(params)
+        }
         
     }
 
@@ -338,7 +346,8 @@ class MasukKontrak extends React.Component {
                                                             <div className='d-flex'>
                                                                 <button className="btn" onClick={() => this.setState({ info: !this.state.info, dataInfo: item })}><i class="fas fa-info-circle"></i></button>
                                                                 <button className="btn" id={`btn-trigger-${item.id_barang}`}><i class="fas fa-cog"></i></button>
-                                                                <ActionPopover target={`btn-trigger-${item.id_barang}`} trigger="focus" placement="right" delete={() => this.setState({ deleteModal: !this.state.deleteModal, deleteData: item })} edit={() => this.setState({ editCore: !this.state.editCore, dataEdit: {...item} })}></ActionPopover>
+                                                                <ActionPopover target={`btn-trigger-${item.id_barang}`} trigger="focus" placement="right" delete={() => this.setState({ deleteModal: !this.state.deleteModal, deleteData: item })} 
+                                                                edit={() => this.setState({ editCore: !this.state.editCore, dataEdit: item })}></ActionPopover>
                                                             </div>
                                                             <h6 className='my-auto'>{this.state.supplier != null ? this.state.supplier.find(item1 => item1.id_supplier == this.props.data.id_supplier).nama_supplier : 'Loading...'}</h6>
                                                         </div>

@@ -33,6 +33,8 @@ class EditCore extends React.Component {
             this.state.history_id.push((100000000000).toString());
             this.setState({ rincian_asset: this.state.rincian_asset, history_id: this.state.history_id, lapisan: this.state.lapisan + 1 });
         })
+
+        console.log(this.props.data)
     }
 
     vendorSearch = (e) => {
@@ -142,14 +144,19 @@ class EditCore extends React.Component {
                                     <input type="text" name="Unit" id="vendor" className="form-control" placeholder="Unit" onChange={(e) => this.setState({ input: {...input, unit: e.target.value} })} value={input.unit} />
                                 </div>
                                 <div>
-                                    <button className="btn btn-primary ms-3 btn-sm" onClick={() => this.setState({ unit_list: [...unit_list, { nama:input.unit }] })}><i class="fas fa-paper-plane"></i></button>
+                                    <button className="btn btn-primary ms-3 btn-sm" 
+                                    onClick={() => this.setState({ unit_list: [...unit_list, { nama:input.unit, 
+                                        id_detail_kontrak: this.props.data.id_detail_kontrak,
+                                        id_barang: this.props.data.id_barang  }] })}
+                                    ><i class="fas fa-paper-plane"></i></button>
                                 </div>
                             </div>
                         </Collapse>
+                        {/* {JSON.stringify(unit_list)} */}
                         <Form.Selection list={unit_list.map((item, i) => { return {...item, id:i.toString()} })} />
                     </div>
                     <KategoriBarang history_id={this.state.history_id} rincian_asset={this.state.rincian_asset} />
-                    <button className="btn btn-primary mt-3 col-12" onClick={this.props.submit}>Simpan</button>
+                    <button className="btn btn-primary mt-3 col-12" onClick={() =>this.props.submit(unit_list)}>Simpan</button>
                 </ModalBody>
             </Modal>
         );

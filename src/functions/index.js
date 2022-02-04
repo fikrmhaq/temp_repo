@@ -13,7 +13,13 @@ function isLogged () {
 
 }
 
+const catchUndefined = (data) => {
+    if(data == undefined) return []
+    return data
+}
+
 export {
     isLogged,
-    signData
+    signData,
+    catchUndefined
 }

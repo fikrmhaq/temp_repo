@@ -7,6 +7,11 @@ const getCoreBarang = (data = null) => {
     })
 }
 
+const postDetailBarang = (data) => {
+    return instance.post('/detail_barang', data)
+}
+
 export default {
-    getCoreBarang
+    getCoreBarang,
+    postDetailBarang
 }
