@@ -17,7 +17,7 @@ const useController = memo((props) => {
         }
 
 
-        // props.barang.get()
+        props.barang.get()
 
     }, [])
 

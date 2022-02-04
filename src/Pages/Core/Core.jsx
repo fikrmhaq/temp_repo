@@ -12,12 +12,14 @@ import Search from '../../components/Search';
 import { useEffect } from 'react';
 import { Kontrak } from './components/kontrak';
 import { usePaginate } from '../../functions/hooks';
+import { useBarang } from '../../functions/hooks/states';
 
 
 const Core = memo(() => {
     const [kontrak, setKontrak] = useState([])
     const [rincian_asset, setRincianAsset] = useState(null)
     const [data, setPage] = usePaginate(kontrak,10)
+    const barangState = useBarang()
 
 
     useEffect(() => {
@@ -60,9 +62,10 @@ const Core = memo(() => {
                         className="w-25" 
                         select={{ name: 'dokumen', id: "dokumen", onChange: this.changeDokumen, children: this.state.dokumen != null ? this.state.dokumen.map(item => ({ key: item.id_jenis_kontrak, value: item.nama_jenis })) : ([{ key: 'null', value: 'Loading...' }]) }} input={{ name: 'searchDokumen', id: "searchDokumen", placeholder: 'Search', onChange: this.whenSearch }}></Search> */}
             </div>
-          
             <div className="row">
-                {data.map(item => {
+                <>
+                {
+                data.map(item => {
                     const { id_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, nilai_kontrak } = item
                     return (
                         <Kontrak.DataCard
@@ -83,6 +86,7 @@ const Core = memo(() => {
                     )
                 }
                 )}
+                </>
                 
             </div>
             <Pagination data={kontrak} get={(data) => setPage(data)}></Pagination>
