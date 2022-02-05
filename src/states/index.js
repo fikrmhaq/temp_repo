@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
 import { barang } from "./reducers/barang"
+import { kontrak } from "./reducers/kontrak"
 
 const ADD_BARANG = 'ADD_BARANG' // Core Barang
 const ADD_UNIT = 'ADD_UNIT' // Detail Barang
@@ -19,5 +20,6 @@ export {
 
 
 export default combineReducers({
-    barang
+    barang,
+    kontrak
 })

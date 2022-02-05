@@ -1,12 +1,21 @@
-import { memo, useEffect } from "react";
+import { createContext, memo, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { isLogged } from "../../functions";
 import Core from "../../Pages/Core/Core";
 import { mapDispatchToProps } from "../../states/containers/barang";
 
 
+const context = createContext(null)
+
+export const useControllerState = () => {
+    return useContext(context)
+}
 
 const useController = memo((props) => {
+
+    const getBarang = (data) => {
+        props.barang.get.getByDetailKontrak()
+    }
 
 
     useEffect(() => {
@@ -17,12 +26,27 @@ const useController = memo((props) => {
         }
 
 
-        props.barang.get()
+        // props.barang.get()
+        props.kontrak.get.getWithDetail()
+        
 
     }, [])
 
 
-    return <Core/>
+    return (
+        <context.Provider
+        
+        value={
+            {
+                getBarang
+            }
+        }
+
+
+        >
+            <Core/>
+        </context.Provider>
+    )
 
 })
 

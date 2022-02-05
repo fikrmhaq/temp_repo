@@ -18,7 +18,7 @@ const DataCard = ({
       <Card>
         <div className="foto">
           <img
-            src={require("./Default.png").default}
+            src={require("../../Default.png").default}
             alt="Default.png"
             width="50%"
           />
@@ -33,12 +33,12 @@ const DataCard = ({
             <div className="d-flex">
               <button
                 className="btn"
-                onClick={() =>
-                  this.setState({
-                    info: !this.state.info,
-                    dataInfo: item,
-                  })
-                }
+                // onClick={() =>
+                //   this.setState({
+                //     info: !this.state.info,
+                //     dataInfo: item,
+                //   })
+                // }
               >
                 <i class="fas fa-info-circle"></i>
               </button>
@@ -49,27 +49,27 @@ const DataCard = ({
                 target={`btn-trigger-${id_barang}`}
                 trigger="focus"
                 placement="right"
-                delete={() =>
-                  this.setState({
-                    deleteModal: !this.state.deleteModal,
-                    deleteData: item,
-                  })
-                }
-                edit={() =>
-                  this.setState({
-                    editCore: !this.state.editCore,
-                    dataEdit: item,
-                  })
-                }
+                // delete={() =>
+                //   this.setState({
+                //     deleteModal: !this.state.deleteModal,
+                //     deleteData: item,
+                //   })
+                // }
+                // edit={() =>
+                //   this.setState({
+                //     editCore: !this.state.editCore,
+                //     dataEdit: item,
+                //   })
+                // }
               ></ActionPopover>
             </div>
-            <h6 className="my-auto">
+            {/* <h6 className="my-auto">
               {this.state.supplier != null
                 ? this.state.supplier.find(
                     (item1) => item1.id_supplier == this.props.data.id_supplier
                   ).nama_supplier
                 : "Loading..."}
-            </h6>
+            </h6> */}
           </div>
         </div>
       </Card>

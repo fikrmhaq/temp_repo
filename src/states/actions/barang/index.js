@@ -10,6 +10,17 @@ const fetch = () => {
     }
 }
 
+const getByDetailKontrak = (data) => {
+    return dispatch => {
+        barangModel.getCoreBarang({
+            id_detail_kontrak: data
+        })
+        .then(res=>{
+            dispatch(add(res.data.data))
+        })
+    }
+}
+
 
 const add = (data = []) => {
     return {
@@ -23,5 +34,6 @@ const add = (data = []) => {
 
 export {
     fetch,
+    getByDetailKontrak,
     add
 }

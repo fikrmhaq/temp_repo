@@ -12,24 +12,33 @@ import Search from '../../components/Search';
 import { useEffect } from 'react';
 import { Kontrak } from './components/kontrak';
 import { usePaginate } from '../../functions/hooks';
-import { useBarang } from '../../functions/hooks/states';
+import { useBarang, useKontrak } from '../../functions/hooks/states';
+import { useControllerState } from '../../controllers/Core';
+import { Barang } from './components/barang';
 
 
 const Core = memo(() => {
-    const [kontrak, setKontrak] = useState([])
-    const [rincian_asset, setRincianAsset] = useState(null)
-    const [data, setPage] = usePaginate(kontrak,10)
-    const barangState = useBarang()
 
+    const barangState = useBarang()
+    const kontrakState = useKontrak()
+
+    const [rincian_asset, setRincianAsset] = useState(null)
+    const [data, setPage] = usePaginate(kontrakState,10)
+    const [detail_kontrak, setDetailKontrak] = useState([])
+    const { getBarang } = useControllerState()
+
+
+    const getBarangOfKontrak = (data) => {
+        // setBarang()
+        // console.log(detail_kontrak)
+
+        setDetailKontrak(data)
+        getBarang(data)
+    }
+    
 
     useEffect(() => {
-        Services.getKontrak().then(res => {
-            // this.setState({ activeData: res.data.data.filter(item => item.id_jenis_kontrak == 1) });
 
-            setKontrak(res.data.data)
-
-
-        })
 
         Services.getBarang().then(res => {
             Services.getDetailKontrak().then(res1 => {
@@ -62,8 +71,7 @@ const Core = memo(() => {
                         className="w-25" 
                         select={{ name: 'dokumen', id: "dokumen", onChange: this.changeDokumen, children: this.state.dokumen != null ? this.state.dokumen.map(item => ({ key: item.id_jenis_kontrak, value: item.nama_jenis })) : ([{ key: 'null', value: 'Loading...' }]) }} input={{ name: 'searchDokumen', id: "searchDokumen", placeholder: 'Search', onChange: this.whenSearch }}></Search> */}
             </div>
-            <div className="row">
-                <>
+            <div className="row" style={detail_kontrak.length == 0 ? {} : {display:'none'}}>
                 {
                 data.map(item => {
                     const { id_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, nilai_kontrak } = item
@@ -73,7 +81,9 @@ const Core = memo(() => {
                             ...
                             {
                                 ...item,
-                                rincian_asset: rincian_asset != null ? rincian_asset[item.id_kontrak] : 'Loading...'
+                                rincian_asset: rincian_asset != null ? rincian_asset[item.id_kontrak] : 'Loading...',
+                                
+                                action: (detail_kontrak) => getBarangOfKontrak(detail_kontrak)
                             }
 
                             }
@@ -86,10 +96,29 @@ const Core = memo(() => {
                     )
                 }
                 )}
-                </>
-                
             </div>
-            <Pagination data={kontrak} get={(data) => setPage(data)}></Pagination>
+            <div className="row" style={detail_kontrak.length == 0 ? {display:'none'} : {}}>
+                <div>
+                    {
+                        barangState.map(item => {
+
+                            return(
+                                <Barang.DataCard
+                                
+                                {
+                                    ...
+                                    {
+                                        ...item
+                                    }
+                                }
+                                
+                                />
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <Pagination data={kontrakState} get={(data) => setPage(data)}></Pagination>
             {/* {this.state.activeData != null && this.state.kontrak && <Pagination data={this.state.dataSearch || this.state.activeData} get={(data) => { this.setState({ pagination: data }) }}></Pagination>}
             <ModalEdit toggle={() => this.setState({ modalEdit: !this.state.modalEdit })} isOpen={this.state.modalEdit} input={this.state.inputEdit} setInput={(e) => this.setState({ inputEdit: e })}></ModalEdit> */}
             {/* <Toast message={this.state.message.message} error={this.state.message.error}></Toast> */}

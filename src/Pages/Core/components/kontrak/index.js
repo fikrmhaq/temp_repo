@@ -3,7 +3,7 @@ import { PopoverBody, UncontrolledPopover } from 'reactstrap';
 import { Card } from '../../../../components';
 
 
-export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang }) => {
+export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, detail_kontrak, action }) => {
 
     return(
         <div className='col-lg-4 kontrak mt-3'>
@@ -73,7 +73,7 @@ export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontr
                             {/* <ActionPopover target={`action-btn-${id_kontrak}`} trigger="focus" placement='right' delete={() => this.setState({ deleteModal: !this.state.deleteModal })} edit={() => this.setState({ editModal: !this.state.editModal })}></ActionPopover> */}
                         </div>
                         <button className="btn btn-primary px-4" 
-                        // onClick={changeKontrak}
+                        onClick={() => action(detail_kontrak)}
                         >Lihat</button>
                     </div>
                 </Card>

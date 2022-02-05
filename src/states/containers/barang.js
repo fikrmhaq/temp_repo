@@ -1,11 +1,19 @@
-import { add, fetch, getsomenewest } from "../actions/barang"
+import { add, fetch, getByDetailKontrak } from "../actions/barang"
+import kontrak from "../actions/kontrak"
 
 
 const mapDispatchToProps = (dispatch) => {
 
     return {
         barang: {
-            get: (data) => dispatch(fetch(data)),
+            get: {
+                getByDetailKontrak: (data) => dispatch(getByDetailKontrak(data))
+            },
+        },
+        kontrak: {
+            get: {
+                getWithDetail: () => dispatch(kontrak.getWithDetail())
+            }
         }
     }
 
