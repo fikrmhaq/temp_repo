@@ -10,6 +10,8 @@ const DataCard = ({
 
   index,
   supplier,
+
+  edit
 }) => {
   const item = { id_barang, nama_barang, vendor, jumlah, rincian_asset };
 
@@ -45,6 +47,7 @@ const DataCard = ({
               <button className="btn" id={`btn-trigger-${id_barang}`}>
                 <i class="fas fa-cog"></i>
               </button>
+              {JSON.stringify(item)}
               <ActionPopover
                 target={`btn-trigger-${id_barang}`}
                 trigger="focus"
@@ -55,12 +58,9 @@ const DataCard = ({
                 //     deleteData: item,
                 //   })
                 // }
-                // edit={() =>
-                //   this.setState({
-                //     editCore: !this.state.editCore,
-                //     dataEdit: item,
-                //   })
-                // }
+                edit={() =>
+                  edit({nama_barang})
+                }
               ></ActionPopover>
             </div>
             {/* <h6 className="my-auto">

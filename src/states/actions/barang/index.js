@@ -16,6 +16,7 @@ const getByDetailKontrak = (data) => {
             id_detail_kontrak: data
         })
         .then(res=>{
+            
             dispatch(add(res.data.data))
         })
     }

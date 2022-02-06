@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +14,7 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import NavBarResponsive from "../Pages/components/NavBarResponsive";
 import SideBarResponsive from "../Pages/components/SideBarResponsive";
 
-const Routes = ({ global, pathname }) => {
+const Routes = memo(({ global, pathname }) => {
   return (
     <Router>
       {[null, ""].includes(localStorage.getItem("signData")) ? (
@@ -43,6 +43,6 @@ const Routes = ({ global, pathname }) => {
       {/* </Theme>s */}
     </Router>
   );
-};
+});
 
 export default Routes;

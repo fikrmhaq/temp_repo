@@ -15,6 +15,8 @@ import { usePaginate } from '../../functions/hooks';
 import { useBarang, useKontrak } from '../../functions/hooks/states';
 import { useControllerState } from '../../controllers/Core';
 import { Barang } from './components/barang';
+import { catchUndefined } from '../../functions';
+import EditCore from './EditCore';
 
 
 const Core = memo(() => {
@@ -23,37 +25,51 @@ const Core = memo(() => {
     const kontrakState = useKontrak()
 
     const [rincian_asset, setRincianAsset] = useState(null)
-    const [data, setPage] = usePaginate(kontrakState,10)
-    const [detail_kontrak, setDetailKontrak] = useState([])
+    const [data, setPage] = usePaginate(kontrakState, 10)
     const { getBarang } = useControllerState()
 
+    const [id_kontrak, setIdKontrak] = useState(null)
+    const [detail_kontrak, setDetailKontrak] = useState([])
+
+    const [temp, setTemp] = useState({})
+    const [edit, setEdit] = useState(false)
 
     const getBarangOfKontrak = (data) => {
         // setBarang()
         // console.log(detail_kontrak)
 
-        setDetailKontrak(data)
-        getBarang(data)
+        setDetailKontrak(data.id_detail_kontrak)
+        setIdKontrak(data.id_kontrak)
+
+        getBarang(data.id_detail_kontrak)
     }
-    
+
+    const _Edit = (data) => {
+        console.log(data)
+        setEdit(!edit)
+        setTemp(data)
+
+  
+    }
+
 
     useEffect(() => {
 
 
-        Services.getBarang().then(res => {
-            Services.getDetailKontrak().then(res1 => {
-                const kontrak = new Object();
-                res1.data.data.forEach(item => {
-                    if (typeof kontrak[item.id_kontrak] == 'undefined') kontrak[item.id_kontrak] = new Array();
-                    kontrak[item.id_kontrak].push({
-                        ...res.data.data.find(item1 => item1.id_detail_kontrak == item.id_detail_kontrak),
-                        total: res.data.data.filter(item1 => item1.id_detail_kontrak == item.id_detail_kontrak).length
-                    });
-                })
+        // Services.getBarang().then(res => {
+        //     Services.getDetailKontrak().then(res1 => {
+        //         const kontrak = new Object();
+        //         res1.data.data.forEach(item => {
+        //             if (typeof kontrak[item.id_kontrak] == 'undefined') kontrak[item.id_kontrak] = new Array();
+        //             kontrak[item.id_kontrak].push({
+        //                 ...res.data.data.find(item1 => item1.id_detail_kontrak == item.id_detail_kontrak),
+        //                 total: res.data.data.filter(item1 => item1.id_detail_kontrak == item.id_detail_kontrak).length
+        //             });
+        //         })
 
-                setRincianAsset(kontrak)
-            })
-        })
+        //         setRincianAsset(kontrak)
+        //     })
+        // })
     }, [])
 
     return (
@@ -71,57 +87,87 @@ const Core = memo(() => {
                         className="w-25" 
                         select={{ name: 'dokumen', id: "dokumen", onChange: this.changeDokumen, children: this.state.dokumen != null ? this.state.dokumen.map(item => ({ key: item.id_jenis_kontrak, value: item.nama_jenis })) : ([{ key: 'null', value: 'Loading...' }]) }} input={{ name: 'searchDokumen', id: "searchDokumen", placeholder: 'Search', onChange: this.whenSearch }}></Search> */}
             </div>
-            <div className="row" style={detail_kontrak.length == 0 ? {} : {display:'none'}}>
+            <div className="row" style={detail_kontrak.length == 0 ? {} : { display: 'none' }}>
                 {
-                data.map(item => {
-                    const { id_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, nilai_kontrak } = item
-                    return (
-                        <Kontrak.DataCard
-                            {
-                            ...
-                            {
-                                ...item,
-                                rincian_asset: rincian_asset != null ? rincian_asset[item.id_kontrak] : 'Loading...',
-                                
-                                action: (detail_kontrak) => getBarangOfKontrak(detail_kontrak)
-                            }
-
-                            }
-                        // changeKontrak={() => this.setState({ kontrak_id: item.id_kontrak, kontrak: !this.state.kontrak, kontrak_data: item })} 
-                        // rincian_asset={this.state.rincian_asset != null ? this.state.rincian_asset[item.id_kontrak] : 'Loading...'} 
-                        // refresh={this.refreshDokumen} 
-                        // refreshEdit={this.refreshDokumenEdit} 
-                        // message={this.setMessage}
-                        ></Kontrak.DataCard>
-                    )
-                }
-                )}
-            </div>
-            <div className="row" style={detail_kontrak.length == 0 ? {display:'none'} : {}}>
-                <div>
-                    {
-                        barangState.map(item => {
-
-                            return(
-                                <Barang.DataCard
-                                
+                    data.map(item => {
+                        const { id_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, nilai_kontrak } = item
+                        return (
+                            <Kontrak.DataCard
                                 {
-                                    ...
-                                    {
-                                        ...item
-                                    }
+                                ...
+                                {
+                                    ...item,
+                                    rincian_asset: rincian_asset != null ? rincian_asset[item.id_kontrak] : 'Loading...',
+
+                                    action: (detail_kontrak) => getBarangOfKontrak(detail_kontrak)
                                 }
-                                
-                                />
-                            )
-                        })
+
+                                }
+                            // changeKontrak={() => this.setState({ kontrak_id: item.id_kontrak, kontrak: !this.state.kontrak, kontrak_data: item })} 
+                            // rincian_asset={this.state.rincian_asset != null ? this.state.rincian_asset[item.id_kontrak] : 'Loading...'} 
+                            // refresh={this.refreshDokumen} 
+                            // refreshEdit={this.refreshDokumenEdit} 
+                            // message={this.setMessage}
+                            ></Kontrak.DataCard>
+                        )
                     }
+                    )}
+            </div>
+            <div class="row mt-3" style={detail_kontrak.length == 0 ? { display: 'none' } : {}}>
+                <div class="col-lg-9">
+                    <div className="row" >
+
+                        {
+                            ![null,undefined].includes(id_kontrak) && 
+                            data.find(a=> a.id_kontrak == id_kontrak).detail_kontrak
+                            .map(b => {
+                                const data_barang = barangState.find(a=> a.id_detail_kontrak == b.id_detail_kontrak)
+
+                                const ifExist = () => {
+                                    if (![undefined,null].includes(data_barang)) {
+                                        return true
+                                    }
+
+                                    return false
+                                }
+
+                                return {
+                                    ...b,
+                                    nama_barang: ifExist() ? data_barang.nama_barang : '',
+                                    vendor: ifExist() ? data_barang.vendor : ''
+                                }
+                            })
+                            .map(item => {
+
+                                return (
+                                    <Barang.DataCard
+
+                                        {
+                                        ...
+                                        {
+                                            ...item,
+                                            edit: (data) => _Edit(data)
+                                        }
+                                        }
+
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
             <Pagination data={kontrakState} get={(data) => setPage(data)}></Pagination>
             {/* {this.state.activeData != null && this.state.kontrak && <Pagination data={this.state.dataSearch || this.state.activeData} get={(data) => { this.setState({ pagination: data }) }}></Pagination>}
             <ModalEdit toggle={() => this.setState({ modalEdit: !this.state.modalEdit })} isOpen={this.state.modalEdit} input={this.state.inputEdit} setInput={(e) => this.setState({ inputEdit: e })}></ModalEdit> */}
             {/* <Toast message={this.state.message.message} error={this.state.message.error}></Toast> */}
+            <EditCore toggle={() => setEdit(!edit)} 
+            data={temp} 
+            // changeData={this.changeDataEdit} 
+            // submit={this.submitEdit} 
+            isOpen={edit}
+            
+            />
         </div>
     )
 })

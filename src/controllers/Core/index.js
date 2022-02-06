@@ -14,7 +14,7 @@ export const useControllerState = () => {
 const useController = memo((props) => {
 
     const getBarang = (data) => {
-        props.barang.get.getByDetailKontrak()
+        props.barang.get.getByDetailKontrak(data)
     }
 
 

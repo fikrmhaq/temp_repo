@@ -73,7 +73,14 @@ export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontr
                             {/* <ActionPopover target={`action-btn-${id_kontrak}`} trigger="focus" placement='right' delete={() => this.setState({ deleteModal: !this.state.deleteModal })} edit={() => this.setState({ editModal: !this.state.editModal })}></ActionPopover> */}
                         </div>
                         <button className="btn btn-primary px-4" 
-                        onClick={() => action(detail_kontrak)}
+                        onClick={() => action(
+                            {
+                                id_detail_kontrak:detail_kontrak.map(item=>{
+                                    return item.id_detail_kontrak
+                                }),
+                                id_kontrak
+                            }
+                        )}
                         >Lihat</button>
                     </div>
                 </Card>
