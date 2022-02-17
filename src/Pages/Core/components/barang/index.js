@@ -7,11 +7,15 @@ const DataCard = ({
   vendor,
   jumlah,
   rincian_asset,
+  id_detail_kontrak,
 
   index,
   supplier,
+
+  info,
+  edit
 }) => {
-  const item = { id_barang, nama_barang, vendor, jumlah, rincian_asset };
+  const item = { id_barang, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
 
   return (
     <div className="col-lg-4 core-barang mb-4" key={index}>
@@ -33,12 +37,8 @@ const DataCard = ({
             <div className="d-flex">
               <button
                 className="btn"
-                // onClick={() =>
-                //   this.setState({
-                //     info: !this.state.info,
-                //     dataInfo: item,
-                //   })
-                // }
+
+                onClick={() => info()}
               >
                 <i class="fas fa-info-circle"></i>
               </button>
@@ -55,12 +55,9 @@ const DataCard = ({
                 //     deleteData: item,
                 //   })
                 // }
-                // edit={() =>
-                //   this.setState({
-                //     editCore: !this.state.editCore,
-                //     dataEdit: item,
-                //   })
-                // }
+                edit={() =>
+                  edit(item)
+                }
               ></ActionPopover>
             </div>
             {/* <h6 className="my-auto">

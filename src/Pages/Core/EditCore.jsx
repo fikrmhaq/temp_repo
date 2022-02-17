@@ -155,7 +155,7 @@ class EditCore extends React.Component {
                         {/* {JSON.stringify(unit_list)} */}
                         <Form.Selection list={unit_list.map((item, i) => { return {...item, id:i.toString()} })} />
                     </div>
-                    <KategoriBarang history_id={this.state.history_id} rincian_asset={this.state.rincian_asset} />
+                    <KategoriBarang history_id={this.state.history_id} rincian_asset={this.state.rincian_asset} nextLapisan={this.nextLapisan} />
                     <button className="btn btn-primary mt-3 col-12" onClick={() =>this.props.submit(unit_list)}>Simpan</button>
                 </ModalBody>
             </Modal>

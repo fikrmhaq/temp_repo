@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { memo } from 'react';
 
-const Pagination = memo((props) => {
+function Pagination(props) {
     const [pagination, setPagination] = useState({
         pageNumber: 1,
         activePage: 1,
@@ -13,7 +13,7 @@ const Pagination = memo((props) => {
     }, [props.data])
 
     useEffect(() => {
-        props.get(pagination.activePage - 1);
+        props.get(pagination.activeData);
     }, [props.data, pagination])
 
     const whenPaginate = () => {
@@ -58,6 +58,7 @@ const Pagination = memo((props) => {
             </nav>
         )
     )
-})
+}
 
 export default Pagination
+

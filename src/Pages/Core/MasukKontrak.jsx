@@ -8,6 +8,7 @@ import DetailBarang from './DetailBarang';
 // Component
 import { ActionPopover, Card, DeleteModal, Pagination, Toast } from '../../components';
 import barangModel from '../../models/barangModel';
+import { useControllerState } from '../../controllers/Core'
 
 class MasukKontrak extends React.Component {
     constructor(props) {
@@ -51,6 +52,8 @@ class MasukKontrak extends React.Component {
         }
     }
 
+
+
     componentDidMount() {
         Service.getRincian(100000000000).then(res => {
             this.state.history.push({
@@ -59,16 +62,17 @@ class MasukKontrak extends React.Component {
             });
             this.setState({ history: this.state.history });
         })
-        Service.getBarang().then(res => {
+        barangModel.getCoreBarang().then(res => {
             Service.getDetailKontrak().then(res1 => {
                 const detail_kontrak = res1.data.data.filter(item => item.id_kontrak == this.props.idKontrak);
                 const barang = res.data.data.filter(item => {
                     const kontrak = detail_kontrak.find(item2 => item2.id_detail_kontrak == item.id_detail_kontrak);
                     return kontrak != null;
                 })
+                console.log(res.data.data.filter(a => a.nama_barang == 'Horizon'))
                 console.log(barang)
                 const final_barang = [];
-                barang.forEach(item => {
+                res.data.data.forEach(item => {
                     const { id_detail_kontrak } = item
                     if (final_barang.find(item2 => item.id_barang == item2.id_barang) == null) final_barang.push({
                         id_barang: item.id_barang,
@@ -82,9 +86,11 @@ class MasukKontrak extends React.Component {
                         id_detail_kontrak
                     })
                 })
+
                 this.setState({ barang: final_barang, filtered_barang: final_barang })
             })
         })
+
         Service.getSupplier().then(res => {
             this.setState({ supplier: res.data.data });
         })
@@ -93,18 +99,20 @@ class MasukKontrak extends React.Component {
     changeId = (id, index) => {
         if (this.state.history_id[index] == id) {
             this.setState({ history_id: this.state.history_id.filter((item, index1) => index1 < index), history: this.state.history.filter((item, index1) => index1 < index + 1), lapisan: index }, () => {
-                this.setState({ filtered_barang: this.state.barang.filter(item => {
-                    const lapisan_pattern = [1, 1, 1, 2, 2, 2, 3];
-                    const lapisan_index = lapisan_pattern.filter((item2, index2) => index2 < this.state.lapisan + 1);
-                    const lapisan_akhir = this.state.history[this.state.history.length - 1].parent.toString().split('').filter((item2, index2) => index2 < lapisan_index.reduce((total, value) => total + value));
-                    return item.id_rincian_asset.indexOf(lapisan_akhir.join('')) == 0;
-                }) }, () => {
+                this.setState({
+                    filtered_barang: this.state.barang.filter(item => {
+                        const lapisan_pattern = [1, 1, 1, 2, 2, 2, 3];
+                        const lapisan_index = lapisan_pattern.filter((item2, index2) => index2 < this.state.lapisan + 1);
+                        const lapisan_akhir = this.state.history[this.state.history.length - 1].parent.toString().split('').filter((item2, index2) => index2 < lapisan_index.reduce((total, value) => total + value));
+                        return item.id_rincian_asset.indexOf(lapisan_akhir.join('')) == 0;
+                    })
+                }, () => {
                     console.log(this.state.search_barang);
                     if (this.state.search_barang != null) this.setState({ search_barang: this.state.filtered_barang.filter(item => item.nama_barang.toLowerCase().indexOf(this.state.searchInput.toLowerCase()) > -1) }, () => {
-                        
+
                         return;
                     })
-                    
+
                 });
             });
             return;
@@ -118,17 +126,19 @@ class MasukKontrak extends React.Component {
                 data: res.data.data
             }
             this.setState({ history: this.state.history, lapisan: index + 1 }, () => {
-                this.setState({ filtered_barang: this.state.barang.filter(item => {
-                    const lapisan_pattern = [1, 1, 1, 2, 2, 2, 3];
-                    const lapisan_index = lapisan_pattern.filter((item2, index2) => index2 < this.state.lapisan + 1);
-                    const lapisan_akhir = this.state.history[this.state.history.length - 1].parent.toString().split('').filter((item2, index2) => index2 < lapisan_index.reduce((total, value) => total + value));
-                    return item.id_rincian_asset.indexOf(lapisan_akhir.join('')) == 0;
-                }) }, () => {
+                this.setState({
+                    filtered_barang: this.state.barang.filter(item => {
+                        const lapisan_pattern = [1, 1, 1, 2, 2, 2, 3];
+                        const lapisan_index = lapisan_pattern.filter((item2, index2) => index2 < this.state.lapisan + 1);
+                        const lapisan_akhir = this.state.history[this.state.history.length - 1].parent.toString().split('').filter((item2, index2) => index2 < lapisan_index.reduce((total, value) => total + value));
+                        return item.id_rincian_asset.indexOf(lapisan_akhir.join('')) == 0;
+                    })
+                }, () => {
                     if (this.state.search_barang != null) this.setState({ search_barang: this.state.filtered_barang.filter(item => item.nama_barang.toLowerCase().indexOf(this.state.searchInput.toLowerCase()) > -1) }, () => {
-                        
+
                         return;
                     })
-                    
+
                 })
             });
         });
@@ -149,12 +159,12 @@ class MasukKontrak extends React.Component {
         this.setState({ searchInput: e.target.value });
         if (e.target.value.length == 0) {
             this.setState({ search_barang: null }, () => {
-                
+
             });
             return;
-        } 
+        }
         this.setState({ search_barang: this.state.filtered_barang.filter(item => item.nama_barang.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1) }, () => {
-            
+
         });
     }
 
@@ -207,10 +217,10 @@ class MasukKontrak extends React.Component {
             this.setMessage(err, true);
         })
 
-        if(params.length > 0) {
+        if (params.length > 0) {
             barangModel.postDetailBarang(params)
         }
-        
+
     }
 
     deleteBarang = (id) => {
@@ -299,6 +309,8 @@ class MasukKontrak extends React.Component {
                                     rincian_asset: item.rincian_asset
                                 })
                             })
+
+
                             this.setState({ barang: final_barang, filtered_barang: final_barang })
                         })
                     })
@@ -311,16 +323,18 @@ class MasukKontrak extends React.Component {
         }).catch(err => {
             this.setMessage(err, true);
         })
+        // this.props.postBarang(barang, detail, id_kontrak)
+
     }
 
-    render() { 
+    render() {
         return (
             <div>
                 <Toast message={this.state.message.message} error={this.state.message.error}></Toast>
                 <div className="d-flex justify-content-between">
                     <div className="d-flex">
                         <button className="btn btn-primary" onClick={() => this.setState({ tambah_core: !this.state.tambah_core })}>Tambah Barang</button>
-                        <TambahCore toggle={() => this.setState({ tambah_core: !this.state.tambah_core })} open={this.state.tambah_core} kontrak={this.props.idKontrak} submit={(barang, detail) => {this.submitBarang(barang, detail, this.props.idKontrak)}}></TambahCore>
+                        <TambahCore toggle={() => this.setState({ tambah_core: !this.state.tambah_core })} open={this.state.tambah_core} kontrak={this.props.idKontrak} submit={(barang, detail) => { this.submitBarang(barang, detail, this.props.idKontrak) }}></TambahCore>
                     </div>
                     <div className="form-group w-25">
                         <input type="search" name="search" id="search" className="form-control form-search" placeholder="Cari Barang disini" onChange={this.searching} />
@@ -346,8 +360,8 @@ class MasukKontrak extends React.Component {
                                                             <div className='d-flex'>
                                                                 <button className="btn" onClick={() => this.setState({ info: !this.state.info, dataInfo: item })}><i class="fas fa-info-circle"></i></button>
                                                                 <button className="btn" id={`btn-trigger-${item.id_barang}`}><i class="fas fa-cog"></i></button>
-                                                                <ActionPopover target={`btn-trigger-${item.id_barang}`} trigger="focus" placement="right" delete={() => this.setState({ deleteModal: !this.state.deleteModal, deleteData: item })} 
-                                                                edit={() => this.setState({ editCore: !this.state.editCore, dataEdit: item })}></ActionPopover>
+                                                                <ActionPopover target={`btn-trigger-${item.id_barang}`} trigger="focus" placement="right" delete={() => this.setState({ deleteModal: !this.state.deleteModal, deleteData: item })}
+                                                                    edit={() => this.setState({ editCore: !this.state.editCore, dataEdit: item })}></ActionPopover>
                                                             </div>
                                                             <h6 className='my-auto'>{this.state.supplier != null ? this.state.supplier.find(item1 => item1.id_supplier == this.props.data.id_supplier).nama_supplier : 'Loading...'}</h6>
                                                         </div>
@@ -366,13 +380,13 @@ class MasukKontrak extends React.Component {
                                     </div>
                                 </div>
                             )
-                        ): (
+                        ) : (
                             <div className="row">
                                 {[...Array(10)].map((item, index) => (
                                     <div className="col-lg-4 core-barang mb-3" key={index}>
                                         <Card>
                                             <div className="foto">
-                                                
+
                                             </div>
                                             <div className='px-4 py-3'>
                                                 <h5 className='placeholder-wave'><span className='placeholder col-3'></span></h5>
@@ -404,7 +418,7 @@ class MasukKontrak extends React.Component {
                                         return (
                                             <>
                                                 <div className="form-group form-check">
-                                                    <input type="checkbox" name="checkbox" id={`rincian${item.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item.id_rincian_asset, 0)}} checked={this.state.history_id[0] == item.id_rincian_asset} />
+                                                    <input type="checkbox" name="checkbox" id={`rincian${item.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item.id_rincian_asset, 0) }} checked={this.state.history_id[0] == item.id_rincian_asset} />
                                                     <label htmlFor={`rincian${item.id_rincian_asset}`} className='form-check-label'>{item.rincian_asset.split(' ').map(item1 => {
                                                         if (item1 == null) return;
                                                         var sementara = item1.toLowerCase().split('');
@@ -418,7 +432,7 @@ class MasukKontrak extends React.Component {
                                                             return (
                                                                 <>
                                                                     <div className="form-group form-check">
-                                                                        <input type="checkbox" name="checkbox" id={`rincian${item2.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item2.id_rincian_asset, 1)}} checked={this.state.history_id[1] == item2.id_rincian_asset} />
+                                                                        <input type="checkbox" name="checkbox" id={`rincian${item2.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item2.id_rincian_asset, 1) }} checked={this.state.history_id[1] == item2.id_rincian_asset} />
                                                                         <label htmlFor={`rincian${item2.id_rincian_asset}`} className='form-check-label'>{item2.rincian_asset.split(' ').map(item1 => {
                                                                             if (item1 == null) return;
                                                                             var sementara = item1.toLowerCase().split('');
@@ -432,7 +446,7 @@ class MasukKontrak extends React.Component {
                                                                                 return (
                                                                                     <>
                                                                                         <div className="form-group form-check">
-                                                                                            <input type="checkbox" name="checkbox" id={`rincian${item3.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item3.id_rincian_asset, 2)}} checked={this.state.history_id[2] == item3.id_rincian_asset}  />
+                                                                                            <input type="checkbox" name="checkbox" id={`rincian${item3.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item3.id_rincian_asset, 2) }} checked={this.state.history_id[2] == item3.id_rincian_asset} />
                                                                                             <label htmlFor={`rincian${item3.id_rincian_asset}`} className='form-check-label'>{item3.rincian_asset.split(' ').map(item1 => {
                                                                                                 if (item1 == null) return;
                                                                                                 var sementara = item1.toLowerCase().split('');
@@ -446,7 +460,7 @@ class MasukKontrak extends React.Component {
                                                                                                     return (
                                                                                                         <>
                                                                                                             <div className="form-group form-check">
-                                                                                                                <input type="checkbox" name="checkbox" id={`rincian${item4.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item4.id_rincian_asset, 3)}} checked={this.state.history_id[3] == item4.id_rincian_asset}  />
+                                                                                                                <input type="checkbox" name="checkbox" id={`rincian${item4.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item4.id_rincian_asset, 3) }} checked={this.state.history_id[3] == item4.id_rincian_asset} />
                                                                                                                 <label htmlFor={`rincian${item4.id_rincian_asset}`} className='form-check-label'>{item4.rincian_asset.split(' ').map(item1 => {
                                                                                                                     if (item1 == null) return;
                                                                                                                     var sementara = item1.toLowerCase().split('');
@@ -460,7 +474,7 @@ class MasukKontrak extends React.Component {
                                                                                                                         return (
                                                                                                                             <>
                                                                                                                                 <div className="form-group form-check">
-                                                                                                                                    <input type="checkbox" name="checkbox" id={`rincian${item5.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item5.id_rincian_asset, 4)}} checked={this.state.history_id[4] == item5.id_rincian_asset}  />
+                                                                                                                                    <input type="checkbox" name="checkbox" id={`rincian${item5.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item5.id_rincian_asset, 4) }} checked={this.state.history_id[4] == item5.id_rincian_asset} />
                                                                                                                                     <label htmlFor={`rincian${item5.id_rincian_asset}`} className='form-check-label'>{item5.rincian_asset.split(' ').map(item1 => {
                                                                                                                                         if (item1 == null) return;
                                                                                                                                         var sementara = item1.toLowerCase().split('');
@@ -474,7 +488,7 @@ class MasukKontrak extends React.Component {
                                                                                                                                             return (
                                                                                                                                                 <>
                                                                                                                                                     <div className="form-group form-check">
-                                                                                                                                                        <input type="checkbox" name="checkbox" id={`rincian${item6.id_rincian_asset}`} className="form-check-input" onChange={() => {this.changeId(item6.id_rincian_asset, 5)}} checked={this.state.history_id[5] == item6.id_rincian_asset}  />
+                                                                                                                                                        <input type="checkbox" name="checkbox" id={`rincian${item6.id_rincian_asset}`} className="form-check-input" onChange={() => { this.changeId(item6.id_rincian_asset, 5) }} checked={this.state.history_id[5] == item6.id_rincian_asset} />
                                                                                                                                                         <label htmlFor={`rincian${item6.id_rincian_asset}`} className='form-check-label'>{item6.rincian_asset.split(' ').map(item1 => {
                                                                                                                                                             if (item1 == null) return;
                                                                                                                                                             var sementara = item1.toLowerCase().split('');
@@ -519,5 +533,7 @@ class MasukKontrak extends React.Component {
         );
     }
 }
- 
+
+
+
 export default MasukKontrak;

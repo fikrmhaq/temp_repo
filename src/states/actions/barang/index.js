@@ -1,11 +1,32 @@
 import { ADD_BARANG } from "../.."
 import barangModel from "../../../models/barangModel"
+import kontrakModel from "../../../models/kontrakModel"
+import vendor from "./vendor"
 
 const fetch = () => {
     return dispatch => {
         barangModel.getCoreBarang().then(res=>{
             // console.log(res)
             dispatch(add(res.data.data))
+        })
+    }
+}
+
+const post = (data = null) => {
+    return dispatch => {
+
+        const { barang, detail, id_kontrak } = data
+
+        barangModel.postBarang({ ...barang, id_rincian_asset: '100000000000' }).then(res=>{
+            kontrakModel.postDetailKontrak({
+                ...detail,
+                id_barang: res.data.data.id_barang,
+                id_kontrak
+            }).then(kontrak => {
+                // console.log(res)
+                dispatch(add([res.data.data]))
+                // console.log(kontrak)
+            })
         })
     }
 }
@@ -35,5 +56,7 @@ const add = (data = []) => {
 export {
     fetch,
     getByDetailKontrak,
-    add
+    add,
+    post,
+    vendor
 }
