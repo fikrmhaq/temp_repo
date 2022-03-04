@@ -25,7 +25,7 @@ const useController = memo((props) => {
     )
 
     const getBarang = (data) => {
-        props.barang.get.getByDetailKontrak()
+        props.barang.get.getByDetailKontrak(data)
     }
 
     const getRincian = (data = 100000000000) => {

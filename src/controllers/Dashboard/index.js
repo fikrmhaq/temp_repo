@@ -19,7 +19,7 @@ const useController = (props) => {
         }
         console.log('Dashboard')
 
-        props.barang.get()
+        // props.barang.get()
 
         
 

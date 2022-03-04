@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {memo, useState} from 'react'
 import {Route, Redirect as Direct, Switch} from 'react-router-dom'
 import Login from '../Pages/Login/Login'
 // import Dashboard from '../Pages/Dashboard/Dashboard'
@@ -14,33 +14,33 @@ export const path = [ // Rute
         name:'Login',
         path:'/oauth-callback',
     },
-    {
-        name: 'Dashboard',
-        path: '/dashboard'
-    },
+    // {
+    //     name: 'Dashboard',
+    //     path: '/dashboard'
+    // },
     {
         name: 'Core',
         path: '/core'
     },
-    {
-        name: 'Ruangan',
-        path: '/ruang'
-    },
-    {
-        name: 'Transaction',
-        path: '/transaction'
-    },
-    {
-        name: 'Ref',
-        path: '/ref'
-    },
+    // {
+    //     name: 'Ruangan',
+    //     path: '/ruang'
+    // },
+    // {
+    //     name: 'Transaction',
+    //     path: '/transaction'
+    // },
+    // {
+    //     name: 'Ref',
+    //     path: '/ref'
+    // },
     {
         name: 'OAuth',
         path: '/oauth-callback?code='
     }
 ]
 
-export const ExportRoutes = () =>{
+export const ExportRoutes = memo(() =>{
 
 
 
@@ -48,11 +48,11 @@ export const ExportRoutes = () =>{
 
     var components = { // Menunjukkan komponen yang di render pada Rute
         'Login': <Login />,
-        'Dashboard': <Dashboard/>,
+        // 'Dashboard': <Dashboard/>,
         'Core': <Core/>,
-        'Ruangan': <Ruangan/>,
-        'Transaction': <Transaction/>,
-        'Ref': <Ref />
+        // 'Ruangan': <Ruangan/>,
+        // 'Transaction': <Transaction/>,
+        // 'Ref': <Ref />
     }
     
 
@@ -78,4 +78,4 @@ export const ExportRoutes = () =>{
     )
     
     
-}
+})

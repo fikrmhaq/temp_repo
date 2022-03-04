@@ -12,7 +12,6 @@ const DataCard = ({
   index,
   supplier,
 
-  info,
   edit
 }) => {
   const item = { id_barang, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
@@ -45,6 +44,7 @@ const DataCard = ({
               <button className="btn" id={`btn-trigger-${id_barang}`}>
                 <i class="fas fa-cog"></i>
               </button>
+              {JSON.stringify(item)}
               <ActionPopover
                 target={`btn-trigger-${id_barang}`}
                 trigger="focus"
@@ -56,7 +56,7 @@ const DataCard = ({
                 //   })
                 // }
                 edit={() =>
-                  edit(item)
+                  edit({nama_barang})
                 }
               ></ActionPopover>
             </div>

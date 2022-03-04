@@ -97,6 +97,9 @@ class EditCore extends React.Component {
                         <h5 className='modal-title my-auto'>Edit Barang</h5>
                         <button className="btn" onClick={this.props.toggle}>&times;</button>
                     </div>
+                    {
+                        JSON.stringify(this.props.data)
+                    }
                     <div className="form-group mb-2">
                         <label htmlFor="nama_barang">Nama Barang</label>
                         <input type="text" name="nama_barang" id="nama_barang" className="form-control" placeholder='Input nama barang disini' value={this.props.data.nama_barang} onChange={(e) => {this.props.changeData('nama_barang', e.target.value)}} />
