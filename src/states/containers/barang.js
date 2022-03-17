@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         kontrak: {
             get: {
+                get: () => dispatch(kontrak.fetch())
+            },
+            getWithDetail: {
                 getWithDetail: () => dispatch(kontrak.getWithDetail())
             },
             

@@ -37,14 +37,14 @@ const DataCard = ({
               <button
                 className="btn"
 
-                onClick={() => info()}
+                // onClick={() => info()}
               >
                 <i class="fas fa-info-circle"></i>
               </button>
               <button className="btn" id={`btn-trigger-${id_barang}`}>
                 <i class="fas fa-cog"></i>
               </button>
-              {JSON.stringify(item)}
+              
               <ActionPopover
                 target={`btn-trigger-${id_barang}`}
                 trigger="focus"

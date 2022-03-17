@@ -2,7 +2,7 @@ import { createContext, memo, useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { isLogged } from "../../functions";
 import barangModel from "../../models/barangModel";
-import Core from "../../Pages/Core/Core";
+import Core from "../../Pages/Core/New/Core";
 import { mapDispatchToProps } from "../../states/containers/barang";
 import Service from "../../services/Services";
 import Toaster from "../../Pages/Core/Toast";
@@ -62,20 +62,20 @@ const useController = memo((props) => {
 
         }
 
-        getRincian()
+        // getRincian()
 
-        Services.getAssetRuangan().then(res1 => {
+        // Services.getAssetRuangan().then(res1 => {
      
-        })
+        // })
 
-        Services.getDetailBarang().then(res => {
+        // Services.getDetailBarang().then(res => {
             
-        })
+        // })
 
 
         // props.barang.get()
-        props.kontrak.get.getWithDetail()
-        props.vendor.get()
+        props.kontrak.get.get()
+        // props.vendor.get() ++
         // props.rincian.get(100000000000)
 
 

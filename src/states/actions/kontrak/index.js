@@ -1,8 +1,12 @@
 import { ADD_KONTRAK } from "../.."
 import kontrakModel from "../../../models/kontrakModel"
+import kontrak_data from '../../sample/kontrak.json'
 
 const fetch = () => {
-
+    
+    return dispatch => {
+        dispatch(add(kontrak_data))
+    }
 }
 
 const getWithDetail = () => { // Kontrak With Detail
@@ -34,6 +38,7 @@ const add = (data = []) => {
 
 
 export default {
+    fetch,
     getWithDetail,
     add
 }
