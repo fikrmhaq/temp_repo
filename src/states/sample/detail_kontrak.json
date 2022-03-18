@@ -1,0 +1,24 @@
+[
+    {
+        "created_date": null,
+        "harga_satuan": "19000",
+        "id_detail_kontrak": "detailkontrak1",
+        "id_kontrak": "kontrak1",
+        "jenis_satuan": "1",
+        "jumlah": 10,
+        "last_update": null,
+        "nama_aset": "asdfasdfasdf",
+        "spesifikasi": "Tes"
+    },
+    {
+        "created_date": null,
+        "harga_satuan": "19000",
+        "id_detail_kontrak": "detailkontrak2",
+        "id_kontrak": "kontrak1",
+        "jenis_satuan": "1",
+        "jumlah": 10,
+        "last_update": null,
+        "nama_aset": "asdfasdfasdf",
+        "spesifikasi": "Tes"
+    }
+]

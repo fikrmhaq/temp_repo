@@ -3,7 +3,7 @@ import { PopoverBody, UncontrolledPopover } from 'reactstrap';
 import { Card } from '../../../../components';
 
 
-export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, detail_kontrak, action }) => {
+export const DataCard = ({ id_kontrak, nilai_kontrak = 0, rincian_asset, nomor_kontrak, ba_penerimaan_barang, tanggal_ba_penerimaan_barang, detail_kontrak, action }) => {
 
     return(
         <div className='col-lg-4 kontrak mt-3'>
@@ -74,12 +74,7 @@ export const DataCard = ({ id_kontrak, nilai_kontrak, rincian_asset, nomor_kontr
                         </div>
                         <button className="btn btn-primary px-4" 
                         onClick={() => action(
-                            {
-                                id_detail_kontrak:detail_kontrak.map(item=>{
-                                    return item.id_detail_kontrak
-                                }),
-                                id_kontrak
-                            }
+                            id_kontrak
                         )}
                         >Lihat</button>
                     </div>

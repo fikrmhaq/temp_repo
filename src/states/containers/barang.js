@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch) => {
             get: {
                 getByDetailKontrak: (data) => dispatch(getByDetailKontrak(data))
             },
+            get: () => dispatch(fetch()),
             post: (data) => dispatch(post(data))
         },
         vendor: {
@@ -23,8 +24,8 @@ const mapDispatchToProps = (dispatch) => {
             get: {
                 get: () => dispatch(kontrak.fetch())
             },
-            getWithDetail: {
-                getWithDetail: () => dispatch(kontrak.getWithDetail())
+            get_detail: {
+                get: () => dispatch(kontrak.fetch_detail())
             },
             
         }

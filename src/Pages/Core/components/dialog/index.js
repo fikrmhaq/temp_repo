@@ -112,6 +112,10 @@ const EditBarang = ({ open, item }) => {
     )
 }
 
+export const TambahDokumen = () => {
+    
+}
+
 export {
     EditBarang
 }

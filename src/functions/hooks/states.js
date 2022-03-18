@@ -16,8 +16,14 @@ const useKontrak = () => {
     return useSelector(states => states.kontrak)
 }
 
+const useDetailKontrak = () => {
+    
+    return useSelector(states => states.detail_kontrak)
+}
+
 export {
     useBarang,
     useKontrak,
-    useVendor
+    useVendor,
+    useDetailKontrak
 }

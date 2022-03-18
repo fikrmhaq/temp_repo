@@ -1,4 +1,4 @@
-import { ADD_KONTRAK } from "..";
+import { ADD_KONTRAK, ADD_DETAIL_KONTRAK } from "..";
 
 const kontrak = (state = [], action) => {
     const { type, payload } = action
@@ -12,6 +12,20 @@ const kontrak = (state = [], action) => {
 
 }
 
+const detail_kontrak = (state = [], action) => {
+    const { type, payload } = action
+
+    switch(type){
+        case ADD_DETAIL_KONTRAK:
+            return state.concat(payload)
+        default:
+            return state
+    }
+
+}
+
+
 export {
-    kontrak
+    kontrak,
+    detail_kontrak
 }

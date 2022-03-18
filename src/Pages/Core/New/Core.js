@@ -1,104 +1,76 @@
 import React, { memo, useState } from "react";
 import { Card } from "reactstrap";
-import { useKontrak } from "../../../functions/hooks/states";
+import { useBarang, useDetailKontrak, useKontrak, useVendor } from "../../../functions/hooks/states";
 import { Barang } from "../components/barang";
-import Kontrak from "../Kontrak";
+// import Kontrak from "../Kontrak";
+import { Kontrak } from '../components/kontrak'
+import TambahDokumen from '../TambahDokumen'
+import TambahCore from "../TambahCore";
 
 const Core = memo(() => {
-  const [mode, setMode] = useState(0);
+  const [mode, setMode] = useState(1);
+  const [id_kontrak, setIdKontrak] = useState(null)
+
+  const [input, setInput] = useState(
+    {
+      kontrak: {
+        nomor_kontrak: '',
+        id_jenis_kontrak: '1',
+        id_sumber_anggaran: '1',
+        nilai_kontrak: '',
+        ba_penerimaan_barang: '',
+        tanggal_ba_penerimaan_barang: '',
+        id_supplier: '',
+      }
+    }
+  )
+
+  const [tambahDokumen, setTambahDokumen] = useState(false)
+  const [tambahBarang, setTambahBarang] = useState(false)
 
 
   const kontrak = useKontrak()
-
-  const detail_kontrak = [
-    {
-      created_date: null,
-      harga_satuan: "19000",
-      id_detail_kontrak: "detailkontrak1",
-      id_kontrak: "kontrak1",
-      jenis_satuan: "1",
-      jumlah: 10,
-      last_update: null,
-      nama_aset: "asdfasdfasdf",
-      spesifikasi: "Tes",
-    },
-    {
-      created_date: null,
-      harga_satuan: "19000",
-      id_detail_kontrak: "detailkontrak2",
-      id_kontrak: "kontrak1",
-      jenis_satuan: "1",
-      jumlah: 10,
-      last_update: null,
-      nama_aset: "asdfasdfasdf",
-      spesifikasi: "Tes",
-    },
-  ];
-
-  const barang = [
-    {
-      created_date: "2022-02-03T11:05:26.730Z",
-      id_barang: "65140dac-93df-44fa-96d4-c303e320f1f1",
-      id_detail_barang: "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-      id_detail_kontrak: "detailkontrak1",
-      id_rincian_asset: "132100102002",
-      id_vendor: "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-      keterangan: null,
-      nama_barang: "ROG",
-      nama_vendor: "Datas",
-      rincian_asset: "Lap Top",
-    },
-    {
-      created_date: "2022-02-03T11:05:26.730Z",
-      id_barang: "65140dac-93df-44fa-96d4-c303e320f1f1",
-      id_detail_barang: "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-      id_detail_kontrak: "detailkontrak1",
-      id_rincian_asset: "132100102002",
-      id_vendor: "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-      keterangan: null,
-      nama_barang: "ROG",
-      nama_vendor: "Datas",
-      rincian_asset: "Lap Top",
-    },
-    {
-      created_date: "2022-02-03T11:05:26.730Z",
-      id_barang: "65140dac-93df-44fa-96d4-c303e320f1f1",
-      id_detail_barang: "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-      id_detail_kontrak: "detailkontrak1",
-      id_rincian_asset: "132100102002",
-      id_vendor: "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-      keterangan: null,
-      nama_barang: "ROG",
-      nama_vendor: "Datas",
-      rincian_asset: "Lap Top",
-    },
-    {
-      created_date: "2022-02-03T11:05:26.730Z",
-      id_barang: "65140dac-93df-44fa-96d4-c303e320f1f1",
-      id_detail_barang: "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-      id_detail_kontrak: "detailkontrak1",
-      id_rincian_asset: "132100102002",
-      id_vendor: "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-      keterangan: null,
-      nama_barang: "ROG",
-      nama_vendor: "Datas",
-      rincian_asset: "Lap Top",
-    },
-  ];
+  const detail_kontrak = useDetailKontrak()
+  const barang = useBarang()
+  const vendor = useVendor()
 
   return (
     <div>
       <div style={mode == 0 ? {} : { display: "none" }}>
+        <TambahDokumen
+          open={tambahDokumen}
+          toggle={() => setTambahDokumen(!tambahDokumen)}
+          // submit={this.submitKontrak}  
+          input={input.kontrak}
+        // changeKontrak={this.changeKontrak}
+        />
+        <div className="d-flex justify-content-between">
+          <button className="btn btn-primary mb-3"
+            onClick={() => setTambahDokumen(!tambahDokumen)}
+          //  submit={this.submitKontrak}
+          >Tambah Dokumen</button>
+          {/* <Search className="w-25" select={{ name: 'dokumen', id: "dokumen", onChange: this.changeDokumen, children: this.state.dokumen != null ? this.state.dokumen.map(item => ({ key: item.id_jenis_kontrak, value: item.nama_jenis })) : ([{ key: 'null', value: 'Loading...' }]) }} input={{ name: 'searchDokumen', id: "searchDokumen", placeholder: 'Search', onChange: this.whenSearch }}></Search> */}
+        </div>
         <div class="row">
           {kontrak.map((item, i) => {
             return (
-              <Kontrak
-                data={item}
-                // changeKontrak={() => this.setState({ kontrak_id: item.id_kontrak, kontrak: !this.state.kontrak, kontrak_data: item })}
-                // rincian_asset={this.state.rincian_asset != null ? this.state.rincian_asset[item.id_kontrak] : 'Loading...'}
-                // refresh={this.refreshDokumen}
-                // refreshEdit={this.refreshDokumenEdit}
-                // message={this.setMessage}
+              <Kontrak.DataCard
+                // data={item}
+                {
+                ...
+                {
+                  ...item,
+                  action: (id) => {
+                    setIdKontrak(id)
+                    setMode(1)
+                  }
+                }
+                }
+              // changeKontrak={() => this.setState({ kontrak_id: item.id_kontrak, kontrak: !this.state.kontrak, kontrak_data: item })}
+              // rincian_asset={this.state.rincian_asset != null ? this.state.rincian_asset[item.id_kontrak] : 'Loading...'}
+              // refresh={this.refreshDokumen}
+              // refreshEdit={this.refreshDokumenEdit}
+              // message={this.setMessage}
               />
             );
           })}
@@ -106,6 +78,27 @@ const Core = memo(() => {
       </div>
 
       <div style={mode == 1 ? {} : { display: "none" }}>
+        <div className="d-flex justify-content-between">
+          <div className="d-flex">
+            <button className="btn btn-primary" 
+            onClick={() => setTambahBarang(!tambahBarang)}
+            >Tambah Barang</button>
+            <TambahCore 
+            toggle={() => setTambahBarang(!tambahBarang)} 
+            open={tambahBarang} 
+            data={
+              {
+                vendor
+              }
+            }
+            // kontrak={this.props.idKontrak} 
+            // submit={(barang, detail) => { this.submitBarang(barang, detail, this.props.idKontrak) }}
+            />
+          </div>
+          {/* <div className="form-group w-25">
+            <input type="search" name="search" id="search" className="form-control form-search" placeholder="Cari Barang disini" onChange={this.searching} />
+          </div> */}
+        </div>
         <div class="row mt-3">
           <div class="col-lg-9">
             <div class="row">

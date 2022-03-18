@@ -1,11 +1,19 @@
-import { ADD_KONTRAK } from "../.."
+import { ADD_DETAIL_KONTRAK, ADD_KONTRAK } from "../.."
 import kontrakModel from "../../../models/kontrakModel"
 import kontrak_data from '../../sample/kontrak.json'
+import detail_kontrak_data from '../../sample/detail_kontrak.json'
 
 const fetch = () => {
     
     return dispatch => {
         dispatch(add(kontrak_data))
+    }
+}
+
+const fetch_detail = () => {
+    
+    return dispatch => {
+        dispatch(add_detail(detail_kontrak_data))
     }
 }
 
@@ -36,9 +44,18 @@ const add = (data = []) => {
     }
 }
 
+const add_detail = (data = []) => {
+    return {
+        type:ADD_DETAIL_KONTRAK,
+        payload:data
+    }
+}
+
+
 
 export default {
     fetch,
+    fetch_detail,
     getWithDetail,
     add
 }

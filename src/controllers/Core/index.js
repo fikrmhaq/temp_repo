@@ -57,10 +57,10 @@ const useController = memo((props) => {
 
     useEffect(() => {
 
-        if (!isLogged()) {
-            window.location.replace('https://asset.tikomdik-disdikjabar.id/auth')
+        // if (!isLogged()) {
+        //     window.location.replace('https://asset.tikomdik-disdikjabar.id/auth')
 
-        }
+        // }
 
         // getRincian()
 
@@ -73,9 +73,10 @@ const useController = memo((props) => {
         // })
 
 
-        // props.barang.get()
+        props.barang.get()
         props.kontrak.get.get()
-        // props.vendor.get() ++
+        props.kontrak.get_detail.get()
+        props.vendor.get() 
         // props.rincian.get(100000000000)
 
 

@@ -30,6 +30,9 @@ class TambahCore extends React.Component {
         Services.getVendor().then(res => {
             this.setState({ dataVendor: res.data, dataSearchVendor: res.data.data });
         });
+        let vendor = this.props.data.vendor
+
+        this.setState({ dataVendor: "NOT NULL", dataSearchVendor: vendor })
     }
 
     newVendor = () => {
@@ -50,6 +53,8 @@ class TambahCore extends React.Component {
         }).catch(err => {
             this.setMessage({ message: err, err: true })
         })
+
+        
     }
 
     changeVendor = (key, value) => {
@@ -128,7 +133,7 @@ class TambahCore extends React.Component {
                             </div>
                             <ul className="nav flex-column mt-3 px-1">
                                 {this.state.dataVendor != null ? (
-                                    this.state.dataSearchVendor.map(item => {
+                                   this.props.data.vendor.map(item => {
                                         return (
                                             <li className={"nav-item py-2 px-3 rounded-3 mb-2 " + (this.state.inputBarang.id_vendor == item.id_vendor && 'active')} onClick={() => {this.state.inputBarang.id_vendor = item.id_vendor;this.setState({ inputBarang: this.state.inputBarang })}}>
                                                 {item.nama}

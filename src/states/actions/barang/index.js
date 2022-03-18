@@ -2,13 +2,16 @@ import { ADD_BARANG } from "../.."
 import barangModel from "../../../models/barangModel"
 import kontrakModel from "../../../models/kontrakModel"
 import vendor from "./vendor"
+import barang_data from '../../sample/barang.json'
 
 const fetch = () => {
     return dispatch => {
-        barangModel.getCoreBarang().then(res=>{
-            // console.log(res)
-            dispatch(add(res.data.data))
-        })
+        // barangModel.getCoreBarang().then(res=>{
+        //     // console.log(res)
+        //     dispatch(add(res.data.data))
+        // })
+
+        dispatch(add(barang_data))
     }
 }
 
