@@ -5,7 +5,20 @@ const barang = (state = [], action) => {
 
     switch(type){
         case ADD_BARANG:
+
+            // Sample with Local
+    
+
+            localStorage.setItem(
+            'barang',
+             JSON.stringify(state.concat(payload)))
+            
+
+            //End Sample
+
+
             return state.concat(payload)
+
         default:
             return state       
     }
@@ -17,7 +30,21 @@ const vendor = (state = [], action) => {
 
     switch(type){
         case ADD_VENDOR:
+
+            // Sample with Local
+
+
+            localStorage.setItem(
+            'vendor', 
+            JSON.stringify(state.concat(payload))
+            )
+
+            //End Sample
+
+
+
             return state.concat(payload)
+
         default:
             return state       
     }

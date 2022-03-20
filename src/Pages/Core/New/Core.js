@@ -6,6 +6,7 @@ import { Barang } from "../components/barang";
 import { Kontrak } from '../components/kontrak'
 import TambahDokumen from '../TambahDokumen'
 import TambahCore from "../TambahCore";
+import { useControllerState } from "../../../controllers/Core";
 
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
@@ -28,11 +29,29 @@ const Core = memo(() => {
   const [tambahDokumen, setTambahDokumen] = useState(false)
   const [tambahBarang, setTambahBarang] = useState(false)
 
+  const { postBarang } = useControllerState()
 
   const kontrak = useKontrak()
   const detail_kontrak = useDetailKontrak()
   const barang = useBarang()
   const vendor = useVendor()
+
+  const _tambahBarang = () => {
+    postBarang(
+      {
+        created_date: "2022-02-03T11:05:26.730Z",
+        id_barang: "65140dac-93df-44fa-96d4-c303e320f1f1",
+        id_detail_barang: "38969f8f-ef4e-41a2-8984-0f2f287b9550",
+        id_detail_kontrak: "detailkontrak1",
+        id_rincian_asset: "132100102002",
+        id_vendor: "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
+        keterangan: null,
+        nama_barang: "Dell",
+        nama_vendor: "Datas",
+        rincian_asset: "Lap Top"
+      }
+    )
+  }
 
   return (
     <div>
@@ -47,6 +66,7 @@ const Core = memo(() => {
         <div className="d-flex justify-content-between">
           <button className="btn btn-primary mb-3"
             onClick={() => setTambahDokumen(!tambahDokumen)}
+            
           //  submit={this.submitKontrak}
           >Tambah Dokumen</button>
           {/* <Search className="w-25" select={{ name: 'dokumen', id: "dokumen", onChange: this.changeDokumen, children: this.state.dokumen != null ? this.state.dokumen.map(item => ({ key: item.id_jenis_kontrak, value: item.nama_jenis })) : ([{ key: 'null', value: 'Loading...' }]) }} input={{ name: 'searchDokumen', id: "searchDokumen", placeholder: 'Search', onChange: this.whenSearch }}></Search> */}
@@ -81,7 +101,8 @@ const Core = memo(() => {
         <div className="d-flex justify-content-between">
           <div className="d-flex">
             <button className="btn btn-primary" 
-            onClick={() => setTambahBarang(!tambahBarang)}
+            // onClick={() => setTambahBarang(!tambahBarang)}
+            onClick={() => _tambahBarang()}
             >Tambah Barang</button>
             <TambahCore 
             toggle={() => setTambahBarang(!tambahBarang)} 

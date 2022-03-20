@@ -57,6 +57,8 @@ const useController = memo((props) => {
 
     useEffect(() => {
 
+
+
         // if (!isLogged()) {
         //     window.location.replace('https://asset.tikomdik-disdikjabar.id/auth')
 

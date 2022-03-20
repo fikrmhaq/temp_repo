@@ -20,17 +20,20 @@ const post = (data = null) => {
 
         const { barang, detail, id_kontrak } = data
 
-        barangModel.postBarang({ ...barang, id_rincian_asset: '100000000000' }).then(res=>{
-            kontrakModel.postDetailKontrak({
-                ...detail,
-                id_barang: res.data.data.id_barang,
-                id_kontrak
-            }).then(kontrak => {
-                // console.log(res)
-                dispatch(add([res.data.data]))
-                // console.log(kontrak)
-            })
-        })
+        // barangModel.postBarang({ ...barang, id_rincian_asset: '100000000000' }).then(res=>{  == OLD ROUTE
+        //     kontrakModel.postDetailKontrak({
+        //         ...detail,
+        //         id_barang: res.data.data.id_barang,
+        //         id_kontrak
+        //     }).then(kontrak => {
+        //         // console.log(res)
+        //         dispatch(add([res.data.data]))
+        //         // console.log(kontrak)
+        //     })
+        // })
+
+        dispatch(add([{ ...barang, id_rincian_asset: '100000000000' }]))
+        
     }
 }
 
