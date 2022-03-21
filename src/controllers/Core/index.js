@@ -79,6 +79,7 @@ const useController = memo((props) => {
         props.kontrak.get.get()
         props.kontrak.get_detail.get()
         props.vendor.get() 
+        props.barang.core()
         // props.rincian.get(100000000000)
 
 

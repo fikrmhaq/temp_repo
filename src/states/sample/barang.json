@@ -1,63 +1,48 @@
 [
     {
-        "created_date": "2022-02-03T11:05:26.730Z",
-        "id_barang": "65140dac-93df-44fa-96d4-c303e320f1f1",
-        "id_detail_barang": "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-        "id_detail_kontrak": "detailkontrak1",
-        "id_rincian_asset": "132100102002",
+        "id_barang": "barang1",
+        "id_detail_barang": "detail_barang1",
+        "id_rincian_asset": "100000000000",
         "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
         "keterangan": null,
-        "nama_barang": "ROG",
-        "nama_vendor": "Datas",
-        "rincian_asset": "Lap Top"
+        "harga": 1000000,
+        "rincian_asset": null
     },
     {
-        "created_date": "2022-02-03T11:05:26.730Z",
-        "id_barang": "65140dac-93df-44fa-96d4-c303e320f1f1",
-        "id_detail_barang": "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-        "id_detail_kontrak": "detailkontrak1",
-        "id_rincian_asset": "132100102002",
+        "id_barang": "barang1",
+        "id_detail_barang": "detail_barang2",
+        "id_rincian_asset": "100000000000",
         "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
         "keterangan": null,
-        "nama_barang": "ROG",
-        "nama_vendor": "Datas",
-        "rincian_asset": "Lap Top"
+        "harga": 1000000,
+        "rincian_asset": null
     },
     {
-        "created_date": "2022-02-03T11:05:26.730Z",
-        "id_barang": "65140dac-93df-44fa-96d4-c303e320f1f1",
-        "id_detail_barang": "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-        "id_detail_kontrak": "detailkontrak1",
-        "id_rincian_asset": "132100102002",
+        "id_barang": "barang1",
+        "id_detail_barang": "detail_barang3",
+        "id_rincian_asset": "100000000000",
         "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
         "keterangan": null,
-        "nama_barang": "ROG",
-        "nama_vendor": "Datas",
-        "rincian_asset": "Lap Top"
+        "harga": 1000000,
+        "rincian_asset": null
     },
     {
-        "created_date": "2022-02-03T11:05:26.730Z",
-        "id_barang": "65140dac-93df-44fa-96d4-c303e320f1f1",
-        "id_detail_barang": "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-        "id_detail_kontrak": "detailkontrak1",
-        "id_rincian_asset": "132100102002",
+        "id_barang": "barang2",
+        "id_detail_barang": "detail_barang1",
+        "id_rincian_asset": "100000000000",
         "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
         "keterangan": null,
-        "nama_barang": "ROG",
-        "nama_vendor": "Datas",
-        "rincian_asset": "Lap Top"
+        "harga": 1000000,
+        "rincian_asset": null
     },
     {
-        "created_date": "2022-02-03T11:05:26.730Z",
-        "id_barang": "65140dac-93df-44fa-96d4-c303e320f1f1",
-        "id_detail_barang": "38969f8f-ef4e-41a2-8984-0f2f287b9550",
-        "id_detail_kontrak": "detailkontrak1",
-        "id_rincian_asset": "132100102002",
+        "id_barang": "barang2",
+        "id_detail_barang": "detail_barang2",
+        "id_rincian_asset": "100000000000",
         "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
         "keterangan": null,
-        "nama_barang": "ROG",
-        "nama_vendor": "Datas",
-        "rincian_asset": "Lap Top"
+        "harga": 1000000,
+        "rincian_asset": null
     }
 ]
   

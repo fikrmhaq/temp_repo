@@ -1,4 +1,4 @@
-import { ADD_BARANG, ADD_RINCIAN, ADD_VENDOR } from ".."
+import { ADD_BARANG, ADD_CORE_BARANG, ADD_RINCIAN, ADD_VENDOR } from ".."
 
 const barang = (state = [], action) => {
     const { type, payload } = action
@@ -63,8 +63,34 @@ const rincian = (state = [], action) => {
 
 }
 
+const core = (state = [], action) => {
+    const { type, payload } = action
+
+    switch(type){
+        case ADD_CORE_BARANG:
+
+            // Sample with Local
+    
+
+            localStorage.setItem(
+            'core',
+             JSON.stringify(state.concat(payload)))
+            
+
+            //End Sample
+
+
+            return state.concat(payload)
+
+        default:
+            return state       
+    }
+
+}
+
 export {
     barang,
     vendor,
-    rincian
+    rincian,
+    core
 }

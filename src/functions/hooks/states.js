@@ -6,6 +6,11 @@ const useBarang = () => {
     return useSelector(states => states.barang) 
 }
 
+const useCoreBarang = () => {
+    
+    return useSelector(states => states.core)
+}
+
 const useVendor = () => {
 
     return useSelector(states => states.vendor) 
@@ -25,5 +30,6 @@ export {
     useBarang,
     useKontrak,
     useVendor,
-    useDetailKontrak
+    useDetailKontrak,
+    useCoreBarang
 }

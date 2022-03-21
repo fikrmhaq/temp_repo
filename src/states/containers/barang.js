@@ -1,4 +1,5 @@
 import { add, fetch, getByDetailKontrak, post, vendor } from "../actions/barang"
+import core_barang from '../actions/barang/core'
 import kontrak from "../actions/kontrak"
 import rincian from "../actions/rincian"
 
@@ -12,8 +13,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         barang: {
             get: {
-                getByDetailKontrak: (data) => dispatch(getByDetailKontrak(data))
+                getByDetailKontrak: (data) => dispatch(getByDetailKontrak(data)),
+                core: () => dispatch(core_barang.fetch())
             },
+            core: () => dispatch(core_barang.fetch()),
             get: () => dispatch(fetch()),
             post: (data) => dispatch(post(data))
         },

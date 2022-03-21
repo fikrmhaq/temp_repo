@@ -1,12 +1,13 @@
 import React, { memo, useState } from "react";
 import { Card } from "reactstrap";
-import { useBarang, useDetailKontrak, useKontrak, useVendor } from "../../../functions/hooks/states";
+import { useBarang, useCoreBarang, useDetailKontrak, useKontrak, useVendor } from "../../../functions/hooks/states";
 import { Barang } from "../components/barang";
 // import Kontrak from "../Kontrak";
 import { Kontrak } from '../components/kontrak'
 import TambahDokumen from '../TambahDokumen'
 import TambahCore from "../TambahCore";
 import { useControllerState } from "../../../controllers/Core";
+import { TambahBarang } from '../components/dialog'
 
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
@@ -31,10 +32,12 @@ const Core = memo(() => {
 
   const { postBarang } = useControllerState()
 
+  const vendor = useVendor()
   const kontrak = useKontrak()
   const detail_kontrak = useDetailKontrak()
+  const core_barang = useCoreBarang()
   const barang = useBarang()
-  const vendor = useVendor()
+  
 
   const _tambahBarang = () => {
     postBarang(
@@ -104,7 +107,7 @@ const Core = memo(() => {
             // onClick={() => setTambahBarang(!tambahBarang)}
             onClick={() => _tambahBarang()}
             >Tambah Barang</button>
-            <TambahCore 
+            {/* <TambahCore 
             toggle={() => setTambahBarang(!tambahBarang)} 
             open={tambahBarang} 
             data={
@@ -114,6 +117,14 @@ const Core = memo(() => {
             }
             // kontrak={this.props.idKontrak} 
             // submit={(barang, detail) => { this.submitBarang(barang, detail, this.props.idKontrak) }}
+            /> */}
+            <TambahBarang
+            open={false}
+            data={
+              {
+                vendor
+              }
+            }
             />
           </div>
           {/* <div className="form-group w-25">
@@ -123,8 +134,17 @@ const Core = memo(() => {
         <div class="row mt-3">
           <div class="col-lg-9">
             <div class="row">
-              {barang.map((sheet, i) => {
-                return <Barang.DataCard {...sheet} />;
+              {core_barang.map((sheet, i) => {
+                return <Barang.DataCard 
+                {
+                  ...
+                  { 
+                    ...sheet,
+                    jumlah: barang.filter(a=> a.id_barang == sheet.id_barang).length,
+                    vendor: vendor.find(a=> a.id_vendor == sheet.id_vendor).nama
+                  }
+                }
+                 />;
               })}
             </div>
           </div>
