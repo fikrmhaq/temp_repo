@@ -11,6 +11,11 @@ const useCoreBarang = () => {
     return useSelector(states => states.core)
 }
 
+const useRincian = () => {
+    
+    return useSelector(states => states.rincian)
+}
+
 const useVendor = () => {
 
     return useSelector(states => states.vendor) 
@@ -31,5 +36,6 @@ export {
     useKontrak,
     useVendor,
     useDetailKontrak,
-    useCoreBarang
+    useCoreBarang,
+    useRincian
 }

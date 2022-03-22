@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         rincian: {
-            get: (data) => dispatch(rincian.fetch(data))
+            get: () => dispatch(rincian.fetch())
         },
         barang: {
             get: {

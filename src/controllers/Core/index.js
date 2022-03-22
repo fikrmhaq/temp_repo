@@ -40,8 +40,8 @@ const useController = memo((props) => {
         })
     }
 
-    const postBarang = (barang, detail, id_kontrak) => {
-        props.barang.post({barang, detail, id_kontrak})
+    const postBarang = (barang) => {
+        props.barang.post({ barang })
         Toast('Added',false)
         setTimeout(() => setMessage({ message: '', error: false }), 5000)
     }
@@ -74,13 +74,13 @@ const useController = memo((props) => {
             
         // })
 
-
+        props.rincian.get()
         props.barang.get()
         props.kontrak.get.get()
         props.kontrak.get_detail.get()
         props.vendor.get() 
         props.barang.core()
-        // props.rincian.get(100000000000)
+        
 
 
     }, [])
@@ -104,7 +104,7 @@ const useController = memo((props) => {
             {
                 ...
                 {
-                    postBarang: (barang, detail, id_kontrak) => postBarang(barang, detail, id_kontrak)
+                    postBarang: (barang) => postBarang(barang)
                 }
             }
             

@@ -2,47 +2,27 @@
     {
         "id_barang": "barang1",
         "id_detail_barang": "detail_barang1",
-        "id_rincian_asset": "100000000000",
-        "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-        "keterangan": null,
-        "harga": 1000000,
-        "rincian_asset": null
+        "keterangan": null
     },
     {
         "id_barang": "barang1",
         "id_detail_barang": "detail_barang2",
-        "id_rincian_asset": "100000000000",
-        "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-        "keterangan": null,
-        "harga": 1000000,
-        "rincian_asset": null
+        "keterangan": null
     },
     {
         "id_barang": "barang1",
         "id_detail_barang": "detail_barang3",
-        "id_rincian_asset": "100000000000",
-        "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-        "keterangan": null,
-        "harga": 1000000,
-        "rincian_asset": null
+        "keterangan": null
     },
     {
         "id_barang": "barang2",
         "id_detail_barang": "detail_barang1",
-        "id_rincian_asset": "100000000000",
-        "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-        "keterangan": null,
-        "harga": 1000000,
-        "rincian_asset": null
+        "keterangan": null
     },
     {
         "id_barang": "barang2",
         "id_detail_barang": "detail_barang2",
-        "id_rincian_asset": "100000000000",
-        "id_vendor": "d99ef356-1fc4-4e3a-a7d5-872a0a68e497",
-        "keterangan": null,
-        "harga": 1000000,
-        "rincian_asset": null
+        "keterangan": null
     }
 ]
   

@@ -3,6 +3,7 @@ import barangModel from "../../../models/barangModel"
 import kontrakModel from "../../../models/kontrakModel"
 import vendor from "./vendor"
 import barang_data from '../../sample/barang.json'
+import core from './core'
 
 const fetch = () => {
     return dispatch => {
@@ -18,7 +19,7 @@ const fetch = () => {
 const post = (data = null) => {
     return dispatch => {
 
-        const { barang, detail, id_kontrak } = data
+        const { barang } = data
 
         // barangModel.postBarang({ ...barang, id_rincian_asset: '100000000000' }).then(res=>{  == OLD ROUTE
         //     kontrakModel.postDetailKontrak({
@@ -32,7 +33,32 @@ const post = (data = null) => {
         //     })
         // })
 
-        dispatch(add([{ ...barang, id_rincian_asset: '100000000000' }]))
+        const { nama_barang, harga, jumlah, id_vendor } = barang
+
+        var construct_core_barang = {
+            nama_barang,
+            harga,
+            id_vendor,
+            id_barang: 'barang3',
+            id_rincian: 'a'
+        }
+
+        
+        dispatch(core.add([construct_core_barang]))
+
+        var temp = []
+        for(var i = 0;i<jumlah;i++) {
+            temp.push(
+                {
+                    id_barang: 'barang3',
+                    id_detail_barang: 'detail_barang1',
+                    keterangan: null
+                }
+            )
+        }
+
+
+        dispatch(add(temp))
         
     }
 }

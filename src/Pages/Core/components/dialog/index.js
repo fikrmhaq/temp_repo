@@ -5,6 +5,7 @@ import { useVendor } from '../../../../functions/hooks/states'
 import { Form } from '../../../components/Form/Form'
 import { Dialog } from '../../../components/Modal/Modal'
 import Cleave from 'cleave.js/react';
+import { useControllerState } from '../../../../controllers/Core'
 
 const EditBarang = ({ open, item }) => {
 
@@ -121,15 +122,22 @@ export const TambahBarang = (
     }
 ) => {
 
+    const { postBarang } = useControllerState()
+
     const [inputDetail, setInputDetail] = useState(
         {
             nama_barang: '',
             harga: '',
-            nama_vendor: '',
-            keterangan: ''
+            jumlah: 1,
+            id_vendor: ''
             
         }
     )
+
+    const submit = () => {
+        console.log(inputDetail)
+        postBarang(inputDetail)
+    }
 
     return (
         <Modal toggle={toggle} isOpen={open} className="tambah-barang" centered>
@@ -141,36 +149,22 @@ export const TambahBarang = (
                 <div className="form-group mb-2">
                     <label htmlFor="nama_barang">Nama Aset</label>
                     <input type="text" name="nama_barang" id="nama_barang" className="form-control" placeholder="Input nama barang disini" 
-                    onChange={(e) => { this.changeInput('inputBarang', 'nama_barang', e.target.value) }} value={inputDetail.nama_barang}
+                    onChange={(e) => setInputDetail({...inputDetail, nama_barang: e.target.value})} value={inputDetail.nama_barang}
                      />
                 </div>
                 <div className="row mb-2">
                     <div className="form-group col-lg-6">
                         <label htmlFor="jumlah">Jumlah</label>
-                        <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} id='jumlah' className="form-control" placeholder="Input jumlah disini" value={inputDetail.jumlah} 
-                        // onChange={(e) => { this.changeInput('inputDetail', 'jumlah', e.target.rawValue) }}
+                        <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} id='jumlah' className="form-control" placeholder="Input jumlah disini" 
+                        onChange={(e) => setInputDetail({...inputDetail, jumlah: e.target.value})} value={inputDetail.jumlah}
                         ></Cleave>
                     </div>
                     <div className="form-group col-lg-6">
-                        <label htmlFor="jenis_satuan">Jenis Satuan</label>
-                        <select name="jenis_satuan" id="jenis_satuan" className="form-select" value={inputDetail.jenis_satuan} 
-                        // onChange={(e) => { this.changeInput('inputDetail', 'jnies_satuan', e.target.value) }}
-                        >
-                            <option value="0">KG</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="form-group mb-2">
-                    <label htmlFor="harga_satuan">Harga Satuan</label>
-                    <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} className='form-control' id='harga_satuan' placeholder='Harga Satuan' value={inputDetail.harga_satuan}
-                    //  onChange={(e) => { this.changeInput('inputDetail', 'harga_satuan', e.target.rawValue) }}
+                    <label htmlFor="harga_satuan">Harga</label>
+                    <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} className='form-control' id='harga_satuan' placeholder='Harga Satuan' 
+                    onChange={(e) => setInputDetail({...inputDetail, harga: e.target.value})} value={inputDetail.harga}
                      ></Cleave>
-                </div>
-                <div className="form-group mb-2">
-                    <label htmlFor="spesifikasi">Spesifikasi Barang</label>
-                    <textarea name="spesifikasi" id="spesifikasi" cols="30" rows="3" className="form-control" placeholder="Input spesifikasi barang disini" 
-                    // onChange={(e) => { this.changeInput('inputDetail', 'spesifikasi', e.target.value) }}
-                    ></textarea>
+                    </div>
                 </div>
                 <div className="detail-container">
                     <div className="d-flex justify-content-between">
@@ -227,7 +221,7 @@ export const TambahBarang = (
             </ModalBody>
             <ModalFooter>
                 <button className="btn btn-primary shadow-none" 
-                // onClick={() => this.props.submit(this.state.inputBarang, this.state.inputDetail)}
+                onClick={() => submit()}
                 >Save</button>
             </ModalFooter>
         </Modal>
