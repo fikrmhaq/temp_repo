@@ -12,6 +12,7 @@ import { TambahBarang } from '../components/dialog'
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
   const [id_kontrak, setIdKontrak] = useState(null)
+  const [Filter, setFilter] = useState(['a'])
 
   const [input, setInput] = useState(
     {
@@ -32,15 +33,15 @@ const Core = memo(() => {
 
   const { postBarang } = useControllerState()
 
-  
-  
+
+
   const rincian = useRincian()
   const vendor = useVendor()
   const kontrak = useKontrak()
   const detail_kontrak = useDetailKontrak()
   const core_barang = useCoreBarang()
   const barang = useBarang()
-  
+
 
   const _tambahBarang = () => {
     postBarang(
@@ -64,18 +65,18 @@ const Core = memo(() => {
       <div style={mode == 1 ? {} : { display: "none" }}>
         <div className="d-flex justify-content-between">
           <div className="d-flex">
-            <button className="btn btn-primary" 
-            onClick={() => setTambahBarang(!tambahBarang)}
+            <button className="btn btn-primary"
+              onClick={() => setTambahBarang(!tambahBarang)}
             // onClick={() => _tambahBarang()}
             >Tambah Barang</button>
             <TambahBarang
-            toggle = {() => setTambahBarang(!tambahBarang)}
-            open={tambahBarang}
-            data={
-              {
-                vendor
+              toggle={() => setTambahBarang(!tambahBarang)}
+              open={tambahBarang}
+              data={
+                {
+                  vendor
+                }
               }
-            }
             />
           </div>
           {/* <div className="form-group w-25">
@@ -86,23 +87,38 @@ const Core = memo(() => {
           <div class="col-lg-9">
             <div class="row">
               {core_barang.map((sheet, i) => {
-                return <Barang.DataCard 
-                {
+                return <Barang.DataCard
+                  {
                   ...
-                  { 
+                  {
                     ...sheet,
-                    jumlah: barang.filter(a=> a.id_barang == sheet.id_barang).length,
-                    vendor: vendor.find(a=> a.id_vendor == sheet.id_vendor).nama,
-                    rincian_asset: rincian.find(a=> a.id_rincian == sheet.id_rincian).nama_rincian
+                    jumlah: barang.filter(a => a.id_barang == sheet.id_barang).length,
+                    vendor: vendor.find(a => a.id_vendor == sheet.id_vendor).nama,
+                    rincian_asset: rincian.find(a => a.id_rincian == sheet.id_rincian).nama_rincian
                   }
-                }
-                 />;
+                  }
+                />;
               })}
             </div>
           </div>
           <div class="col-lg-3">
             <div class="card">
-              <Card>Kategori Barang</Card>
+              <Card>
+                <div
+                  class="card-label"
+                >Kategori Barang</div>
+                <ul>
+                  <div className="form-group form-check">
+                    <input type="checkbox" name="checkbox" className="form-check-input" />
+                    <label>Aset</label>
+                  </div>
+                  {/* {
+                    Filter..map(item => {
+                      return
+                    })
+                  } */}
+                </ul>
+              </Card>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ import { useAuth } from '../functions/hooks/auth'
 export const path = [ // Rute
     {
         name:'Login',
-        path:'/oauth-callback',
+        path:'/',
     },
     // {
     //     name: 'Dashboard',
@@ -34,10 +34,6 @@ export const path = [ // Rute
     //     name: 'Ref',
     //     path: '/ref'
     // },
-    {
-        name: 'OAuth',
-        path: '/oauth-callback?code='
-    }
 ]
 
 export const ExportRoutes = memo(() =>{

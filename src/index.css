@@ -8576,6 +8576,13 @@ body {
 .modal-open {
   padding: 0 !important; }
 
+.card-label {
+  color:#3470D0;
+  padding:20px;
+  font-size:0.92vw;
+  font-weight:500
+}
+
 @media (max-width: 575.98px) {
   #chartIncome {
     height: 500px; } }
@@ -8611,3 +8618,5 @@ body {
     width: 100% !important; }
   .d-cslg-flex {
     display: flex; } }
+
+  

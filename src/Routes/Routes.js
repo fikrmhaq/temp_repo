@@ -17,7 +17,7 @@ import SideBarResponsive from "../Pages/components/SideBarResponsive";
 const Routes = memo(({ global, pathname }) => {
   return (
     <Router>
-      {/* {[null, ""].includes(localStorage.getItem("signData")) ? (
+      {[null, ""].includes(localStorage.getItem("log_data")) ? (
         <div>
             <ExportRoutes global={global} />
         </div>
@@ -37,9 +37,9 @@ const Routes = memo(({ global, pathname }) => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
 
-    <div className="row m-0" style={{ height: "100vh" }}>
+    {/* <div className="row m-0" style={{ height: "100vh" }}>
           <div className="col-lg-2 d-none d-cslg-block sidebar-container">
             <SideBar></SideBar>
           </div>
@@ -53,7 +53,7 @@ const Routes = memo(({ global, pathname }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       {/* <Theme>s */}
       {/* <ExportRoutes global={global}/> */}
       {/* </Theme>s */}
