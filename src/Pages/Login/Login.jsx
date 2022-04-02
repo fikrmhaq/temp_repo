@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { isLogged } from '../../functions';
@@ -8,6 +8,13 @@ import { isLogged } from '../../functions';
 const Login = () => {
     // const query = useQuery()
     let { search } = useLocation();
+
+    const [log, setLog] = useState(
+        {
+            username: '',
+            password: ''
+        }
+    )
 
     useEffect(() => {
         
@@ -31,8 +38,9 @@ const Login = () => {
     }, [])
 
     const login = async () => {
-        await localStorage.setItem('logged', true);
-        // window.location.href = 'http://192.168.2.16:3000/dashboard';
+        axios.post('http://localhost/auth/login', log).then(res=>{
+            // localStorage.setItem('log_data', { ...res.responseData.userData, token: res.responseData.token })
+        })
     }
 
     return (
@@ -53,11 +61,15 @@ const Login = () => {
                                 <h3 class="text-center">Selamat Datang</h3>
                                 <h6 class="text-center">Silahkan Login</h6>
                                 <div class="form-group mb-3">
-                                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" />
+                                    <input 
+                                    onChange={ev=>setLog({...log, username: ev.target.value})}
+                                    type="text" name="username" id="username" class="form-control" placeholder="Username" />
                                 </div>
                                 <div class="form-group">
                                     <div class="position-relative">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" />
+                                        <input
+                                        onChange={ev=>setLog({...log, password: ev.target.value})}
+                                        type="password" name="password" id="password" class="form-control" placeholder="Password" />
                                         <button class="btn px-3"><i class="far fa-eye"></i></button>
                                     </div>
                                 </div>
