@@ -7,6 +7,7 @@ import { mapDispatchToProps } from "../../states/containers/barang";
 import Service from "../../services/Services";
 import Toaster from "../../Pages/Core/Toast";
 import Services from "../../services/Services";
+import axios from "axios";
 
 
 export const context = createContext(null)
@@ -73,6 +74,12 @@ const useController = memo((props) => {
         // Services.getDetailBarang().then(res => {
             
         // })
+
+        axios.get('https://wppl-inventaris.herokuapp.com/rincian', 
+        // { headers: { 'Authorization': JSON.parse(localStorage.getItem('log_data')).token } }
+        ).then(res=>{
+
+        })
 
         props.rincian.get()
         props.barang.get()
