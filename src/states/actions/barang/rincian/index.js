@@ -1,14 +1,17 @@
 import { ADD_RINCIAN } from '../../..'
+import barangModel from '../../../../models/barangModel'
 import rincian_data from '../../../sample/rincian.json'
 
 const fetch = () => {
+    
     return dispatch => {
-        // barangModel.getCoreBarang().then(res=>{
-        //     // console.log(res)
-        //     dispatch(add(res.data.data))
-        // })
+        
+        barangModel.getRincian().then(res=>{
+            console.log(res)
+            
+        })
 
-        dispatch(add(rincian_data))
+        
     }
 }
 

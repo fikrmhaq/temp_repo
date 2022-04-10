@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: 'http://dev.tikom.elemen.my.id/asset/',
+    baseURL: 'https://wppl-inventaris.herokuapp.com/',
     // baseURL: 'http://192.168.100.37:3650/',
     withCredentials: false,
     headers: {
@@ -22,12 +22,12 @@ const config = {
 const headers =  {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    "Authorization":localStorage.getItem("token")
+    "x-auth":JSON.parse(localStorage.getItem('log_data')).token
 }
 
 export const instance = axios.create({
     ...config,
     headers:headers,
-    baseURL: 'https://asset.tikomdik-disdikjabar.id/'
+    baseURL: 'https://wppl-inventaris.herokuapp.com/'
 })
 

@@ -4,10 +4,13 @@ import vendor_data from '../../../sample/vendor.json'
 
 const fetch = (data = []) => {
     return dispatch => {
-        // barangModel.getVendor().then(res=>{
-        //     dispatch(add(res.data.data))
-        // })
-        dispatch(add(vendor_data))
+        barangModel.getVendor().then(res=>{
+          const construct = res.data.responseData.vendors.map(item=>{
+              return {id_vendor: item._id, nama_vendor: item.nama_vendor}
+          })
+          dispatch(add(construct))
+        })
+        
     }
 }
 

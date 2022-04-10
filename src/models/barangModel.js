@@ -18,7 +18,7 @@ const getVendor = (data = null) => {
 }
 
 const getRincian = (data = null) => {
-    return instance.get(`/rincian_asset?mst_rincian_asset=${data}&offset=${0}`)
+    return instance.get(`/rincian`)
 }
 
 const postDetailBarang = (data) => {

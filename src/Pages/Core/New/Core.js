@@ -8,6 +8,7 @@ import TambahDokumen from '../TambahDokumen'
 import TambahCore from "../TambahCore";
 import { useControllerState } from "../../../controllers/Core";
 import { TambahBarang } from '../components/dialog'
+import { IfUndefined } from "../../../functions/catcher";
 
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
@@ -93,8 +94,8 @@ const Core = memo(() => {
                   {
                     ...sheet,
                     jumlah: barang.filter(a => a.id_barang == sheet.id_barang).length,
-                    vendor: vendor.find(a => a.id_vendor == sheet.id_vendor).nama,
-                    rincian_asset: rincian.find(a => a.id_rincian == sheet.id_rincian).nama_rincian
+                    vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama'),
+                    rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian')
                   }
                   }
                 />;
@@ -108,10 +109,16 @@ const Core = memo(() => {
                   class="card-label"
                 >Kategori Barang</div>
                 <ul>
-                  <div className="form-group form-check">
-                    <input type="checkbox" name="checkbox" className="form-check-input" />
-                    <label>Aset</label>
-                  </div>
+                  {
+                    rincian.map(item => {
+                      return (
+                        <div className="form-group form-check mb-2">
+                          <input type="checkbox" name="checkbox" className="form-check-input" />
+                          <label>{item.nama_rincian}</label>
+                        </div>
+                      )
+                    })
+                  }
                   {/* {
                     Filter..map(item => {
                       return

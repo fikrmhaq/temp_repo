@@ -30,19 +30,6 @@ const vendor = (state = [], action) => {
 
     switch(type){
         case ADD_VENDOR:
-
-            // Sample with Local
-
-
-            localStorage.setItem(
-            'vendor', 
-            JSON.stringify(state.concat(payload))
-            )
-
-            //End Sample
-
-
-
             return state.concat(payload)
 
         default:
@@ -57,10 +44,6 @@ const rincian = (state = [], action) => {
     switch(type){
         case ADD_RINCIAN:
 
-
-            localStorage.setItem(
-            'rincian',
-                JSON.stringify(state.concat(payload)))
 
 
             return state.concat(payload)

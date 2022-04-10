@@ -39,7 +39,7 @@ const Login = () => {
 
     const login = async () => {
         axios.post('https://wppl-inventaris.herokuapp.com/auth/login', log).then(res=>{
-            localStorage.setItem('log_data', { ...res.data.responseData.userData, token: res.data.responseData.token })
+            localStorage.setItem('log_data', JSON.stringify({ ...res.data.responseData.userData, token: res.data.responseData.token }))
             
             window.location.replace('/core')
         })

@@ -7,6 +7,7 @@ const fetch = () => {
         //     // console.log(res)
         //     dispatch(add(res.data.data))
         // })
+  
 
         dispatch(add(core_barang_data))
     }

@@ -8,7 +8,16 @@ const fetch = (data = []) => {
         //     dispatch(add(res.data.data))
         // })
 
-        dispatch(add(rincian_data))
+        barangModel.getRincian().then(res=>{
+            const construct = res.data.responseData.rincians.map(item=>{
+                return {id_rincian: item._id, nama_rincian: item.nama_rincian}
+            })
+            console.log()
+            dispatch(add(construct))
+            
+        })
+        
+        
     }
 }
 

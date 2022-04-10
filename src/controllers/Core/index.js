@@ -75,17 +75,24 @@ const useController = memo((props) => {
             
         // })
 
-        axios.get('https://wppl-inventaris.herokuapp.com/rincian', 
+        // axios.get('https://wppl-inventaris.herokuapp.com/rincian', 
         // { headers: { 'Authorization': JSON.parse(localStorage.getItem('log_data')).token } }
-        ).then(res=>{
+        // ).then(res=>{
 
-        })
+        // })
+
+        
+        // barangModel.getRincian().then(res=>{
+
+        // })
+
 
         props.rincian.get()
+        props.vendor.get() 
         props.barang.get()
         props.kontrak.get.get()
         props.kontrak.get_detail.get()
-        props.vendor.get() 
+        
         props.barang.core()
         
 
