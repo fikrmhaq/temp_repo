@@ -8,13 +8,15 @@ const useAuth = (component) => {
  
     
 
-    // useEffect(() => {
-    // console.log('useAuth')
+  
 
-    // }, [])
+    var log = localStorage.getItem('log_data')
 
-
-    // return component
+    if(log == null) {
+        return ''
+    } else {
+        return JSON.parse(localStorage.getItem('log_data')).token
+    }
 
 }
 

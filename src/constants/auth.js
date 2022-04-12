@@ -1,4 +1,4 @@
-const data = localStorage.getItem('signData')
+const data = localStorage.getItem('log_data')
 
 
 

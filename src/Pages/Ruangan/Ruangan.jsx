@@ -48,9 +48,30 @@ class Ruangan extends React.Component {
   componentDidMount() {
     // if (!localStorage.getItem("logged"))
     //   window.location.href = "http://192.168.2.16:3000";
-    Services.getRuangan().then((res) => {
+    // Services.getRuangan().then((res) => {
+    //   this.setState({
+    //     ruangan: res.data.data.sort((a, b) => {
+    //       let x = a.nama_ruangan.toLowerCase();
+    //       let y = b.nama_ruangan.toLowerCase();
+    //       if (x < y) return -1;
+    //       if (x > y) return 1;
+    //       return 0;
+    //     }),
+    //   });
+    // });
+
       this.setState({
-        ruangan: res.data.data.sort((a, b) => {
+        ruangan: [
+          {
+            nama_ruangan:'RND'
+          },
+          {
+            nama_ruangan:'RND'
+          },
+          {
+            nama_ruangan:'RND'
+          }
+        ].sort((a, b) => {
           let x = a.nama_ruangan.toLowerCase();
           let y = b.nama_ruangan.toLowerCase();
           if (x < y) return -1;
@@ -58,7 +79,6 @@ class Ruangan extends React.Component {
           return 0;
         }),
       });
-    });
   }
 
   getRuanganAgain = (dataRuangan) => {

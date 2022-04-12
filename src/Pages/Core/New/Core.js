@@ -105,9 +105,12 @@ const Core = memo(() => {
           <div class="col-lg-3">
             <div class="card">
               <Card>
-                <div
-                  class="card-label"
-                >Kategori Barang</div>
+                <div class="row">
+                  <div
+                    class="card-label"
+                    style={{ marginLeft:'10px' }}
+                  >Kategori Barang</div>
+                </div>
                 <ul>
                   {
                     rincian.map(item => {

@@ -1,4 +1,7 @@
 import axios from "axios";
+import { signData } from "../functions";
+import { useAuth } from "../functions/hooks/auth";
+import { IfUndefined } from '../functions/catcher'
 
 const apiClient = axios.create({
     baseURL: 'https://wppl-inventaris.herokuapp.com/',
@@ -22,7 +25,7 @@ const config = {
 const headers =  {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    "x-auth":JSON.parse(localStorage.getItem('log_data')).token
+    "x-auth": IfUndefined(signData(), '', 'token')
 }
 
 export const instance = axios.create({

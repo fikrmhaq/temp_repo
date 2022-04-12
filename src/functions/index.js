@@ -2,7 +2,7 @@ import { data } from "../constants/auth";
 
 function signData (){
     
-    if(data == null) return
+    if(data == null) return undefined
     return JSON.parse(data) 
 }
 

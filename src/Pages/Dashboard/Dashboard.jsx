@@ -133,58 +133,58 @@ const Dashboard = memo(() => {
                 }
             }
         }))
-        defaultModel.getKontrak().then(res=>{
-            threeData.kontrak = res.data.data.length;
-            var jumlah = 0;
-            res.data.data.forEach(item => {
-                jumlah += item.nilai_kontrak;
-            })
-            threeData.pengeluaran = jumlah;
-            // this.setState({ threeData: threeData });
-            setthreeData(threeData)
-        })
+        // defaultModel.getKontrak().then(res=>{
+        //     threeData.kontrak = res.data.data.length;
+        //     var jumlah = 0;
+        //     res.data.data.forEach(item => {
+        //         jumlah += item.nilai_kontrak;
+        //     })
+        //     threeData.pengeluaran = jumlah;
+        //     // this.setState({ threeData: threeData });
+        //     setthreeData(threeData)
+        // })
 
-        barangModel.getCoreBarang().then(res=>{
-            threeData.aset = res.data.data.length;
-            const rincian_asset = new Object();
-            res.data.data.forEach(item => {
-                if (Object.keys(rincian_asset).indexOf(item.rincian_asset) < 0) rincian_asset[item.rincian_asset] = 0;
-                rincian_asset[item.rincian_asset]++;
-            })
-            var berubah = Object.keys(rincian_asset).map(item => {
-                return {
-                    rincian_asset: item,
-                    total: rincian_asset[item]
-                };
-            })
-            berubah = berubah.sort((a, b) => a.total - b.total).filter((item, index) => index < 5);
-            setthreeData({threeData, kategori_barang: new Chart(document.getElementById('kategori-barang'), {
-                type: 'doughnut',
-                data: {
-                    labels: berubah.map(item => item.rincian_asset.split(' ').map(item => {
-                        if (item == null || item == '') return;
-                        var hasil = item.toLowerCase().split('');
-                        hasil[0] = hasil[0].toUpperCase();
-                        return hasil.join('');
-                    }).join(' ')),
-                    datasets: [
-                        {
-                            label: 'Kategori Barang',
-                            data: berubah.map(item => item.total),
-                            backgroundColor: ['#246BDD', '#4280E4', '#5F9CFF', '#BCD6FF', '#D8E7FF'].reverse(),
-                            borderWidth: 0
-                        }
-                    ]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            })})
-        })
+        // barangModel.getCoreBarang().then(res=>{
+        //     threeData.aset = res.data.data.length;
+        //     const rincian_asset = new Object();
+        //     res.data.data.forEach(item => {
+        //         if (Object.keys(rincian_asset).indexOf(item.rincian_asset) < 0) rincian_asset[item.rincian_asset] = 0;
+        //         rincian_asset[item.rincian_asset]++;
+        //     })
+        //     var berubah = Object.keys(rincian_asset).map(item => {
+        //         return {
+        //             rincian_asset: item,
+        //             total: rincian_asset[item]
+        //         };
+        //     })
+        //     berubah = berubah.sort((a, b) => a.total - b.total).filter((item, index) => index < 5);
+        //     setthreeData({threeData, kategori_barang: new Chart(document.getElementById('kategori-barang'), {
+        //         type: 'doughnut',
+        //         data: {
+        //             labels: berubah.map(item => item.rincian_asset.split(' ').map(item => {
+        //                 if (item == null || item == '') return;
+        //                 var hasil = item.toLowerCase().split('');
+        //                 hasil[0] = hasil[0].toUpperCase();
+        //                 return hasil.join('');
+        //             }).join(' ')),
+        //             datasets: [
+        //                 {
+        //                     label: 'Kategori Barang',
+        //                     data: berubah.map(item => item.total),
+        //                     backgroundColor: ['#246BDD', '#4280E4', '#5F9CFF', '#BCD6FF', '#D8E7FF'].reverse(),
+        //                     borderWidth: 0
+        //                 }
+        //             ]
+        //         },
+        //         options: {
+        //             plugins: {
+        //                 legend: {
+        //                     position: 'bottom'
+        //                 }
+        //             }
+        //         }
+        //     })})
+        // })
     }, [])
 
     return (

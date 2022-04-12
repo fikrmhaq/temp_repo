@@ -1,0 +1,23 @@
+[
+    {
+    "id_barang": "1",
+    "nama": "Yasu Vang",
+    "tanggal_pinjam": "12-01-2015",
+    "tanggal_kembali": "14-01-2015",
+    "status_pinjam": "kembali"
+    },
+    {
+    "id_barang": "2",
+    "nama": "Yannic Wong",
+    "tanggal_pinjam": "14-02-2016",
+    "tanggal_kembali": "14-03-2016",
+    "status_pinjam": "kembali"
+    },
+    {
+    "id_barang": "3",
+    "nama": "Henny Aleksandrov",
+    "tanggal_pinjam": "12-12-2015",
+    "tanggal_kembali": "null",
+    "status_pinjam": "hilang"
+    }
+]

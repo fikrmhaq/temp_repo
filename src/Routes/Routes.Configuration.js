@@ -14,22 +14,22 @@ export const path = [ // Rute
         name:'Login',
         path:'/',
     },
-    // {
-    //     name: 'Dashboard',
-    //     path: '/dashboard'
-    // },
+    {
+        name: 'Dashboard',
+        path: '/dashboard'
+    },
     {
         name: 'Core',
         path: '/core'
     },
-    // {
-    //     name: 'Ruangan',
-    //     path: '/ruang'
-    // },
-    // {
-    //     name: 'Transaction',
-    //     path: '/transaction'
-    // },
+    {
+        name: 'Ruangan',
+        path: '/ruang'
+    },
+    {
+        name: 'Transaction',
+        path: '/transaction'
+    },
     // {
     //     name: 'Ref',
     //     path: '/ref'
@@ -44,10 +44,10 @@ export const ExportRoutes = memo(() =>{
 
     var components = { // Menunjukkan komponen yang di render pada Rute
         'Login': <Login />,
-        // 'Dashboard': <Dashboard/>,
+        'Dashboard': <Dashboard/>,
         'Core': <Core/>,
-        // 'Ruangan': <Ruangan/>,
-        // 'Transaction': <Transaction/>,
+        'Ruangan': <Ruangan/>,
+        'Transaction': <Transaction/>,
         // 'Ref': <Ref />
     }
     
