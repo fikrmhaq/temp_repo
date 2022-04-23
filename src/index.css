@@ -8583,6 +8583,16 @@ body {
   font-weight:500
 }
 
+.page-button {
+  flex: 0 0 auto;
+  width: 2.33333%; }
+  
+.page-button-active {
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
 @media (max-width: 575.98px) {
   #chartIncome {
     height: 500px; } }
@@ -8618,5 +8628,7 @@ body {
     width: 100% !important; }
   .d-cslg-flex {
     display: flex; } }
+
+  
 
   

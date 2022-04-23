@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActionPopover, Card } from "../../../../components";
+import { DeleteBarang } from "../dialog";
 
 const DataCard = ({
+  img_path,
   id_barang,
+  _id,
   nama_barang,
   vendor,
   jumlah,
@@ -12,16 +15,21 @@ const DataCard = ({
   index,
   supplier,
 
-  edit
+  edit,
+  _delete
 }) => {
-  const item = { id_barang, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
+  const item = { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
+  const [Delete, setDelete] = useState(false)
+  // const [Item, setItem] = useState({ id: null, nama_Barang: null })
+
 
   return (
+    <>
     <div className="col-lg-4 core-barang mb-4" key={index}>
       <Card>
         <div className="foto">
           <img
-            src={require("../../Default.png").default}
+            src={img_path == "" ? require("../../Default.png").default : img_path}
             alt="Default.png"
             width="50%"
           />
@@ -41,24 +49,18 @@ const DataCard = ({
               >
                 <i class="fas fa-info-circle"></i>
               </button>
-              <button className="btn" id={`btn-trigger-${id_barang}`}>
-                <i class="fas fa-cog"></i>
-              </button>
-              
               <ActionPopover
                 target={`btn-trigger-${id_barang}`}
                 trigger="focus"
                 placement="right"
-                // delete={() =>
-                //   this.setState({
-                //     deleteModal: !this.state.deleteModal,
-                //     deleteData: item,
-                //   })
-                // }
-                edit={() =>
+                _delete={() =>
+                 setDelete(!Delete)
+                }
+                _edit={() =>
                   edit({nama_barang})
                 }
               ></ActionPopover>
+              
             </div>
             {/* <h6 className="my-auto">
               {this.state.supplier != null
@@ -71,6 +73,8 @@ const DataCard = ({
         </div>
       </Card>
     </div>
+    <DeleteBarang open={Delete} toggle={() => setDelete(!Delete)} item={item} />
+    </>
   );
 };
 

@@ -103,7 +103,7 @@ const usePaginate = (array, page_num) => {
         // console.log(map)
     }, [indexes])
 
-    return [catchUndefined(indexes[index]), setIndex]
+    return [catchUndefined(indexes[index]), setIndex, {data: indexes, now_page: index}]
 
 
 }

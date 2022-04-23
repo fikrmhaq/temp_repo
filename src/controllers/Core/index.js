@@ -47,6 +47,10 @@ const useController = memo((props) => {
         setTimeout(() => setMessage({ message: '', error: false }), 5000)
     }
 
+    const deleteCoreBarang = (data) => {
+        props.barang.del.core(data)
+    }
+
     const Toast = (message, error = false) => {
         // this.setState({ message: { message, error } }, () => {
         //     setTimeout(() => this.setState({ message: { message: '', error: false } }), 5000)
@@ -58,7 +62,7 @@ const useController = memo((props) => {
 
     useEffect(() => {
 
-
+        console.log('Core Effect')
 
         // if (!isLogged()) {
         //     window.location.replace('https://asset.tikomdik-disdikjabar.id/auth')
@@ -89,11 +93,11 @@ const useController = memo((props) => {
 
         props.rincian.get()
         props.vendor.get() 
-        props.barang.get()
         props.kontrak.get.get()
         props.kontrak.get_detail.get()
         
-        props.barang.core()
+        props.barang.get.core()
+        props.barang.get.unit()
         
 
 
@@ -107,6 +111,7 @@ const useController = memo((props) => {
                 {
                     getBarang,
                     postBarang,
+                    deleteCoreBarang,
                     history
                 }
             }
@@ -118,7 +123,7 @@ const useController = memo((props) => {
             {
                 ...
                 {
-                    postBarang: (barang) => postBarang(barang)
+                    postBarang: (barang) => postBarang(barang),
                 }
             }
             

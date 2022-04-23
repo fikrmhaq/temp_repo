@@ -1,4 +1,4 @@
-import { ADD_BARANG, ADD_CORE_BARANG, ADD_RINCIAN, ADD_VENDOR } from ".."
+import { ADD_BARANG, ADD_CORE_BARANG, ADD_RINCIAN, ADD_VENDOR, DELETE_CORE_BARANG } from ".."
 
 const barang = (state = [], action) => {
     const { type, payload } = action
@@ -71,7 +71,8 @@ const core = (state = [], action) => {
 
 
             return state.concat(payload)
-
+        case DELETE_CORE_BARANG:
+            return state.filter(a=> a._id != payload)
         default:
             return state       
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Collapse, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { Vendor } from '..'
 import { useVendor } from '../../../../functions/hooks/states'
@@ -126,17 +126,20 @@ export const TambahBarang = (
 
     const [inputDetail, setInputDetail] = useState(
         {
+            img : null,
             nama_barang: '',
-            harga: '',
+            harga: 1,
             jumlah: 1,
-            id_vendor: ''
-            
+            id_vendor: '',
+            id_rincian: null
+
         }
     )
+    const UploadRef = useRef()
 
     const submit = () => {
-        console.log(inputDetail)
         postBarang(inputDetail)
+        toggle()
     }
 
     return (
@@ -148,22 +151,22 @@ export const TambahBarang = (
                 </div>
                 <div className="form-group mb-2">
                     <label htmlFor="nama_barang">Nama Aset</label>
-                    <input type="text" name="nama_barang" id="nama_barang" className="form-control" placeholder="Input nama barang disini" 
-                    onChange={(e) => setInputDetail({...inputDetail, nama_barang: e.target.value})} value={inputDetail.nama_barang}
-                     />
+                    <input type="text" name="nama_barang" id="nama_barang" className="form-control" placeholder="Input nama barang disini"
+                        onChange={(e) => setInputDetail({ ...inputDetail, nama_barang: e.target.value })} value={inputDetail.nama_barang}
+                    />
                 </div>
                 <div className="row mb-2">
                     <div className="form-group col-lg-6">
                         <label htmlFor="jumlah">Jumlah</label>
-                        <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} id='jumlah' className="form-control" placeholder="Input jumlah disini" 
-                        onChange={(e) => setInputDetail({...inputDetail, jumlah: e.target.value})} value={inputDetail.jumlah}
+                        <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} id='jumlah' className="form-control" placeholder="Input jumlah disini"
+                            onChange={(e) => setInputDetail({ ...inputDetail, jumlah: e.target.value })} value={inputDetail.jumlah}
                         ></Cleave>
                     </div>
                     <div className="form-group col-lg-6">
-                    <label htmlFor="harga_satuan">Harga</label>
-                    <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} className='form-control' id='harga_satuan' placeholder='Harga Satuan' 
-                    onChange={(e) => setInputDetail({...inputDetail, harga: e.target.value})} value={inputDetail.harga}
-                     ></Cleave>
+                        <label htmlFor="harga_satuan">Harga</label>
+                        <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} className='form-control' id='harga_satuan' placeholder='Harga Satuan'
+                            onChange={(e) => setInputDetail({ ...inputDetail, harga: e.target.value })} value={inputDetail.harga}
+                        ></Cleave>
                     </div>
                 </div>
                 <div className="detail-container">
@@ -172,45 +175,45 @@ export const TambahBarang = (
                             Vendor
                         </div>
                         <div>
-                            <button className="btn btn-primary btn-sm" 
+                            <button className="btn btn-primary btn-sm"
                             // onClick={() => this.setState({ vendor: !this.state.vendor })}
                             >+</button>
                         </div>
                     </div>
-                    <Collapse 
+                    <Collapse
                     // isOpen={this.state.vendor}
                     >
                         <div className="d-flex pt-3">
                             <div className="form-group w-100">
-                                <input type="text" name="vendor" id="vendor" className="form-control" placeholder="Vendor" 
+                                <input type="text" name="vendor" id="vendor" className="form-control" placeholder="Vendor"
                                 // onChange={(e) => { this.changeVendor('nama', e.target.value) }}
                                 //  value={this.state.inputVendor.nama}
-                                  />
+                                />
                             </div>
                             <div>
-                                <button className="btn btn-primary ms-3 btn-sm" 
+                                <button className="btn btn-primary ms-3 btn-sm"
                                 // onClick={this.newVendor}
                                 ><i class="fas fa-paper-plane"></i></button>
                             </div>
                         </div>
                     </Collapse>
-                    <div className="detail px-2 py-3 mt-3 rounded-3">
+                    <div className="detail px-2 py-3 mt-3 rounded-3 mb-3">
                         <div className="form-group">
-                            <input type="text" name="search" id="search" className="form-control" placeholder="Search" 
+                            <input type="text" name="search" id="search" className="form-control" placeholder="Search"
                             // onChange={this.vendorSearch}
-                             />
+                            />
                         </div>
                         <ul className="nav flex-column mt-3 px-1">
                             {
                                 data.vendor.map(item => {
                                     return (
                                         <li className={"nav-item py-2 px-3 rounded-3 mb-2 " + (inputDetail.id_vendor == item.id_vendor && 'active')}
-                                         onClick={() => setInputDetail({
-                                             ...inputDetail,
-                                             id_vendor: item.id_vendor
-                                         })}
-                                         >
-                                            {item.nama}
+                                            onClick={() => setInputDetail({
+                                                ...inputDetail,
+                                                id_vendor: item.id_vendor
+                                            })}
+                                        >
+                                            {item.nama_vendor}
                                         </li>
                                     );
                                 })
@@ -218,16 +221,58 @@ export const TambahBarang = (
                         </ul>
                     </div>
                 </div>
+                <div className="row mb-2">
+                    <div className="form-group col-lg-6">
+                        <input ref={UploadRef} type="file" style={{ display: 'none' }} onChange={ (e) => setInputDetail({...inputDetail, img: e.target.files[0]}) } />
+                        <button class="btn btn-primary" onClick={() => UploadRef.current.click() } >Upload</button>
+                    </div>
+                    <div className="form-group col-lg-6">
+                        
+                    </div>
+                </div>
             </ModalBody>
             <ModalFooter>
-                <button className="btn btn-primary shadow-none" 
-                onClick={() => submit()}
+                <button className="btn btn-primary shadow-none"
+                    onClick={() => submit()}
                 >Save</button>
             </ModalFooter>
         </Modal>
     )
 }
 
+const DeleteBarang = ({ open, toggle, item }) => {
+    const { deleteCoreBarang } = useControllerState()
+
+    const { _id, nama_barang } = item
+
+    const submit = () => {
+        console.log(item)
+        deleteCoreBarang(_id)
+        toggle()
+    }
+
+    return(
+        <Modal 
+        toggle={toggle}
+         isOpen={open} className='modal-delete' centered>
+                <ModalBody className='px-3'>
+                    <h5 className="modal-title text-center">Konfirmasi</h5>
+                    <p className='text-center'>Apakah anda yakin untuk menghapus</p>
+                    <h5 className='text-center'>{nama_barang}</h5>
+                    <div className="row mt-4">
+                        <div className="col-lg-6">
+                            <button className="btn btn-secondary col-12" onClick={toggle}>Tidak</button>
+                        </div>
+                        <div className="col-lg-6">
+                            <button className="btn btn-danger col-12" onClick={submit}>Hapus</button>
+                        </div>
+                    </div>
+                </ModalBody>
+            </Modal>
+    )
+}
+
 export {
-    EditBarang
+    EditBarang,
+    DeleteBarang
 }

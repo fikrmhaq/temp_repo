@@ -6,59 +6,38 @@ import barang_data from '../../sample/barang.json'
 import core from './core'
 
 const fetch = () => {
-    return dispatch => {
-        // barangModel.getCoreBarang().then(res=>{
-        //     // console.log(res)
-        //     dispatch(add(res.data.data))
-        // })
+    return (dispatch, getState) => {
 
-        dispatch(add(barang_data))
+        // This procedure must only works when the app request all data at once from the server
+        const { core, barang } = getState() 
+        
+        if(barang.length == 0){
+            barangModel.getBarang().then(res=>{
+
+                dispatch(add(res.data.responseData.barangs))
+             
+            })
+        }
+
+        // End Procedure
+
+        
     }
 }
 
 const post = (data = null) => {
     return dispatch => {
 
-        const { barang } = data
+        const { id_barang, jumlah } = data
 
-        // barangModel.postBarang({ ...barang, id_rincian_asset: '100000000000' }).then(res=>{  == OLD ROUTE
-        //     kontrakModel.postDetailKontrak({
-        //         ...detail,
-        //         id_barang: res.data.data.id_barang,
-        //         id_kontrak
-        //     }).then(kontrak => {
-        //         // console.log(res)
-        //         dispatch(add([res.data.data]))
-        //         // console.log(kontrak)
-        //     })
-        // })
-
-        const { nama_barang, harga, jumlah, id_vendor } = barang
-
-        var construct_core_barang = {
-            nama_barang,
-            harga,
-            id_vendor,
-            id_barang: 'barang3',
-            id_rincian: 'a'
+        for(var i = 0;i<jumlah;i++){
+            barangModel.postBarang({ id_barang, keterangan: null }).then(res=>{
+                // console.log(res)
+                dispatch(add(res.data.responseData.barang))
+            })
         }
 
         
-        dispatch(core.add([construct_core_barang]))
-
-        var temp = []
-        for(var i = 0;i<jumlah;i++) {
-            temp.push(
-                {
-                    id_barang: 'barang3',
-                    id_detail_barang: 'detail_barang1',
-                    keterangan: null
-                }
-            )
-        }
-
-
-        dispatch(add(temp))
         
     }
 }

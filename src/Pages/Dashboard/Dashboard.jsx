@@ -6,7 +6,7 @@ import Services from '../../services/Services';
 // Component
 import { Card } from '../../components';
 import defaultModel from '../../models/defaultModel';
-import { useBarang } from '../../functions/hooks/states';
+import { useBarang, useCoreBarang } from '../../functions/hooks/states';
 import { memo } from 'react';
 import { ListofData } from './components';
 import { useEffect } from 'react';
@@ -14,6 +14,7 @@ import barangModel from '../../models/barangModel';
 
 
 const Dashboard = memo(() => {
+    const CoreBarang = useCoreBarang()
     const barang = useBarang()
     const [chartLine, setChartLine] = useState(null)
     const [chartBar, setChartBar] = useState(null)
@@ -196,16 +197,13 @@ const Dashboard = memo(() => {
                         <div className="col-lg-4">
                             <Card>
                                 <h5>Total Aset</h5>
-                                <h3 className={"mt-4 mb-0 " + (threeData.aset == null && 'placeholder-wave')}>{threeData.aset != null ? threeData.aset.toString().split('').reverse().map((item, index, elem) => {
-                                    if (!((index + 1) % 3) && index + 1 < elem.length) return item + '.';
-                                    return item;
-                                }).join('').split('').reverse().join('') : (<span className='placeholder col-12'></span>)}</h3>
+                                <h3 className={"mt-4 mb-0 placeholder-wave"}>{barang.length}</h3>
                                 <h6>Buah</h6>
                             </Card>
                         </div>
                         <div className="col-lg-4 my-4 my-lg-0">
                             <Card>
-                                <h5>Total Kontrak</h5>
+                                <h5>Total Ruangan</h5>
                                 <h3 className={"mt-4 mb-0 " + (threeData.kontrak == null && 'placeholder-wave')}>{threeData.kontrak != null ? threeData.kontrak.toString().split('').reverse().map((item, index, elem) => {
                                     if (!((index + 1) % 3) && index + 1 < elem.length) return item + '.';
                                     return item;
@@ -286,7 +284,7 @@ const Dashboard = memo(() => {
                                 {/* {Object.keys([...Array(10)]).map(() => (
                                     <ItemIn></ItemIn>
                                 ))} */}
-                                <ListofData data={barang} />
+                                <ListofData data={CoreBarang} />
                             </div>
                         </div>
                     </Card>

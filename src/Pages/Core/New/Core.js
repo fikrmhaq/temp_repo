@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Card } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import { useBarang, useCoreBarang, useDetailKontrak, useKontrak, useRincian, useVendor } from "../../../functions/hooks/states";
 import { Barang } from "../components/barang";
 // import Kontrak from "../Kontrak";
@@ -7,13 +7,18 @@ import { Kontrak } from '../components/kontrak'
 import TambahDokumen from '../TambahDokumen'
 import TambahCore from "../TambahCore";
 import { useControllerState } from "../../../controllers/Core";
-import { TambahBarang } from '../components/dialog'
+import { DeleteBarang, TambahBarang } from '../components/dialog'
 import { IfUndefined } from "../../../functions/catcher";
+import { usePaginate } from "../../../functions/hooks";
+import { PaginateComponent } from "../components";
+import { Grow } from "@material-ui/core";
 
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
   const [id_kontrak, setIdKontrak] = useState(null)
   const [Filter, setFilter] = useState(['a'])
+  const [index, setIndex, data] = usePaginate(useCoreBarang(), 6)
+  const [tried, setTried] = useState([])
 
   const [input, setInput] = useState(
     {
@@ -31,6 +36,8 @@ const Core = memo(() => {
 
   const [tambahDokumen, setTambahDokumen] = useState(false)
   const [tambahBarang, setTambahBarang] = useState(false)
+  const [Delete, setDelete] = useState(false)
+  const [item, setItem] = useState({ id: null, nama_Barang: null })
 
   const { postBarang } = useControllerState()
 
@@ -42,6 +49,8 @@ const Core = memo(() => {
   const detail_kontrak = useDetailKontrak()
   const core_barang = useCoreBarang()
   const barang = useBarang()
+
+
 
 
   const _tambahBarang = () => {
@@ -87,19 +96,27 @@ const Core = memo(() => {
         <div class="row mt-3">
           <div class="col-lg-9">
             <div class="row">
-              {core_barang.map((sheet, i) => {
-                return <Barang.DataCard
+              {index.map((sheet, i) => {
+                return (<><Barang.DataCard
                   {
                   ...
                   {
                     ...sheet,
-                    jumlah: barang.filter(a => a.id_barang == sheet.id_barang).length,
-                    vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama'),
-                    rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian')
+                    jumlah: barang.filter(a => a.id_barang == sheet._id).length,
+                    vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
+                    rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
+                    _delete : (item) => {
+                      setDelete(!Delete)
+                      setItem(item)
+                    }
                   }
                   }
-                />;
+                /></>);
               })}
+
+            </div>
+            <div style={{ margin: 'auto', width: '33%', marginTop: '10px' }}>
+              <PaginateComponent indexes={data.data} index={data.now_page} setIndex={(i) => setIndex(i)}  />
             </div>
           </div>
           <div class="col-lg-3">
@@ -108,7 +125,7 @@ const Core = memo(() => {
                 <div class="row">
                   <div
                     class="card-label"
-                    style={{ marginLeft:'10px' }}
+                    style={{ marginLeft: '10px' }}
                   >Kategori Barang</div>
                 </div>
                 <ul>
@@ -133,6 +150,7 @@ const Core = memo(() => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 });

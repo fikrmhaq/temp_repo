@@ -102,19 +102,88 @@ const KategoriBarang = ({ history_id, rincian_asset, nextLapisan }) => {
 
 }
 
-const Vendor = ({ dataVendor = [], dataSearchVendor = [], id_vendor, vendorSearch, onChange }) => {    
+const Vendor = ({ dataVendor = [], dataSearchVendor = [], id_vendor, vendorSearch, onChange }) => {
 
     return (
         <Form.Selection onChange={onChange} list={
-            dataVendor.data.map(item=> {
-                return {...item, id: item.id_vendor}
+            dataVendor.data.map(item => {
+                return { ...item, id: item.id_vendor }
             })
         } />
     )
 }
 
+const PaginateComponent = ({ indexes, index, setIndex }) => {
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <a 
+            href="#"
+            onClick={() => {
+                if(index != 0) setIndex(index - 1)
+            }}
+            style={{ padding: '15px', paddingBlock: '9px' }}>
+                <i class="fa-solid fa-angle-left"></i>
+            </a>
+            {
+                indexes.map((item, i) => {
+                    return (<a href="#" >
+                        <div onClick={() => setIndex(i)} style={i == index ? { backgroundColor: '#4285F1', padding: '15px', paddingBlock: '9px', borderRadius: '5px', color: 'white' } : { padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                            {i + 1}
+                        </div>
+                    </a>)
+                })
+            }
+            {/* <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    1
+                </div>
+            </div>
+            <div >
+                <div class="page-button-active" style={{ backgroundColor: '#4285F1', padding: '15px', paddingBlock: '9px', borderRadius: '5px', color: 'white' }} >
+                    2
+                </div>
+            </div>
+            <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    3
+                </div>
+            </div>
+            <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    4
+                </div>
+            </div>
+            <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    5
+                </div>
+            </div>
+            <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    ...
+                </div>
+            </div>
+            <div >
+                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
+                    22
+                </div>
+            </div> */}
+            <a
+            href="#"
+            onClick={() => {
+                if(index != indexes.length) setIndex(index + 1)
+            }}
+            
+            style={{ padding: '15px', paddingBlock: '9px' }}>
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
+        </div>
+    )
+}
+
 // const Unit = ({ onChange }) => {
-    
+
 
 
 //     return (
@@ -128,5 +197,6 @@ const Vendor = ({ dataVendor = [], dataSearchVendor = [], id_vendor, vendorSearc
 
 export {
     KategoriBarang,
-    Vendor
+    Vendor,
+    PaginateComponent
 }

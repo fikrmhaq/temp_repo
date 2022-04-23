@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useBarang } from "../../../functions/hooks/states";
 
-const ListofData = ({ }) => {
+const ListofData = ({ data }) => {
     const barang = useBarang()
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const ListofData = ({ }) => {
     return (
         <div>
             {
-                barang.map(item=>{
+                data.map(item=>{
                     return (
                         <div class="row mb-3">
                             <div style={
@@ -28,7 +28,7 @@ const ListofData = ({ }) => {
 
                                     </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" style={{ marginLeft:'10px' }} >
                                 <div class="text-color-dark-blue font-weight-500">{item.nama_barang}</div>
                                 <div class="text-color-light-blue">12 Jan 2007</div>
                             </div>

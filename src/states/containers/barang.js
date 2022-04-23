@@ -13,12 +13,15 @@ const mapDispatchToProps = (dispatch) => {
         },
         barang: {
             get: {
-                getByDetailKontrak: (data) => dispatch(getByDetailKontrak(data)),
-                core: () => dispatch(core_barang.fetch())
+                core: () => dispatch(core_barang.fetch()),
+                unit: () => dispatch(fetch())
             },
+            del: {
+                core: (data) => dispatch(core_barang.del(data))
+            },
+            
             core: () => dispatch(core_barang.fetch()),
-            get: () => dispatch(fetch()),
-            post: (data) => dispatch(post(data))
+            post: (data) => dispatch(core_barang.post(data))
         },
         vendor: {
             get: () => dispatch(vendor.fetch())
