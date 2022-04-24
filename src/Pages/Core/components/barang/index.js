@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ActionPopover, Card } from "../../../../components";
-import { DeleteBarang } from "../dialog";
+import { DeleteBarang, EditBarang } from "../dialog";
 
 const DataCard = ({
   img_path,
@@ -19,6 +19,8 @@ const DataCard = ({
   _delete
 }) => {
   const item = { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
+
+  const [Edit, setEdit] = useState(false)
   const [Delete, setDelete] = useState(false)
   // const [Item, setItem] = useState({ id: null, nama_Barang: null })
 
@@ -57,7 +59,7 @@ const DataCard = ({
                  setDelete(!Delete)
                 }
                 _edit={() =>
-                  edit({nama_barang})
+                  setEdit(!Edit)
                 }
               ></ActionPopover>
               
@@ -73,6 +75,7 @@ const DataCard = ({
         </div>
       </Card>
     </div>
+    <EditBarang open={Edit} item={item} toggle={() => setEdit(!Edit)} />
     <DeleteBarang open={Delete} toggle={() => setDelete(!Delete)} item={item} />
     </>
   );
