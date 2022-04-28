@@ -16,9 +16,10 @@ import { Grow } from "@material-ui/core";
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
   const [id_kontrak, setIdKontrak] = useState(null)
-  const [Filter, setFilter] = useState(['a'])
-  const [index, setIndex, data] = usePaginate(useCoreBarang(), 6)
-  const [tried, setTried] = useState([])
+  const [Filter, setFilter] = useState(['6269eba5b9c27824fcba78ea'])
+  const core_barang = useCoreBarang()
+  const [index, setIndex, data] = usePaginate(core_barang, 6)
+  const [search, setSearch] = useState("")
 
   const [input, setInput] = useState(
     {
@@ -47,7 +48,6 @@ const Core = memo(() => {
   const vendor = useVendor()
   const kontrak = useKontrak()
   const detail_kontrak = useDetailKontrak()
-  const core_barang = useCoreBarang()
   const barang = useBarang()
 
 
@@ -70,6 +70,14 @@ const Core = memo(() => {
     )
   }
 
+  const check_filter = (id) => {
+    if (Filter.includes(id)) return setFilter(Filter.filter(el => el != id))
+    setFilter([...Filter, id])
+
+
+
+  }
+
   return (
     <div>
       <div style={mode == 1 ? {} : { display: "none" }}>
@@ -89,35 +97,40 @@ const Core = memo(() => {
               }
             />
           </div>
-          {/* <div className="form-group w-25">
-            <input type="search" name="search" id="search" className="form-control form-search" placeholder="Cari Barang disini" onChange={this.searching} />
-          </div> */}
+          <div className="form-group w-25">
+            <input type="search" name="search" id="search" className="form-control form-search" placeholder="Cari Barang disini"
+              onChange={(ev) => setSearch(ev.target.value.toLowerCase())}
+            //  onChange={this.searching}
+            />
+          </div>
         </div>
         <div class="row mt-3">
           <div class="col-lg-9">
             <div class="row">
-              {index.map((sheet, i) => {
-                return (<><Barang.DataCard
-                  {
-                  ...
-                  {
-                    ...sheet,
-                    jumlah: barang.filter(a => a.id_barang == sheet._id).length,
-                    vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
-                    rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
-                    _delete : (item) => {
-                      setDelete(!Delete)
-                      setItem(item)
+              {core_barang
+                .filter(a => a.nama_barang.toLowerCase().includes(search))
+                .filter(a => Filter.every(v => a.id_rincian.includes(v))).map((sheet, i) => {
+                  return (<><Barang.DataCard
+                    {
+                    ...
+                    {
+                      ...sheet,
+                      jumlah: barang.filter(a => a.id_barang == sheet._id).length,
+                      vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
+                      rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
+                      _delete: (item) => {
+                        setDelete(!Delete)
+                        setItem(item)
+                      }
                     }
-                  }
-                  }
-                /></>);
-              })}
+                    }
+                  /></>);
+                })}
 
             </div>
-            <div style={{ margin: 'auto', width: '33%', marginTop: '10px' }}>
+            {/* <div style={{ margin: 'auto', width: '33%', marginTop: '10px' }}>
               <PaginateComponent indexes={data.data} index={data.now_page} setIndex={(i) => setIndex(i)}  />
-            </div>
+            </div> */}
           </div>
           <div class="col-lg-3">
             <div class="card">
@@ -133,7 +146,7 @@ const Core = memo(() => {
                     rincian.map(item => {
                       return (
                         <div className="form-group form-check mb-2">
-                          <input type="checkbox" name="checkbox" className="form-check-input" />
+                          <input type="checkbox" name="checkbox" className="form-check-input" checked={Filter.includes(item.id_rincian)} onClick={() => check_filter(item.id_rincian)} />
                           <label>{item.nama_rincian}</label>
                         </div>
                       )
@@ -150,7 +163,7 @@ const Core = memo(() => {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 });

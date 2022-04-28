@@ -134,41 +134,6 @@ const PaginateComponent = ({ indexes, index, setIndex }) => {
                     </a>)
                 })
             }
-            {/* <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    1
-                </div>
-            </div>
-            <div >
-                <div class="page-button-active" style={{ backgroundColor: '#4285F1', padding: '15px', paddingBlock: '9px', borderRadius: '5px', color: 'white' }} >
-                    2
-                </div>
-            </div>
-            <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    3
-                </div>
-            </div>
-            <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    4
-                </div>
-            </div>
-            <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    5
-                </div>
-            </div>
-            <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    ...
-                </div>
-            </div>
-            <div >
-                <div style={{ padding: '15px', paddingBlock: '9px', borderRadius: '5px' }} >
-                    22
-                </div>
-            </div> */}
             <a
             href="#"
             onClick={() => {

@@ -55,7 +55,7 @@ const usePaginate = (array, page_num) => {
     const [index, setIndex] = useState(0)
 
 
-    const format = async(length,per_page) => {
+    const format = async(arrays,length,per_page) => {
         const calculate_leftover = length % per_page == 0 ? true : false
 
         let data = []
@@ -78,7 +78,7 @@ const usePaginate = (array, page_num) => {
 
         setIndexes(
             data.map((sheet, i) => {
-                return array.slice(sheet[0],sheet[1])
+                return arrays.slice(sheet[0],sheet[1])
             })
         )
         
@@ -90,18 +90,18 @@ const usePaginate = (array, page_num) => {
     useEffect(() => {
 
 
-        format(array.length, page_num)
+        format(array, array.length, page_num)
 
 
 
 
-        
+        console.log('paginate', array.length)
         
         
 
 
         // console.log(map)
-    }, [indexes])
+    }, [array])
 
     return [catchUndefined(indexes[index]), setIndex, {data: indexes, now_page: index}]
 

@@ -112,12 +112,12 @@ function SideBar() {
 
     const [path, setPath] = useState('');
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         setPath(window.location.pathname);
-    //         sessionStorage.setItem('pathname', content.find(item => item.to == window.location.pathname).name);
-    //     });
-    // })
+    useEffect(() => {
+        setInterval(() => {
+            setPath(window.location.pathname);
+            // sessionStorage.setItem('pathname', content.find(item => item.to == window.location.pathname).name);
+        });
+    })
 
     const logout = () => {
         localStorage.removeItem('logged');
@@ -126,14 +126,14 @@ function SideBar() {
 
     return (
         <div className="px-2 py-4 d-none d-cslg-block sidebar h-100 position-relative">
-            <img src={require('./Img/LogoDark.png').default} alt="Logo" className="d-block mx-auto mb-2" width="20%" />
+            <img src={require('./Img/LogoDark.png').default} alt="Logo" className="d-block mx-auto mb-4" width="20%" />
             <hr />
             <div className="d-flex flex-column" style={{ height: '90%' }}>
                 <ul className="nav flex-column mt-4">
                     {content.map((item, index) => {
                         return  (
                             <li className="nav-item my-2" key={index}>
-                                <Link className={`nav-link py-3 nav-custom-link px-4 ${item.to == path && 'active'}`} to={item.to}>{item.icon} {item.name}</Link>
+                                <Link className={`nav-link py-3 nav-custom-link px-4 ${item.to == path && 'active'}`} to={item.to}>{item.icon} <a style={{ marginLeft:'7px' }}>{item.name}</a></Link>
                             </li>
                         );
                     })}

@@ -5,7 +5,7 @@ import Login from '../Pages/Login/Login'
 import Core from '../controllers/Core'
 import Ruangan from '../Pages/Ruangan/Ruangan'
 import Transaction from '../Pages/Transaction/Transaction'
-import Ref from '../Pages/Ref/Ref'
+import Ref from '../controllers/Ref'
 import Dashboard from '../controllers/Dashboard'
 import { useAuth } from '../functions/hooks/auth'
 
@@ -30,10 +30,10 @@ export const path = [ // Rute
         name: 'Transaction',
         path: '/transaction'
     },
-    // {
-    //     name: 'Ref',
-    //     path: '/ref'
-    // },
+    {
+        name: 'Ref',
+        path: '/ref'
+    },
 ]
 
 export const ExportRoutes = memo(() =>{
@@ -48,7 +48,7 @@ export const ExportRoutes = memo(() =>{
         'Core': <Core/>,
         'Ruangan': <Ruangan/>,
         'Transaction': <Transaction/>,
-        // 'Ref': <Ref />
+        'Ref': <Ref />
     }
     
 

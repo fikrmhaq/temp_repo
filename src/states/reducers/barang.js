@@ -72,7 +72,8 @@ const core = (state = [], action) => {
 
             return state.concat(payload)
         case DELETE_CORE_BARANG:
-            return state.filter(a=> a._id != payload)
+            console.log('tes', payload)
+            return state.filter(el => el._id !== payload._id)
         default:
             return state       
     }

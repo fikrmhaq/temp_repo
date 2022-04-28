@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Collapse, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { Vendor } from '..'
-import { useVendor } from '../../../../functions/hooks/states'
+import { useRincian, useVendor } from '../../../../functions/hooks/states'
 import { Form } from '../../../components/Form/Form'
 import { Dialog } from '../../../components/Modal/Modal'
 import Cleave from 'cleave.js/react';
@@ -25,6 +25,7 @@ const EditBarang = ({ open, item, toggle }) => {
     const [unit_list, setUnitList] = useState([])
 
     const vendorState = useVendor()
+    const rincian = useRincian()
 
     const { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang } = item;
 
@@ -133,7 +134,15 @@ const EditBarang = ({ open, item, toggle }) => {
                         
                     </div>
                 </div>
-                <InputSelection title={'Kategori'} option={[{label:"PC", value:"1"}, { label:"Laptop", value:"2" }]}  />
+                <InputSelection title={'Kategori'} option={
+                    rincian.map(item => {
+                        return { label:item.nama_rincian, value:item.id_rincian }
+                    })
+
+                    
+                } 
+                defaultSelected={"6269eba5b9c27824fcba78ea"}
+                />
             </ModalBody>
             <ModalFooter>
                 <button className="btn btn-primary shadow-none"
