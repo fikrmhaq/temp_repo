@@ -47,6 +47,10 @@ const useController = memo((props) => {
         setTimeout(() => setMessage({ message: '', error: false }), 5000)
     }
 
+    const editCoreBarang = (data) => {
+        props.barang.edit.core(data)
+    }
+
     const deleteCoreBarang = (data) => {
         props.barang.del.core(data)
     }
@@ -111,6 +115,7 @@ const useController = memo((props) => {
                 {
                     getBarang,
                     postBarang,
+                    editCoreBarang,
                     deleteCoreBarang,
                     history
                 }

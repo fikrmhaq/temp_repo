@@ -1,4 +1,4 @@
-const InputSelection = ({ title, option }) => {
+const InputSelection = ({ title, option, checked = [], onChange }) => {
     return (
         <div className="detail-container">
             <div className="d-flex justify-content-between">
@@ -34,13 +34,14 @@ const InputSelection = ({ title, option }) => {
                     // onChange={this.vendorSearch}
                     />
                 </div> */}
+                
                 <ul className="nav flex-column mt-3 px-1">
                     {
                         option.map(item => {
                             return (
                                 <li>
                                     <div className="form-check">
-                                        <input type="checkbox" name="check" id="check" className="form-check-input" onChange={() => console.log(item.value)} />
+                                        <input type="checkbox" name="check" id="check" className="form-check-input" checked={checked.includes(item.value)} onChange={() => onChange(item.value)} />
                                         <label htmlFor="check" className='form-check-label'>{item.label}</label>
                                     </div>
                                 </li>

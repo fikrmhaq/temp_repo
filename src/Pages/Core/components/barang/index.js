@@ -14,11 +14,13 @@ const DataCard = ({
 
   index,
   supplier,
-
+  id_rincians,
+  id_vendor,
+  harga,
   edit,
   _delete
 }) => {
-  const item = { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang };
+  const item = { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang, id_rincians, id_vendor, harga };
 
   const [Edit, setEdit] = useState(false)
   const [Delete, setDelete] = useState(false)

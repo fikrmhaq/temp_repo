@@ -11,7 +11,9 @@ const fetch = () => {
 
         if (core.length == 0) {
             barangModel.getCoreBarang().then(res => {
-                var construct = res.data.responseData.coreBarangs
+                var construct = res.data.responseData.coreBarangs.map(item => {
+                    return {...item, harga: item.harga.toString()}
+                })
                 dispatch(add(construct))
             })
         }
@@ -28,7 +30,7 @@ const post = (data) => {
 
         var dat = data.barang
 
-        var construct = { img: dat.img, nama: dat.nama_barang, id_vendor: dat.id_vendor, id_rincian: ["6269eba5b9c27824fcba78ea"], harga: parseFloat(dat.harga), jumlah: dat.jumlah }
+        var construct = { img: dat.img, nama: dat.nama_barang, id_vendor: dat.id_vendor, id_rincian: ["6269eba5b9c27824fcba78ea"], harga: parseInt(dat.harga.split(',').join('')), jumlah: dat.jumlah }
 
         let form = new FormData()
 
@@ -46,6 +48,32 @@ const post = (data) => {
             // var construct = res.data.responseData.coreBarangs
             dispatch(barang_post({ id_barang: _id, jumlah: construct.jumlah }))
             dispatch(add(res.data.responseData.core_barang))
+        })
+    }
+}
+
+const edit = (data) => {
+    return (dispatch) => {
+
+        
+        const { id, nama_barang, id_vendor, id_rincian, harga } = data
+
+        let form = new FormData()
+
+        // form.append('img', construct.img)
+        form.append('nama', nama_barang)
+        form.append('vendor', id_vendor)
+        // form.append('rincians', id_rincian)
+        form.append('harga', parseInt(harga.split(',').join('')))
+
+        for (var i = 0; i < id_rincian.length; i++) {
+            form.append('rincians[]', id_rincian[i]);
+          }
+
+        console.log(form)
+
+        barangModel.editCoreBarang({id, items: form}).then(res=>{
+
         })
     }
 }
@@ -98,6 +126,7 @@ const dump = (data) => {
 export default {
     fetch,
     post,
+    edit,
     add,
     del,
     dump

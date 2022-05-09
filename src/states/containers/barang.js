@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
             del: {
                 core: (data) => dispatch(core_barang.del(data))
             },
+            edit: {
+                core: (data) => dispatch(core_barang.edit(data))
+            },
             
             core: () => dispatch(core_barang.fetch()),
             post: (data) => dispatch(core_barang.post(data))

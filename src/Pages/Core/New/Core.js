@@ -110,6 +110,7 @@ const Core = memo(() => {
               {core_barang
                 .filter(a => a.nama_barang.toLowerCase().includes(search))
                 .filter(a => Filter.every(v => a.id_rincian.includes(v))).map((sheet, i) => {
+                  const {id_vendor, harga} = sheet
                   return (<><Barang.DataCard
                     {
                     ...
@@ -118,6 +119,9 @@ const Core = memo(() => {
                       jumlah: barang.filter(a => a.id_barang == sheet._id).length,
                       vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
                       rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
+                      id_rincians: sheet.id_rincian,
+                      id_vendor,
+                      harga,
                       _delete: (item) => {
                         setDelete(!Delete)
                         setItem(item)

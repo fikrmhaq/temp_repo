@@ -27,28 +27,46 @@ const EditBarang = ({ open, item, toggle }) => {
     const vendorState = useVendor()
     const rincian = useRincian()
 
-    const { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang } = item;
+    const { _id, nama_barang, vendor, jumlah, rincian_asset, id_detail_kontrak, id_barang, id_rincians, id_vendor, harga } = item;
 
-    const { postBarang } = useControllerState()
+    const { postBarang, editCoreBarang } = useControllerState()
 
     const [inputDetail, setInputDetail] = useState(
         {
-            img : null,
             nama_barang,
-            harga: 1,
+            harga,
             jumlah,
-            id_vendor: vendor,
-            id_rincian: null
+            id_vendor:id_vendor,
+            id_rincian: []
 
         }
     )
     const UploadRef = useRef()
+
+    const modifyId_rincian = (id) => {
+
+        const data = inputDetail.id_rincian
+
+        if(data.includes(id)){
+            setInputDetail({...inputDetail, id_rincian: data.filter(el=> el != id)})
+            return
+        }
+        
+        setInputDetail({...inputDetail, id_rincian: [...data, id]})
+        
+
+    }
+
+    const submit = () => {
+        editCoreBarang({...inputDetail, id_rincian: inputDetail.id_rincian.concat(id_rincians), id:_id})
+    }
 
 
 
     return (
         <Modal toggle={toggle} isOpen={open} className="tambah-barang" centered>
             <ModalBody>
+                {JSON.stringify(inputDetail)}
                 <div className="d-flex justify-content-between mb-2">
                     <h5 className='modal-title'>Edit Aset</h5>
                     <button className="btn" onClick={toggle}>&times;</button>
@@ -63,7 +81,7 @@ const EditBarang = ({ open, item, toggle }) => {
                     <div className="form-group col-lg-6">
                         <label htmlFor="jumlah">Jumlah</label>
                         <Cleave options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }} id='jumlah' className="form-control" placeholder="Input jumlah disini"
-                            onChange={(e) => setInputDetail({ ...inputDetail, jumlah: e.target.value })} value={parseInt(inputDetail.jumlah)}
+                            onChange={(e) => setInputDetail({ ...inputDetail, jumlah: e.target.value })} value={inputDetail.jumlah}
                         ></Cleave>
                     </div>
                     <div className="form-group col-lg-6">
@@ -108,10 +126,15 @@ const EditBarang = ({ open, item, toggle }) => {
                             />
                         </div>
                         <ul className="nav flex-column mt-3 px-1">
+                            
                             {
                                 vendorState.map(item => {
+                                    var classes = 'nav-item py-2 px-3 rounded-3 mb-2'
+
+                                    if(inputDetail.id_vendor == item.id_vendor) classes = 'nav-item py-2 px-3 rounded-3 mb-2 active'
+
                                     return (
-                                        <li className={"nav-item py-2 px-3 rounded-3 mb-2 " + (inputDetail.id_vendor == item.id_vendor && 'active')}
+                                        <li className={classes}
                                             onClick={() => setInputDetail({
                                                 ...inputDetail,
                                                 id_vendor: item.id_vendor
@@ -134,6 +157,7 @@ const EditBarang = ({ open, item, toggle }) => {
                         
                     </div>
                 </div>
+                
                 <InputSelection title={'Kategori'} option={
                     rincian.map(item => {
                         return { label:item.nama_rincian, value:item.id_rincian }
@@ -141,12 +165,13 @@ const EditBarang = ({ open, item, toggle }) => {
 
                     
                 } 
-                defaultSelected={"6269eba5b9c27824fcba78ea"}
+                checked={item.id_rincians.concat(inputDetail.id_rincian)}
+                onChange={(value) => modifyId_rincian(value)}
                 />
             </ModalBody>
             <ModalFooter>
                 <button className="btn btn-primary shadow-none"
-                    // onClick={() => submit()}
+                    onClick={() => submit()}
                 >Save</button>
             </ModalFooter>
         </Modal>
