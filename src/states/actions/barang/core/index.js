@@ -1,4 +1,4 @@
-import { ADD_CORE_BARANG, DELETE_CORE_BARANG } from '../../..'
+import { ADD_CORE_BARANG, DELETE_CORE_BARANG, EDIT_CORE_BARANG } from '../../..'
 import barangModel from '../../../../models/barangModel'
 import core_barang_data from '../../../sample/core_barang.json'
 import { post as barang_post } from '..'
@@ -70,9 +70,12 @@ const edit = (data) => {
             form.append('rincians[]', id_rincian[i]);
           }
 
-        console.log(form)
 
         barangModel.editCoreBarang({id, items: form}).then(res=>{
+            const data = res.data.responseData.core_barang
+
+
+            dispatch(replace({_id: id, items: [data]}))
 
         })
     }
@@ -116,6 +119,13 @@ const add = (data = []) => {
     }
 }
 
+const replace = (data = []) => {
+    return{
+        type: EDIT_CORE_BARANG,
+        payload: data
+    }
+}
+
 const dump = (data) => {
     return {
         type: DELETE_CORE_BARANG,
@@ -129,5 +139,6 @@ export default {
     edit,
     add,
     del,
+    replace,
     dump
 }

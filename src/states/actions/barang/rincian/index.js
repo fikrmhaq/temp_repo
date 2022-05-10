@@ -4,12 +4,16 @@ import rincian_data from '../../../sample/rincian.json'
 
 const fetch = () => {
     
-    return dispatch => {
+    return (dispatch, getState) => {
         
-        barangModel.getRincian().then(res=>{
-            console.log(res)
-            
-        })
+        const { rincian } = getState()
+
+        if(rincian.length == 0){
+            barangModel.getRincian().then(res=>{
+                console.log(res)
+                
+            })
+        }
 
         
     }

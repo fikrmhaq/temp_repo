@@ -32,11 +32,23 @@ const DataCard = ({
     <div className="col-lg-4 core-barang mb-4" key={index}>
       <Card>
         <div className="foto">
-          <img
+          {/* <img
             src={img_path == "" ? require("../../Default.png").default : img_path}
             alt="Default.png"
             width="50%"
           />
+           */}
+                   
+          <div class={img_path == "" ? "noimg" : "withimg"}>
+          <img
+            
+            src={img_path == "" ? require("../../Default.png").default : img_path}
+            alt="Default.png"
+            width="50%"
+            
+          />
+          </div>
+          
         </div>
         <div className="px-4 py-3">
           <h5>{nama_barang}</h5>

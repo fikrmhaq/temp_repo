@@ -35,7 +35,7 @@ class NavBar extends React.Component {
                                     </div>
                                     <div className='profile my-auto'>
                                         <p className="m-0">Inventory</p>
-                                        <p className="m-0">almufti@gmail.com</p>
+                                        <p className="m-0">aezakmi@gmail.com</p>
                                     </div>
                                 </div>
                             </Card>

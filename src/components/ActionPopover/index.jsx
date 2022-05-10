@@ -52,7 +52,12 @@ const ActPopover = ({ _edit, _delete }) => {
                             handleClose()
                              }}><i class="fas fa-trash-alt"></i> Hapus</button>
                         <hr className='m-0' />
-                        <button className="btn" onClick={_edit}><i class="fas fa-pen"></i> Edit</button>
+                        <button className="btn" onClick={
+                            () => {
+                                _edit()
+                                handleClose()
+                            }
+                        }><i class="fas fa-pen"></i> Edit</button>
                     </div>
                 </div>
             </Popover>

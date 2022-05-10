@@ -59,6 +59,7 @@ const EditBarang = ({ open, item, toggle }) => {
 
     const submit = () => {
         editCoreBarang({...inputDetail, id_rincian: inputDetail.id_rincian.concat(id_rincians), id:_id})
+        toggle()
     }
 
 
@@ -66,7 +67,6 @@ const EditBarang = ({ open, item, toggle }) => {
     return (
         <Modal toggle={toggle} isOpen={open} className="tambah-barang" centered>
             <ModalBody>
-                {JSON.stringify(inputDetail)}
                 <div className="d-flex justify-content-between mb-2">
                     <h5 className='modal-title'>Edit Aset</h5>
                     <button className="btn" onClick={toggle}>&times;</button>
@@ -148,7 +148,7 @@ const EditBarang = ({ open, item, toggle }) => {
                         </ul>
                     </div>
                 </div>
-                <div className="row mb-2">
+                {/* <div className="row mb-2">
                     <div className="form-group col-lg-6">
                         <input ref={UploadRef} type="file" style={{ display: 'none' }} onChange={ (e) => setInputDetail({...inputDetail, img: e.target.files[0]}) } />
                         <button class="btn btn-primary" onClick={() => UploadRef.current.click() } >Upload</button>
@@ -156,7 +156,7 @@ const EditBarang = ({ open, item, toggle }) => {
                     <div className="form-group col-lg-6">
                         
                     </div>
-                </div>
+                </div> */}
                 
                 <InputSelection title={'Kategori'} option={
                     rincian.map(item => {

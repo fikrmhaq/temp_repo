@@ -15,6 +15,7 @@ import barangModel from '../../models/barangModel';
 
 const Dashboard = memo(() => {
     const CoreBarang = useCoreBarang()
+    const total_cost = CoreBarang.map(a=> { return parseInt(a.harga) }).reduce((partialSum, a) => partialSum + a, 0)
     const barang = useBarang()
     const [chartLine, setChartLine] = useState(null)
     const [chartBar, setChartBar] = useState(null)
@@ -188,8 +189,27 @@ const Dashboard = memo(() => {
         // })
     }, [])
 
+    function formatRupiah(angka, prefix){
+        var number_string = angka.toString()
+        var split   		= number_string.split(',')
+        var sisa     		= split[0].length % 3
+        var rupiah     		= split[0].substr(0, sisa)
+        var ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
+    }
+      
+
     return (
         <div className="dashboard">
+            
             <div className="background-foto"><img src={require('../components/Img/LogoBackground.png').default} alt="LogoBackground" /></div>
             <div className="row">
                 <div className="col-lg-9">
@@ -214,10 +234,7 @@ const Dashboard = memo(() => {
                         <div className="col-lg-4">
                             <Card>
                                 <h5>Total Pengeluaran</h5>
-                                <h3 className={"mt-4 mb-0 " + (threeData.pengeluaran == null && 'placeholder-wave')}>{threeData.pengeluaran != null ? threeData.pengeluaran.toString().split('').reverse().map((item, index, elem) => {
-                                    if (!((index + 1) % 3) && index + 1 < elem.length) return item + '.';
-                                    return item;
-                                }).join('').split('').reverse().join('') + ',00' : (<span className='placeholder col-12'></span>)}</h3>
+                                <h3 className={"mt-4 mb-0 " + (threeData.pengeluaran == null && 'placeholder-wave')}>{CoreBarang.length != 0 ? formatRupiah(total_cost,'') : (<span className='placeholder col-12'></span>)}</h3>
                                 <h6>Rupiah</h6>
                             </Card>
                         </div>

@@ -3,19 +3,22 @@ import barangModel from "../../../models/barangModel";
 import rincian_data from '../../sample/rincian.json'
 
 const fetch = (data = []) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         // barangModel.getRincian(data).then(res => {
         //     dispatch(add(res.data.data))
         // })
 
-        barangModel.getRincian().then(res=>{
-            const construct = res.data.responseData.rincians.map(item=>{
-                return {id_rincian: item._id, nama_rincian: item.nama_rincian}
+        const { rincian } = getState()
+
+        if(rincian.length == 0){
+            barangModel.getRincian().then(res=>{
+                const construct = res.data.responseData.rincians.map(item=>{
+                    return {id_rincian: item._id, nama_rincian: item.nama_rincian}
+                })
+                dispatch(add(construct))
+                
             })
-            console.log()
-            dispatch(add(construct))
-            
-        })
+        }
         
         
     }

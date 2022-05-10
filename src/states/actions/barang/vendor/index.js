@@ -3,13 +3,19 @@ import barangModel from "../../../../models/barangModel";
 import vendor_data from '../../../sample/vendor.json'
 
 const fetch = (data = []) => {
-    return dispatch => {
-        barangModel.getVendor().then(res=>{
-          const construct = res.data.responseData.vendors.map(item=>{
-              return {id_vendor: item._id, nama_vendor: item.nama_vendor}
-          })
-          dispatch(add(construct))
-        })
+    return (dispatch, getState) => {
+        
+        const { vendor } = getState()
+
+        if(vendor.length == 0){
+            barangModel.getVendor().then(res=>{
+                const construct = res.data.responseData.vendors.map(item=>{
+                    return {id_vendor: item._id, nama_vendor: item.nama_vendor}
+                })
+                dispatch(add(construct))
+              })
+        }
+
         
     }
 }
