@@ -4,52 +4,29 @@ import Services from '../../services/Services';
 import { RefCard } from './components';
 import RefContainer from './RefContainer';
 import Vendor from './Vendor/Vendor';
+import { addVendor as DaddVendor, addKT as DaddKategori } from './components/dialog';
+import { useControllerState } from '../../controllers/Ref';
 
-// class Ref extends React.Component {
-//     state = {
-//         total: {
-//             vendor: null,
-//             supplier: null
-//         },
-//         active: 0
-//     }
-
-//     componentDidMount() {
-//         Services.getVendor().then(res => {
-//             this.state.total.vendor = res.data.data.length;
-//             this.setState({ total: this.state.total });
-//         })
-//         Services.getSupplier().then(res => {
-//             this.state.total.supplier = res.data.data.length;
-//             this.setState({ total: this.state.total });
-//         })
-//     }
-
-//     render() { 
-//         return (
-//             <div className='ref'>
-//                 {!this.state.active && (
-//                     <div className='row'>
-//                         {Object.keys(this.state.total).map((item, index) => (
-//                             <RefContainer title={item} data={this.state.total[item]} clicked={() => this.setState({ active: index + 1 })} />
-//                         ))}
-//                     </div>
-//                 )}
-//                 {this.state.active == 1 && (
-//                     <Vendor back={() => this.setState({ active: 0 })} />
-//                 )}
-//             </div>
-//         );
-//     }
-// }
 
 const Ref = memo(() => {
     const [active, setActive] = useState(false)
     const [data, setData] = useState([])
     const [section, setSection] = useState('')
+    const [addVendor, setAddVendor] = useState(false)
+    const [addKategori, setAddKategori] = useState(false)
+    const { deleteKategori, deleteVendor } = useControllerState()
 
     const kategori = useRincian()
     const vendor = useVendor()
+
+    const Delete = (id) => {
+        if(section == 'Kategori'){
+            deleteKategori(id)
+            return
+        }
+        deleteVendor(id)
+
+    }
 
     return (
         <div className='ref'>
@@ -77,16 +54,28 @@ const Ref = memo(() => {
             {active && (
                 <div className='vendor'>
                     <button className="btn btn-primary d-block mb-3" 
-                    // onClick={() => this.setState({ tambahVendor: !this.state.tambahVendor })}
+                    onClick={() => {
+                        if(section == 'Kategori'){
+                            setAddKategori(!addKategori)
+                        }else{
+                            setAddVendor(!addVendor)
+                        }
+                    }}
                     >Tambah {section}</button>
                     <button className="btn btn-back mb-3" 
                     onClick={() => setActive(!active)}
                     ><i class="fas fa-long-arrow-alt-left"></i> Kembali</button>
                     <div className="row">
-                        {data
+                        {(section == 'Kategori' ? kategori : vendor)
+                        .filter(a=> !Object.values(a).includes(null))
                         .map(item => (
                             <div className="col-lg-6 mb-3">
-                                <RefCard label={section == 'Kategori' ? item.nama_rincian : section == 'Vendor' ? item.nama_vendor : ''} />
+                                <RefCard 
+                                id={section == 'Kategori' ? item.id_rincian : item.id_vendor} 
+                                label={section == 'Kategori' ? item.nama_rincian : section == 'Vendor' ? item.nama_vendor : ''} 
+                                date={{create:item.createdAt,update:item.updatedAt}}
+                                _delete={(id) => Delete(id)}
+                                  />
                             </div>
                         ))}
                     </div>
@@ -94,6 +83,10 @@ const Ref = memo(() => {
                     <TambahVendor toggle={() => this.setState({ tambahVendor: !this.state.tambahVendor })} isOpen={this.state.tambahVendor} refresh={this.refresh} /> */}
                 </div>
             )}
+            <DaddVendor toggle={() => setAddVendor(!addVendor)} open={addVendor}  />
+            <DaddKategori
+             toggle={() => setAddKategori(!addKategori)}
+             open={addKategori}  />
         </div>
     )
 

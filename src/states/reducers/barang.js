@@ -1,4 +1,4 @@
-import { ADD_BARANG, ADD_CORE_BARANG, ADD_RINCIAN, ADD_VENDOR, DELETE_CORE_BARANG, EDIT_CORE_BARANG } from ".."
+import { ADD_BARANG, ADD_CORE_BARANG, ADD_RINCIAN, ADD_VENDOR, DELETE_CORE_BARANG, DELETE_RINCIAN, DELETE_VENDOR, EDIT_CORE_BARANG } from ".."
 
 const barang = (state = [], action) => {
     const { type, payload } = action
@@ -31,7 +31,8 @@ const vendor = (state = [], action) => {
     switch(type){
         case ADD_VENDOR:
             return state.concat(payload)
-
+        case DELETE_VENDOR:
+            return state.filter(el => el.id_vendor !== payload._id)
         default:
             return state       
     }
@@ -47,6 +48,8 @@ const rincian = (state = [], action) => {
 
 
             return state.concat(payload)
+        case DELETE_RINCIAN:
+            return state.filter(el => el.id_rincian !== payload._id)
         default:
             return state       
     }

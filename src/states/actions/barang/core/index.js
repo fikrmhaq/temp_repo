@@ -30,7 +30,7 @@ const post = (data) => {
 
         var dat = data.barang
 
-        var construct = { img: dat.img, nama: dat.nama_barang, id_vendor: dat.id_vendor, id_rincian: ["6269eba5b9c27824fcba78ea"], harga: parseInt(dat.harga.split(',').join('')), jumlah: dat.jumlah }
+        var construct = { img: dat.img, nama: dat.nama_barang, id_vendor: dat.id_vendor, id_rincian: dat.id_rincian, harga: parseInt(dat.harga.split(',').join('')), jumlah: dat.jumlah }
 
         let form = new FormData()
 

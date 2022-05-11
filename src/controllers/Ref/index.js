@@ -22,6 +22,22 @@ const useController = memo((props) => {
         setMessage({ message, error })
     }
 
+    const postKategori = (data) => {
+        props.rincian.post(data)
+    }
+
+    const deleteKategori = (data) => {
+            props.rincian.del(data)
+    }
+
+    const deleteVendor = (data) => {
+        props.vendor.del(data)
+    }
+
+    const postVendor = (data) => {
+        props.vendor.post(data) 
+    }
+
 
     useEffect(() => {
 
@@ -37,7 +53,10 @@ const useController = memo((props) => {
 
             value={
                 {
-                   
+                   postKategori,
+                   postVendor,
+                   deleteKategori,
+                   deleteVendor
                 }
             }
 

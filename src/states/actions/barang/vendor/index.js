@@ -1,4 +1,4 @@
-import { ADD_VENDOR } from "../../..";
+import { ADD_VENDOR, DELETE_VENDOR } from "../../..";
 import barangModel from "../../../../models/barangModel";
 import vendor_data from '../../../sample/vendor.json'
 
@@ -9,14 +9,32 @@ const fetch = (data = []) => {
 
         if(vendor.length == 0){
             barangModel.getVendor().then(res=>{
-                const construct = res.data.responseData.vendors.map(item=>{
-                    return {id_vendor: item._id, nama_vendor: item.nama_vendor}
+                const construct = res.data.responseData.vendors.filter(a=> a.updatedAt != null).map(item=>{
+                    return {id_vendor: item._id, nama_vendor: item.nama_vendor, updatedAt: item.updatedAt, createdAt: item.createdAt}
                 })
                 dispatch(add(construct))
               })
         }
 
         
+    }
+}
+
+const post = (data = null) => {
+    return (dispatch) => {
+
+        barangModel.postVendor(data).then(res=>{
+            const { _id, nama_vendor, updatedAt, createdAt } = res.data.responseData.vendor
+            dispatch(add([{id_vendor: _id, nama_vendor, updatedAt, createdAt}]))
+        })
+    }
+}
+
+const del = (data = null) => {
+    return dispatch => {
+        barangModel.deleteVendor(data).then(res=>{
+            dispatch(remove({_id:data}))
+        })
     }
 }
 
@@ -28,7 +46,16 @@ const add = (data = []) => {
     }
 }
 
+const remove = (data = null) => {
+    return {
+        type:DELETE_VENDOR,
+        payload:data
+    }
+}
+
 export default {
     fetch,
+    post,
+    del,
     add
 }

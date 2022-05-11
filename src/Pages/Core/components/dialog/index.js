@@ -202,6 +202,10 @@ export const TambahBarang = (
     const UploadRef = useRef()
 
     const submit = () => {
+        if(data.Filter.length != 0) {
+            postBarang({...inputDetail, id_rincian: data.Filter})
+            return
+        }
         postBarang(inputDetail)
         toggle()
     }

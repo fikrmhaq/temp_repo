@@ -16,7 +16,8 @@ import { Grow } from "@material-ui/core";
 const Core = memo(() => {
   const [mode, setMode] = useState(1);
   const [id_kontrak, setIdKontrak] = useState(null)
-  const [Filter, setFilter] = useState(['6269eba5b9c27824fcba78ea'])
+  const [Filter, setFilter] = useState([])
+  const rincian = useRincian()
   const core_barang = useCoreBarang()
   const [index, setIndex, data] = usePaginate(core_barang, 6)
   const [search, setSearch] = useState("")
@@ -44,7 +45,7 @@ const Core = memo(() => {
 
 
 
-  const rincian = useRincian()
+  
   const vendor = useVendor()
   const kontrak = useKontrak()
   const detail_kontrak = useDetailKontrak()
@@ -92,7 +93,8 @@ const Core = memo(() => {
               open={tambahBarang}
               data={
                 {
-                  vendor
+                  vendor,
+                  Filter
                 }
               }
             />
@@ -119,8 +121,8 @@ const Core = memo(() => {
                       jumlah: barang.filter(a => a.id_barang == sheet._id).length,
                       vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
                       // rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
-                      rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian[0]), [], 'nama_rincian'),
-                      id_rincians: sheet.id_rincian,
+                      rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian.filter(a=> rincian.map(b=> { return b.id_rincian }).includes(a))[0]), [], 'nama_rincian'),
+                      id_rincians: sheet.id_rincian.filter(a=> rincian.map(b=> { return b.id_rincian }).includes(a)),
                       id_vendor,
                       harga,
                       _delete: (item) => {

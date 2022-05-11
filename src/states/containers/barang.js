@@ -9,7 +9,9 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         rincian: {
-            get: () => dispatch(rincian.fetch())
+            get: () => dispatch(rincian.fetch()),
+            post: (data) => dispatch(rincian.post(data)),
+            del: (data) => dispatch(rincian.del(data))
         },
         barang: {
             get: {
@@ -27,7 +29,9 @@ const mapDispatchToProps = (dispatch) => {
             post: (data) => dispatch(core_barang.post(data))
         },
         vendor: {
-            get: () => dispatch(vendor.fetch())
+            get: () => dispatch(vendor.fetch()),
+            post: (data) => dispatch(vendor.post(data)),
+            del: (data) => dispatch(vendor.del(data))
         },
         kontrak: {
             get: {
@@ -47,3 +51,4 @@ export {
 }
 
 
+ 
