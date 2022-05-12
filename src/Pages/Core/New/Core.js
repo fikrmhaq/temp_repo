@@ -111,7 +111,13 @@ const Core = memo(() => {
             <div class="row">
               {core_barang
                 .filter(a => a.nama_barang.toLowerCase().includes(search))
-                .filter(a => Filter.every(v => a.id_rincian.includes(v))).map((sheet, i) => {
+                .filter(a => Filter.every(v => a.id_rincian.includes(v)))
+                .sort(function(a,b){
+                  // Turn your strings into dates, and then subtract them
+                  // to get a value that is either negative, positive, or zero.
+                  return new Date(b.createdAt) - new Date(a.createdAt);
+                })
+                .map((sheet, i) => {
                   const {id_vendor, harga} = sheet
                   return (<><Barang.DataCard
                     {
@@ -119,10 +125,11 @@ const Core = memo(() => {
                     {
                       ...sheet,
                       jumlah: barang.filter(a => a.id_barang == sheet._id).length,
+                      units: barang.filter(a=> a.id_barang == sheet._id),
                       vendor: IfUndefined(vendor.find(a => a.id_vendor == sheet.id_vendor), '', 'nama_vendor'),
-                      // rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian), [], 'nama_rincian'),
                       rincian_asset: IfUndefined(rincian.find(a => a.id_rincian == sheet.id_rincian.filter(a=> rincian.map(b=> { return b.id_rincian }).includes(a))[0]), [], 'nama_rincian'),
                       id_rincians: sheet.id_rincian.filter(a=> rincian.map(b=> { return b.id_rincian }).includes(a)),
+                      label_rincians: rincian.filter(a=> sheet.id_rincian.includes(a.id_rincian)).map(el=> { return el.nama_rincian }),
                       id_vendor,
                       harga,
                       _delete: (item) => {

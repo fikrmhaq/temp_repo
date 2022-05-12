@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, memo } from 'react'
 import { Collapse, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { Vendor } from '..'
 import { useRincian, useVendor } from '../../../../functions/hooks/states'
@@ -36,7 +36,7 @@ const EditBarang = ({ open, item, toggle }) => {
             nama_barang,
             harga,
             jumlah,
-            id_vendor:id_vendor,
+            id_vendor: id_vendor,
             id_rincian: []
 
         }
@@ -47,18 +47,18 @@ const EditBarang = ({ open, item, toggle }) => {
 
         const data = inputDetail.id_rincian
 
-        if(data.includes(id)){
-            setInputDetail({...inputDetail, id_rincian: data.filter(el=> el != id)})
+        if (data.includes(id)) {
+            setInputDetail({ ...inputDetail, id_rincian: data.filter(el => el != id) })
             return
         }
-        
-        setInputDetail({...inputDetail, id_rincian: [...data, id]})
-        
+
+        setInputDetail({ ...inputDetail, id_rincian: [...data, id] })
+
 
     }
 
     const submit = () => {
-        editCoreBarang({...inputDetail, id_rincian: inputDetail.id_rincian.concat(id_rincians), id:_id})
+        editCoreBarang({ ...inputDetail, id_rincian: inputDetail.id_rincian.concat(id_rincians), id: _id })
         toggle()
     }
 
@@ -126,12 +126,12 @@ const EditBarang = ({ open, item, toggle }) => {
                             />
                         </div>
                         <ul className="nav flex-column mt-3 px-1">
-                            
+
                             {
                                 vendorState.map(item => {
                                     var classes = 'nav-item py-2 px-3 rounded-3 mb-2'
 
-                                    if(inputDetail.id_vendor == item.id_vendor) classes = 'nav-item py-2 px-3 rounded-3 mb-2 active'
+                                    if (inputDetail.id_vendor == item.id_vendor) classes = 'nav-item py-2 px-3 rounded-3 mb-2 active'
 
                                     return (
                                         <li className={classes}
@@ -157,16 +157,16 @@ const EditBarang = ({ open, item, toggle }) => {
                         
                     </div>
                 </div> */}
-                
+
                 <InputSelection title={'Kategori'} option={
                     rincian.map(item => {
-                        return { label:item.nama_rincian, value:item.id_rincian }
+                        return { label: item.nama_rincian, value: item.id_rincian }
                     })
 
-                    
-                } 
-                checked={item.id_rincians.concat(inputDetail.id_rincian)}
-                onChange={(value) => modifyId_rincian(value)}
+
+                }
+                    checked={item.id_rincians.concat(inputDetail.id_rincian)}
+                    onChange={(value) => modifyId_rincian(value)}
                 />
             </ModalBody>
             <ModalFooter>
@@ -190,7 +190,7 @@ export const TambahBarang = (
 
     const [inputDetail, setInputDetail] = useState(
         {
-            img : null,
+            img: null,
             nama_barang: '',
             harga: 1,
             jumlah: 1,
@@ -202,8 +202,8 @@ export const TambahBarang = (
     const UploadRef = useRef()
 
     const submit = () => {
-        if(data.Filter.length != 0) {
-            postBarang({...inputDetail, id_rincian: data.Filter})
+        if (data.Filter.length != 0) {
+            postBarang({ ...inputDetail, id_rincian: data.Filter })
             return
         }
         postBarang(inputDetail)
@@ -291,11 +291,11 @@ export const TambahBarang = (
                 </div>
                 <div className="row mb-2">
                     <div className="form-group col-lg-6">
-                        <input ref={UploadRef} type="file" style={{ display: 'none' }} onChange={ (e) => setInputDetail({...inputDetail, img: e.target.files[0]}) } />
-                        <button class="btn btn-primary" onClick={() => UploadRef.current.click() } >Upload</button>
+                        <input ref={UploadRef} type="file" style={{ display: 'none' }} onChange={(e) => setInputDetail({ ...inputDetail, img: e.target.files[0] })} />
+                        <button class="btn btn-primary" onClick={() => UploadRef.current.click()} >Upload</button>
                     </div>
                     <div className="form-group col-lg-6">
-                        
+
                     </div>
                 </div>
             </ModalBody>
@@ -319,28 +319,84 @@ const DeleteBarang = ({ open, toggle, item }) => {
         toggle()
     }
 
-    return(
-        <Modal 
-        toggle={toggle}
-         isOpen={open} className='modal-delete' centered>
-                <ModalBody className='px-3'>
-                    <h5 className="modal-title text-center">Konfirmasi</h5>
-                    <p className='text-center'>Apakah anda yakin untuk menghapus</p>
-                    <h5 className='text-center'>{nama_barang}</h5>
-                    <div className="row mt-4">
-                        <div className="col-lg-6">
-                            <button className="btn btn-secondary col-12" onClick={toggle}>Tidak</button>
-                        </div>
-                        <div className="col-lg-6">
-                            <button className="btn btn-danger col-12" onClick={submit}>Hapus</button>
-                        </div>
+    return (
+        <Modal
+            toggle={toggle}
+            isOpen={open} className='modal-delete' centered>
+            <ModalBody className='px-3'>
+                <h5 className="modal-title text-center">Konfirmasi</h5>
+                <p className='text-center'>Apakah anda yakin untuk menghapus</p>
+                <h5 className='text-center'>{nama_barang}</h5>
+                <div className="row mt-4">
+                    <div className="col-lg-6">
+                        <button className="btn btn-secondary col-12" onClick={toggle}>Tidak</button>
                     </div>
-                </ModalBody>
-            </Modal>
+                    <div className="col-lg-6">
+                        <button className="btn btn-danger col-12" onClick={submit}>Hapus</button>
+                    </div>
+                </div>
+            </ModalBody>
+        </Modal>
     )
 }
 
+const DetailBarang = memo(({ open, toggle, nama, rincians, units }) => {
+
+
+    return (
+        <Modal className='modal-detail-barang'
+            // onOpened={this.onMount} 
+            isOpen={open} on toggle={toggle} centered unmountOnClose={true}>
+            <ModalBody>
+                <div className="d-flex justify-content-between">
+                    <h5 className='modal-title mt-auto'>Detail Barang</h5>
+                    <button className="btn my-auto" onClick={toggle}>&times;</button>
+                </div>
+                <p className='mb-3 subtitle'>"{nama}"</p>
+                <h6>Spesifikasi</h6>
+                <p className='spek'>Tidak ada spesifikasi</p>
+                <h6>Kategori</h6>
+                {/* <div className="d-flex flex-wrap mb-3">
+                        {this.state.rincian_asset.length ? this.state.rincian_asset.map(item => (
+                            <div className="rincian-asset m-1 py-1 px-3">{item.rincian_asset.split(' ').map(item1 => {
+                                if (item1 == null) return;
+                                var sementara = item1.toLowerCase().split('');
+                                sementara[0] = sementara[0].toUpperCase();
+                                return sementara.join('');
+                            }).join(' ')}</div>
+                        )) : 'Loading...'}
+                    </div> */}
+                <div className="d-flex flex-wrap mb-3">
+                    {rincians.length ? rincians.map(item => (
+                        <div className="rincian-asset m-1 py-1 px-3">{item}</div>
+                    )) : 'Loading...'}
+                </div>
+                <h6>Detail Unit</h6>
+                <div className="detail-unit py-3">
+                        <ol className='mb-0'>
+                            {units.length != 0 ? units.map(item => (
+                                <li className='mb-3 me-2'>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            {nama}
+                                            {/* <p className='m-0'>{this.state.ruangan != null && item.ruangan != null ? this.state.ruangan.find(item1 => item1.id_ruangan == item.ruangan).nama_ruangan : ''}</p> */}
+                                        </div>
+                                        <div>
+                                            {/* <button className="btn btn-sm" onClick={() => this.setState({ id_detail_barang: item.id_detail_barang })}>Lokasi</button> */}
+                                            {/* <ModalDenah toggle={() => this.setState({ id_detail_barang: null })} isOpen={this.state.id_detail_barang == item.id_detail_barang} data={item}></ModalDenah> */}
+                                        </div>
+                                    </div>
+                                </li>
+                            )) : 'Loading...'}
+                        </ol>
+                    </div>
+            </ModalBody>
+        </Modal>
+    )
+})
+
 export {
     EditBarang,
-    DeleteBarang
+    DeleteBarang,
+    DetailBarang
 }

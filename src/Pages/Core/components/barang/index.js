@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { ActionPopover, Card } from "../../../../components";
-import { DeleteBarang, EditBarang } from "../dialog";
+import { DeleteBarang, DetailBarang, EditBarang } from "../dialog";
 
 const DataCard = ({
   img_path,
@@ -9,9 +9,10 @@ const DataCard = ({
   nama_barang,
   vendor,
   jumlah,
+  units,
   rincian_asset,
   id_detail_kontrak,
-
+  label_rincians,
   index,
   supplier,
   id_rincians,
@@ -24,6 +25,7 @@ const DataCard = ({
 
   const [Edit, setEdit] = useState(false)
   const [Delete, setDelete] = useState(false)
+  const [Detail, setDetail] = useState(false)
   // const [Item, setItem] = useState({ id: null, nama_Barang: null })
 
 
@@ -61,7 +63,7 @@ const DataCard = ({
               <button
                 className="btn"
 
-                // onClick={() => info()}
+                onClick={() => setDetail(!Detail)}
               >
                 <i class="fas fa-info-circle"></i>
               </button>
@@ -76,7 +78,6 @@ const DataCard = ({
                   setEdit(!Edit)
                 }
               ></ActionPopover>
-              
             </div>
             {/* <h6 className="my-auto">
               {this.state.supplier != null
@@ -91,6 +92,7 @@ const DataCard = ({
     </div>
     <EditBarang open={Edit} item={item} toggle={() => setEdit(!Edit)} />
     <DeleteBarang open={Delete} toggle={() => setDelete(!Delete)} item={item} />
+    <DetailBarang open={Detail} toggle={() => setDetail(!Detail)} nama={nama_barang} rincians={label_rincians} units={units} />
     </>
   );
 };

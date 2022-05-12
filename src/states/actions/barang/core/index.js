@@ -11,7 +11,7 @@ const fetch = () => {
 
         if (core.length == 0) {
             barangModel.getCoreBarang().then(res => {
-                var construct = res.data.responseData.coreBarangs.map(item => {
+                var construct = res.data.responseData.coreBarangs.filter(a=> Object.keys(a).includes('createdAt')).map(item => {
                     return {...item, harga: item.harga.toString()}
                 })
                 dispatch(add(construct))
