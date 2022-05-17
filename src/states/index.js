@@ -1,6 +1,7 @@
 import { combineReducers } from "redux"
 import { barang, vendor, rincian, core } from "./reducers/barang"
 import { kontrak, detail_kontrak } from "./reducers/kontrak"
+import { ruangan } from './reducers/ruangan'
 
 const ADD_BARANG = 'ADD_BARANG' // Barang
 const ADD_CORE_BARANG = 'ADD_CORE_BARANG'
@@ -44,5 +45,6 @@ export default combineReducers({
     vendor,
     rincian,
     detail_kontrak,
-    core
+    core,
+    ruangan
 })

@@ -26,6 +26,14 @@ const useKontrak = () => {
     return useSelector(states => states.kontrak)
 }
 
+const useRuangan = () => {
+    return useSelector(states => states.ruangan)
+}
+
+const useAll = () => {
+    return useSelector(states => states)
+}
+
 const useDetailKontrak = () => {
     
     return useSelector(states => states.detail_kontrak)
@@ -37,5 +45,7 @@ export {
     useVendor,
     useDetailKontrak,
     useCoreBarang,
-    useRincian
+    useRincian,
+    useRuangan,
+    useAll
 }
