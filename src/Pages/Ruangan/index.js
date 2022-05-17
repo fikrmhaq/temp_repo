@@ -30,7 +30,6 @@ export const Ruangan = memo(() => {
                     />
                 </div>
             </div>
-            {JSON.stringify(All)}
             <div className="row">
                 {Ruangan.length != 0
                     ? Ruangan.map((item) => (

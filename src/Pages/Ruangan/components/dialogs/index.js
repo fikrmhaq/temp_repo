@@ -1,3 +1,4 @@
+import Cleave from 'cleave.js/react';
 import React, { memo, useState } from 'react'
 import { Modal, ModalBody } from 'reactstrap'
 import { Form } from '../../../components/Form'
@@ -38,12 +39,16 @@ export const TambahRuangan = memo(({ toggle, open }) => {
                     </div>
                     <div className="form-group col-lg-5">
                         <label htmlFor="penanggung_jawab">Lantai</label>
-                        <Cleave options={{ numericOnly: true }} className='form-control' placeholder='Input lantai disini' value={this.state.dataInput.lantai} onChange={(e) => this.changeSubmit('lantai', e.target.rawValue)}></Cleave>
+                        <Cleave options={{ numericOnly: true }} className='form-control' placeholder='Input lantai disini' 
+                        onChange={ev => setInput({...input, lantai: ev.target.rawValue})}
+                        ></Cleave>
                     </div>
                 </div>
                 <div className="form-group mb-2">
-                    <label htmlFor="keterangan">Keterangan</label>
-                    <textarea name="keterangan" id="keterangan" rows="3" className="form-control" placeholder='Input keterangan disini' value={this.state.dataInput.keterangan} onChange={(e) => this.changeSubmit('keterangan', e.target.value)}></textarea>
+                    <Form.Textarea
+                    label="Keterangan"
+                    onChange={ev => setInput({ ...input, keterangan: ev.target.value })}
+                    />
                 </div>
                 <button className="btn btn-primary col-12 mt-3" 
                 // onClick={this.submit}
