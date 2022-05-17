@@ -23,7 +23,7 @@ const Textarea = memo(({ label, rows="3", onChange = (ev) => console.log(ev) }) 
             rows={rows} 
             className="form-control" 
             placeholder='Input disini..' 
-            onChange={(e) => this.changeSubmit('keterangan', e.target.value)}
+            onChange={onChange}
             />
         </>
     )

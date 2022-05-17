@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         ruangan: {
             get: () => dispatch(ruangan.fetch()),
-            post: (data) => dispatch()
+            post: (data) => dispatch(ruangan.post(data))
         }
     }
 

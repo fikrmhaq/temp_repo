@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { ActionPopover, Card } from '../../../components'
 
 
-export const RuanganCard = memo(({ nama, penanggung_jawab, lantai }) => {
+export const RuanganCard = memo(({ nama, keterangan }) => {
     return (
         <div className="col-lg-6 mb-3">
             <Card className="card-ruangan">
@@ -11,8 +11,8 @@ export const RuanganCard = memo(({ nama, penanggung_jawab, lantai }) => {
                     <div className="w-75 ms-4">
                         <h5>{nama}</h5>
                         <p>
-                            item.penanggung_jawab &#9679; Lantai{" "}
-                            item.lantai
+                            {keterangan.penanggung_jawab} &#9679; Lantai{" "}
+                            {keterangan.lantai}
                         </p>
                         <div className="d-flex justify-content-between">
                             <div className="d-flex">

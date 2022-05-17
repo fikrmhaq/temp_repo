@@ -13,8 +13,8 @@ export const useControllerState = () => {
 
 const useController = memo((props) => {
 
-    const postKategori = (data) => {
-        props.rincian.post(data)
+    const postRuangan = (data) => {
+        props.ruangan.post(data)
     }
 
 
@@ -32,7 +32,7 @@ const useController = memo((props) => {
 
             value={
                 {
-                  
+                  postRuangan
                 }
             }
 

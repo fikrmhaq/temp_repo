@@ -1,6 +1,7 @@
 import Cleave from 'cleave.js/react';
 import React, { memo, useState } from 'react'
 import { Modal, ModalBody } from 'reactstrap'
+import { useControllerState } from '../../../../controllers/Ruangan';
 import { Form } from '../../../components/Form'
 
 
@@ -14,6 +15,15 @@ export const TambahRuangan = memo(({ toggle, open }) => {
             keterangan: null
         }
     )
+
+    const { postRuangan } = useControllerState()
+
+
+
+    const submit = () => {
+        postRuangan(input)
+        toggle()
+    }
 
 
     return (
@@ -51,7 +61,7 @@ export const TambahRuangan = memo(({ toggle, open }) => {
                     />
                 </div>
                 <button className="btn btn-primary col-12 mt-3" 
-                // onClick={this.submit}
+                onClick={submit}
                 >Simpan</button>
             </ModalBody>
         </Modal>
