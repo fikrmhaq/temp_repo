@@ -39,6 +39,10 @@ const useDetailKontrak = () => {
     return useSelector(states => states.detail_kontrak)
 }
 
+const useTransaksi = () => {
+    return useSelector(states => states.transaksi)
+}
+
 export {
     useBarang,
     useKontrak,
@@ -47,5 +51,6 @@ export {
     useCoreBarang,
     useRincian,
     useRuangan,
-    useAll
+    useAll,
+    useTransaksi
 }

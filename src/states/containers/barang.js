@@ -3,6 +3,7 @@ import core_barang from '../actions/barang/core'
 import kontrak from "../actions/kontrak"
 import rincian from "../actions/rincian"
 import ruangan from '../actions/ruangan'
+import transaksi from "../actions/transaksi"
 
 
 
@@ -46,6 +47,9 @@ const mapDispatchToProps = (dispatch) => {
         ruangan: {
             get: () => dispatch(ruangan.fetch()),
             post: (data) => dispatch(ruangan.post(data))
+        },
+        transaksi: {
+            get: () => dispatch(transaksi.fetch())
         }
     }
 
