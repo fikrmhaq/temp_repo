@@ -11,11 +11,21 @@ export const useControllerState = () => {
 
 const useController = memo((props) => {
 
+    const postTransaksi = (data) => {
+        props.transaksi.post(data)
+    }
+
+    const editTransaksi = (data) => {
+        props.transaksi.edit(data)
+    }
+
 
     useEffect(() => {
 
 
         props.transaksi.get()
+        props.barang.get.unit()
+        props.barang.get.core()
 
 
     }, [])
@@ -26,7 +36,8 @@ const useController = memo((props) => {
 
             value={
                 {
-
+                    postTransaksi,
+                    editTransaksi
                 }
             }
 

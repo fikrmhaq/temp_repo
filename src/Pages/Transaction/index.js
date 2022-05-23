@@ -1,20 +1,26 @@
 import React, { memo, useState, useEffect } from 'react'
-import { Card } from '../../components'
+import { ActionPopover, Card } from '../../components'
 import { date_format } from '../../functions'
 import { useTransaksi } from '../../functions/hooks/states'
+import { EditTransaksi, TambahTransaksi } from './components/dialogs'
 
 
 
 export const Transaksi = () => {
+
+    const [tambahTransaksi, setTambahTransaksi] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const [Delete, setDelete] = useState(false)
+    const [editData, setEditData] = useState({})
 
     const transaksi = useTransaksi()
 
     return (
         <div className="transaksi">
             <div className="d-flex justify-content-between mb-4">
-                <button 
-                // onClick={() => this.setState({ _pinjam_: !_pinjam_ })}
-                 className="btn btn-primary">Tambah Transaksi</button>
+                <button
+                    onClick={() => setTambahTransaksi(!tambahTransaksi)}
+                    className="btn btn-primary">Tambah Transaksi</button>
                 <div className="d-flex w-25">
                     <div className="form-group w-25">
                         <select name="type" id="type" className="form-select form-search">
@@ -28,67 +34,79 @@ export const Transaksi = () => {
                             id="search"
                             className="form-control form-search"
                             placeholder="Cari disini"
-                            // onChange={this.searching}
+                        // onChange={this.searching}
                         />
                     </div>
                 </div>
             </div>
             <div className="row">
                 {transaksi.map((item) => {
-                    const status_pinjam = ["tersedia","masih pinjam","kembali"][item.status_pinjam - 1]
+                    const status_pinjam = ["tersedia", "masih pinjam", "kembali"][item.status_pinjam - 1]
 
                     return (
                         <div className="col-lg-6 mb-4 transaksi-item">
-                        <Card>
-                            <div
-                                className="d-grid px-2 py-1"
-                                style={{ gridTemplateColumns: "40% 25% 25% 10%" }}
-                            >
-                                <div className="title">
-                                    <h5>{item.nama}</h5>
-                                    <p className="m-0">
-                                    {date_format(item.tanggal_pinjam)} &#9679; {date_format(item.tanggal_kembali)}
-                                    </p>
-                                </div>
-                                <div className="d-flex asset">
-                                    <h5 className="my-auto">Komputer</h5>
-                                </div>
-                                <div className="d-flex status">
-                                    <div className="my-auto">
-                                        <h5
-                                            className={
-                                                "m-0 " +
-                                                (status_pinjam == "kembali"
-                                                    ? "text-success "
-                                                    : "") +
-                                                (status_pinjam == "masih pinjam"
-                                                    ? "text-danger "
-                                                    : "") +
-                                                (status_pinjam == "tersedia"
-                                                    ? "text-primary"
-                                                    : "")
+                            <Card>
+                                <div
+                                    className="d-grid px-2 py-1"
+                                    style={{ gridTemplateColumns: "40% 25% 25% 10%" }}
+                                >
+                                    <div className="title">
+                                        <h5>{item.nama}</h5>
+                                        <p className="m-0">
+                                            {date_format(item.tanggal_pinjam)} &#9679; {date_format(item.tanggal_kembali)}
+                                        </p>
+                                    </div>
+                                    <div className="d-flex asset">
+                                        <h5 className="my-auto">Komputer</h5>
+                                    </div>
+                                    <div className="d-flex status">
+                                        <div className="my-auto">
+                                            <h5
+                                                className={
+                                                    "m-0 " +
+                                                    (status_pinjam == "kembali"
+                                                        ? "text-success "
+                                                        : "") +
+                                                    (status_pinjam == "masih pinjam"
+                                                        ? "text-danger "
+                                                        : "") +
+                                                    (status_pinjam == "tersedia"
+                                                        ? "text-primary"
+                                                        : "")
+                                                }
+                                            >
+                                                {status_pinjam}
+                                            </h5>
+                                            <p className="m-0">status</p>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex action">
+                                        <div className="my-auto ms-auto">
+                                            <button className="btn">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                            <ActionPopover
+                                                target={`btn-trigger-`}
+                                                trigger="focus"
+                                                placement="right"
+                                            // _delete={() =>
+                                            //     setDelModal(!delModal)
+                                            // }
+                                            _edit={() =>
+                                                {
+                                                    setEdit(!edit)
+                                                    setEditData(item)
+                                                }
                                             }
-                                        >
-                                            {status_pinjam}
-                                        </h5>
-                                        <p className="m-0">status</p>
+                                            ></ActionPopover>
+                                        </div>
                                     </div>
+
                                 </div>
-                                <div className="d-flex action">
-                                    <div className="my-auto ms-auto">
-                                        <button className="btn">
-                                            <i class="fas fa-info-circle"></i>
-                                        </button>
-                                        <button className="btn">
-                                            <i class="fas fa-cog"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                 
-                )
+                            </Card>
+                        </div>
+
+                    )
                 })}
             </div>
             {/* {this.state.data != null && (
@@ -124,6 +142,8 @@ export const Transaksi = () => {
             </div>
           </div>
         </Dialog> */}
+            <TambahTransaksi open={tambahTransaksi} toggle={() => setTambahTransaksi(!tambahTransaksi)} />
+            <EditTransaksi open={edit} toggle={() => setEdit(!edit)} data={editData} />
         </div>
     )
 }
