@@ -3,10 +3,16 @@ import transaksiModel from "../../../models/transaksiModel"
 
 const fetch = (data = null) => {
 
-    return dispatch => {
-        transaksiModel.getTransaksi().then(res=>{
-            dispatch(add(res.data.responseData.transaksis))
-        })
+    return (dispatch, getState) => {
+        
+        const { transaksi } = getState()
+
+        if(transaksi.length == 0) {
+            transaksiModel.getTransaksi().then(res=>{
+                dispatch(add(res.data.responseData.transaksis))
+            })
+        }
+
     }
 
 }

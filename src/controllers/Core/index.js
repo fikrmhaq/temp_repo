@@ -56,9 +56,7 @@ const useController = memo((props) => {
     }
 
     const Toast = (message, error = false) => {
-        // this.setState({ message: { message, error } }, () => {
-        //     setTimeout(() => this.setState({ message: { message: '', error: false } }), 5000)
-        // })
+
 
         setMessage({ message, error })
     }
@@ -67,32 +65,6 @@ const useController = memo((props) => {
     useEffect(() => {
 
         console.log('Core Effect')
-
-        // if (!isLogged()) {
-        //     window.location.replace('https://asset.tikomdik-disdikjabar.id/auth')
-
-        // }
-
-        // getRincian()
-
-        // Services.getAssetRuangan().then(res1 => {
-     
-        // })
-
-        // Services.getDetailBarang().then(res => {
-            
-        // })
-
-        // axios.get('https://wppl-inventaris.herokuapp.com/rincian', 
-        // { headers: { 'Authorization': JSON.parse(localStorage.getItem('log_data')).token } }
-        // ).then(res=>{
-
-        // })
-
-        
-        // barangModel.getRincian().then(res=>{
-
-        // })
 
 
         props.rincian.get()
