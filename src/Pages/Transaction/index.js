@@ -1,8 +1,8 @@
 import React, { memo, useState, useEffect } from 'react'
 import { ActionPopover, Card } from '../../components'
 import { date_format } from '../../functions'
-import { useTransaksi } from '../../functions/hooks/states'
-import { EditTransaksi, TambahTransaksi } from './components/dialogs'
+import { useCoreBarang, useTransaksi } from '../../functions/hooks/states'
+import { DeleteTransaksi, EditTransaksi, TambahTransaksi } from './components/dialogs'
 
 
 
@@ -11,9 +11,12 @@ export const Transaksi = () => {
     const [tambahTransaksi, setTambahTransaksi] = useState(false)
     const [edit, setEdit] = useState(false)
     const [Delete, setDelete] = useState(false)
+
     const [editData, setEditData] = useState({})
+    const [deleteData, setDeleteData] = useState(null)
 
     const transaksi = useTransaksi()
+    const core = useCoreBarang()
 
     return (
         <div className="transaksi">
@@ -57,7 +60,7 @@ export const Transaksi = () => {
                                         </p>
                                     </div>
                                     <div className="d-flex asset">
-                                        <h5 className="my-auto">Komputer</h5>
+                                        <h5 className="my-auto">{JSON.stringify(core.find(a=> a._id == item.id_barang))}</h5>
                                     </div>
                                     <div className="d-flex status">
                                         <div className="my-auto">
@@ -89,9 +92,12 @@ export const Transaksi = () => {
                                                 target={`btn-trigger-`}
                                                 trigger="focus"
                                                 placement="right"
-                                            // _delete={() =>
-                                            //     setDelModal(!delModal)
-                                            // }
+                                            _delete={() =>
+                                                {
+                                                    setDelete(!Delete)
+                                                    setDeleteData(item._id)
+                                                }
+                                            }
                                             _edit={() =>
                                                 {
                                                     setEdit(!edit)
@@ -144,6 +150,7 @@ export const Transaksi = () => {
         </Dialog> */}
             <TambahTransaksi open={tambahTransaksi} toggle={() => setTambahTransaksi(!tambahTransaksi)} />
             <EditTransaksi open={edit} toggle={() => setEdit(!edit)} data={editData} />
+            <DeleteTransaksi open={Delete} toggle={ () => setDelete(!Delete) } id={deleteData} />
         </div>
     )
 }

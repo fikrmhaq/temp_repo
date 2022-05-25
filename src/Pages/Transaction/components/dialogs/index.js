@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Modal, ModalBody } from 'reactstrap'
 import { Form } from "../../../components/Form"
 import { Dialog } from '../../../components/Modal'
@@ -6,6 +6,7 @@ import Cleave from 'cleave.js/react';
 import { useBarang, useCoreBarang } from '../../../../functions/hooks/states';
 import { IfUndefined } from '../../../../functions/catcher';
 import { useControllerState } from '../../../../controllers/Transaksi';
+import { DeleteDialog } from '../../../components/Modal/Modal';
 
 export const TambahTransaksi = memo(({ open, toggle }) => {
 
@@ -85,11 +86,7 @@ export const EditTransaksi = memo(({ open, toggle, data }) => {
 
     const [input, setInput] = useState(
         {
-            id_barang: data.id_barang,
-            nama: null,
-            tanggal_pinjam: null,
-            tanggal_kembali: null,
-            status_pinjam: null
+            
         }
     )
 
@@ -100,6 +97,16 @@ export const EditTransaksi = memo(({ open, toggle, data }) => {
         editTransaksi({...input, _id: data._id})
         toggle()
     }
+
+    useEffect(() => {
+        setInput({
+            id_barang: data.id_barang,
+            nama: data.nama,
+            tanggal_pinjam: data.tanggal_pinjam,
+            tanggal_kembali: data.tanggal_kembali,
+            status_pinjam: data.status_pinjam
+        })
+    }, [data])
 
 
     return (
@@ -172,5 +179,16 @@ export const EditTransaksi = memo(({ open, toggle, data }) => {
             </div>
         </Dialog.Form>
     )
+
+})
+
+export const DeleteTransaksi = (({ open, toggle, id }) => {
+
+    const { deleteTransaksi } = useControllerState()
+    
+    return <DeleteDialog { ... { open, toggle } }
+    nama={"Peminjaman "+id}
+    onSubmit={() => deleteTransaksi(id)}
+    />
 
 })

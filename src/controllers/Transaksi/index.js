@@ -19,6 +19,11 @@ const useController = memo((props) => {
         props.transaksi.edit(data)
     }
 
+    const deleteTransaksi = (data) => {
+        console.log(data)
+        props.transaksi.delete(data)
+    }
+
 
     useEffect(() => {
 
@@ -37,7 +42,8 @@ const useController = memo((props) => {
             value={
                 {
                     postTransaksi,
-                    editTransaksi
+                    editTransaksi,
+                    deleteTransaksi
                 }
             }
 

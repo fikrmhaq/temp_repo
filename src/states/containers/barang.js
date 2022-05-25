@@ -51,7 +51,8 @@ const mapDispatchToProps = (dispatch) => {
         transaksi: {
             get: () => dispatch(transaksi.fetch()),
             post: (data) => dispatch(transaksi.post(data)),
-            edit: (data) => dispatch(transaksi.patch(data))
+            edit: (data) => dispatch(transaksi.patch(data)),
+            delete: (data) => dispatch(transaksi.del(data))
         }
     }
 
