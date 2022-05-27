@@ -13,7 +13,17 @@ const postRuangan = (data = null) => {
     return instance.post('/ruangan', data)
 }
 
+const patchRuangan = (data = null,_id) => {
+    return instance.put('/ruangan/'+_id, data)
+}
+
+const deleteRuangan = (id = null) => {
+    return instance.delete('/ruangan/'+id)
+}
+
 export default {
     getRuangan,
-    postRuangan
+    postRuangan,
+    patchRuangan,
+    deleteRuangan
 }

@@ -17,6 +17,14 @@ const useController = memo((props) => {
         props.ruangan.post(data)
     }
 
+    const editRuangan = (data) => {
+        props.ruangan.edit(data)
+    }
+
+    const deleteRuangan = (data) => {
+        props.ruangan.delete(data)
+    }
+
 
     useEffect(() => {
 
@@ -32,7 +40,9 @@ const useController = memo((props) => {
 
             value={
                 {
-                  postRuangan
+                  postRuangan,
+                  editRuangan,
+                  deleteRuangan
                 }
             }
 
