@@ -1,0 +1,41 @@
+.ruangan {
+    .card-ruangan {
+        h5 {
+            color: #184896;
+            font-weight: 500;
+        }
+        p {
+            color: #739DE8;
+            font-weight: 500;
+        }
+        .foto {
+            background-color: #BCD6FF;
+            border-radius: 5px;
+        }
+        .action {
+            .btn {
+                color: #184896;
+            }
+        }
+    }
+}
+.svg-denah-ruangan {
+    #denah {
+        g {
+            &.active {
+                rect {
+                    fill: #739DE8;
+                }
+                path {
+                    fill: white;
+                }
+            }
+        }
+    }
+}
+.popover-ruangan {
+    .btn {
+        color: #5987D0;
+        font-weight: 500;
+    }
+}

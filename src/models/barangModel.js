@@ -45,6 +45,10 @@ const postVendor = (data = null) => {
     return instance.post('/vendor', {nama:data})
 }
 
+const editVendor = (data = null, id) => {
+    return instance.put('/vendor/'+id, data)
+}
+
 const editCoreBarang = (data = null) => {
     const { id, items } = data
     return instance.put('/core-barang/'+ id, items)
@@ -79,6 +83,7 @@ export default {
     postDetailBarang,
     postKategori,
     postVendor,
+    editVendor,
     deleteCoreBarang,
     deleteBarang,
     deleteKategori,

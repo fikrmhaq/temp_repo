@@ -1,0 +1,37 @@
+$photo-profile-size: 53px;
+
+.navbar-cs {
+    z-index: 1000;
+
+    .navbar-brand {
+        font-weight: 600;
+        font-size: $h4-font-size !important;
+        color: #08419C !important;
+    }
+    .profile {
+        p {
+            &:nth-child(1) {
+                color: #184CA7;
+                font-weight: 600;
+            }
+            &:nth-child(2) {
+                color: #739DE8;
+                font-weight: 400;
+            }
+        }
+    }
+    .photo-profile {
+        background-color: #5896FB;
+        color: white;
+        width: $photo-profile-size;
+        height: $photo-profile-size;
+        border-radius: 50%;
+        
+        h5 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

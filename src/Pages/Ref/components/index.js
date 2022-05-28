@@ -3,11 +3,13 @@ import { ActionPopover, Card } from "../../../components"
 import { useControllerState } from "../../../controllers/Ref"
 import { date_format } from "../../../functions"
 import { DeleteDialog } from "../../components/Modal/Modal"
+import { EditVendor } from "./dialog"
 
 
 
 
-const RefCard = ({ id, label, date, _delete }) => {
+const RefCard = ({ id, label, date, _delete, section }) => {
+    const [editVendor, setEditVendor] = useState(false)
     const [delModal, setDelModal] = useState(false)
 
 
@@ -31,9 +33,14 @@ const RefCard = ({ id, label, date, _delete }) => {
                         _delete={() =>
                             setDelModal(!delModal)
                         }
-                        // _edit={() =>
-                        //     setEdit(!Edit)
-                        // }
+                        _edit={() =>
+                            {
+                                console.log(section)
+                                if(section == 'Vendor'){
+                                    setEditVendor(!editVendor)
+                                }
+                            }
+                        }
                     ></ActionPopover>
                     {/* <ActionPopover target={`btn-settings-${item.id_vendor}`} placement='right' delete={() => this.setState({ delete: item.id_vendor })} edit={() => this.setState({ edit: item.id_vendor })}></ActionPopover> */}
                 </div>
@@ -43,6 +50,11 @@ const RefCard = ({ id, label, date, _delete }) => {
               open={delModal} message="Apakah anda yakin ingin menghapus" nama={label}
               onSubmit={Delete}
               />
+            <EditVendor
+            toggle={() => setEditVendor(!editVendor)}
+            open={editVendor}
+            data={{_id:id,nama:label}}
+            />
             {/* <Info toggle={() => this.setState({ info: '0' })} isOpen={this.state.info == item.id_vendor} data={item} />
             <DeleteModal toggle={() => this.setState({ delete: '0' })} isOpen={this.state.delete == item.id_vendor} message="Apakah anda yakin ingin menghapus" item={item.nama}></DeleteModal>
             <EditVendor toggle={() => this.setState({ edit: '0' })} isOpen={this.state.edit == item.id_vendor} data={item} refresh={this.refresh}></EditVendor> */}

@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch) => {
         vendor: {
             get: () => dispatch(vendor.fetch()),
             post: (data) => dispatch(vendor.post(data)),
+            edit: (data) => dispatch(vendor.edit(data)),
             del: (data) => dispatch(vendor.del(data))
         },
         kontrak: {

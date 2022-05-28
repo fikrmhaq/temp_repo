@@ -26,6 +26,7 @@ const useController = memo((props) => {
         props.rincian.post(data)
     }
 
+
     const deleteKategori = (data) => {
             props.rincian.del(data)
     }
@@ -36,6 +37,10 @@ const useController = memo((props) => {
 
     const postVendor = (data) => {
         props.vendor.post(data) 
+    }
+
+    const patchVendor = (data) => {
+        props.vendor.edit(data)
     }
 
 
@@ -55,6 +60,7 @@ const useController = memo((props) => {
                 {
                    postKategori,
                    postVendor,
+                   patchVendor,
                    deleteKategori,
                    deleteVendor
                 }

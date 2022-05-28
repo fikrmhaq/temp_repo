@@ -1,0 +1,178 @@
+@media (max-width: 1366px) {
+    .dashboard {
+        .threeData {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .dashboard {
+        .threeData {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block;
+
+            .col-lg-4 {
+                width: 100%;
+                margin-bottom: 15px !important;
+                padding: 0;
+            }
+        }
+        .background-foto {
+            width: 90% !important;
+        }
+        .barang-terbaru {
+            max-height: 1000px;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #f3f3f3;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgb(190, 190, 190);
+            }
+            .itemin {
+                display: block !important;
+    
+                .content-1 {
+                    display: block !important;
+                    
+                    .foto {
+                        width: 100% !important;
+                        height: 100px !important;
+                        margin-bottom: 12px;
+                    }
+                    .ms-2 {
+                        margin: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dashboard {
+    .ruangan {
+        h6 {
+            color: #739DE8;
+        }
+        .card {
+            h6 {
+                color: #184896;
+            }
+            p {
+                color: #739DE8;
+            }
+            .h-100 {
+                background-color: #BCD6FF;
+                border-radius: 5px;
+            }
+            h2 {
+                color: #A9B7DB;
+            }
+        }
+    }
+    .background-foto {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #C4DBFF;
+        width: 74%;
+        height: 190px;
+        border-end-end-radius: 80px;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    .threeData {
+        .col-lg-4 {
+            .card {
+                position: relative;
+                overflow: hidden;
+    
+                h3 {
+                    color: #184896;
+                    font-weight: 600;
+                }
+                h6 {
+                    color: #6A90CE;
+                    font-weight: 400;
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 40px;
+                    height: 40px;
+                    border-top-left-radius: 5px;
+                }
+            }
+            &:nth-child(1) {
+                .card {
+                    &::before {
+                        background-color: #FFD79C;
+                    }
+                }
+            }
+            &:nth-child(2) {
+                .card {
+                    &::before {
+                        background-color: #5F9CFF;
+                    }
+                }
+            }
+            &:nth-child(3) {
+                .card {
+                    &::before {
+                        background-color: #F4AAAA;
+                    }
+                }
+            }
+        }
+    }
+    h5 {
+        color: #3470D0;
+        font-weight: 500;
+    }
+    table {
+        thead {
+            th {
+                color: #37517A;
+                font-weight: 700;
+            }
+        }
+    }
+    .barang-masuk {
+        h6 {
+            color: #37517A;
+            font-weight: 500;
+        }
+        .price {
+            color: #37517A;
+            font-weight: 500;
+        }
+    }
+}
+.itemin {
+    h6 {
+        color: #184896 !important;
+        font-weight: 600 !important;
+    }
+    .tanggal {
+        color: #6A90CE;
+        font-weight: 400;
+    }
+    .price {
+        color: #2672ED !important;
+        font-weight: 500 !important;
+    }
+}

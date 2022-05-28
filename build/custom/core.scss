@@ -1,0 +1,387 @@
+.breadcrumb {
+    background-color: #EDF2FE;
+    box-shadow: 5px 5px 20px 0px #B4C1D573,
+                -5px -5px 25px 0px #FFFFFFBF;
+
+    &.breadcrumb-custom {
+        .breadcrumb-item {
+            &:hover {
+                button {
+                    color: #37517A;
+                }
+            }
+
+            &.active {
+                button {
+                    color: #37517A;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+.asset-lapisan {
+    h5 {
+        color: #37517A;
+    }
+
+    .core-dalam {
+        h5 {
+            color: #37517A;
+            font-weight: 500;
+        }
+        p {
+            color: #37517A;
+        }
+    }
+}
+.detail-container {
+    .detail {
+        max-height: 300px;
+        overflow: auto;
+        background-color: #EEF5FF;
+        
+        .form-control {
+            box-shadow: 0 0 0 2px #BCCEEA;
+        }
+        .nav {
+            .nav-item {
+                cursor: pointer;
+                transition: .15s ease-in-out;
+                color: #597FBC;
+                font-weight: 500;
+
+                &.active {
+                    background-color: #D7E7FF;
+                    color: #2672ED;
+
+                    &:hover {
+                        background-color: #D7E7FF !important;
+                        color: #2672ED !important;
+                    }
+                }
+
+                &:hover {
+                    background-color: #D7E7FF;
+                }
+            }
+        }
+
+        &::-webkit-scrollbar {
+            width: 9px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #CED3DD;
+            border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #4E658A;
+            border-radius: 2px;
+        }
+    }
+}
+.detail-barang {
+    background-color: #EDF2FE;
+    box-shadow: 5px 5px 20px 0px #B4C1D573 inset,
+                -5px -5px 25px 0px #FFFFFFBF inset;
+
+    h6 {
+        color: #37517A;
+    }
+    .inside {
+        box-shadow: 5px 5px 20px 0px #B4C1D573,
+                    -5px -5px 25px 0px #FFFFFFBF;
+        background-color: #EDF2FE;
+        
+        .btn {
+            color: #37517A !important;
+        }
+
+    }
+}
+.kontrak {
+    .card {
+        box-shadow: none;
+        overflow: hidden;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 8px;
+            background-color: #5F9CFF;
+        }
+        .card-body {
+            overflow: hidden;
+            
+            .inline-btn {
+                .btn {
+                    color: #184896;
+                }
+            }
+            h5, h6 {
+                color: #184896;
+            }
+            h5 {
+                font-weight: 500;
+            }
+            h6 {
+                font-weight: 400;
+            }
+            p {
+                color: #739DE8;
+                font-weight: 500;
+            }
+            .row {
+                .col-lg-6 {
+                    &:nth-child(2) {
+                        border-left: 1px solid #739DE8;
+                    }
+                }
+            }
+        }
+    }
+}
+.isi-popover {
+    color: white;
+
+    span {
+        background-color: #A7D1F6;
+        color: #37517A;
+        font-weight: 600;
+        font-size: 16px;
+        white-space: pre;
+    }
+}
+.sidebar-kanan {
+    h5 {
+        color: #3470D0;
+        font-weight: 500;
+    }
+    ul {
+        padding-left: 2rem;
+
+        label {
+            color: #184896;
+            font-weight: 500;
+        }
+    }
+}
+.core-barang {
+    .card {
+        overflow: hidden;
+
+        .card-body {
+            padding: 0 !important;
+
+            h5 {
+                color: #184896;
+                font-weight: 500;
+            }
+            h6 {
+                color: #739DE8;
+                font-weight: 500;
+
+                span {
+                    font-size: 12px;
+                }
+            }
+            .d-flex {
+                .btn {
+                    color: #184896 !important;
+                }
+                h6 {
+                    color: #184896;
+                    font-weight: 500;
+                }
+            }
+            .foto {
+                background-color: #D8E5FF;
+                position: relative;
+                height: 250px;
+
+                img {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}
+.modal-detail-barang {
+    h6 {
+        color: #184896;
+        font-weight: 500;
+    }
+    p {
+        &.subtitle {
+            color: #739DE8;
+            font-weight: 500;
+        }
+        &.spek {
+            color: #597FBC;
+        }
+    }
+    .rincian-asset {
+        background-color: #E4EFFF;
+        color: #4285F1;
+        font-weight: 500;
+        border-radius: 10px;
+    }
+    .detail-unit {
+        background-color: #EEF5FF;
+        max-height: 300px;
+        overflow: auto;
+
+        ol {
+            li {
+                color: #597FBC;
+
+                .btn {
+                    color: #4285F1;
+                }
+            }
+        }
+    }
+}
+.popover-core-barang {
+    .btn {
+        color: #5987D0;
+        font-weight: 500;
+    }
+}
+.btn-back {
+    color: #597FBC;
+}
+.tambah-barang {
+    .detail-container {
+        color: #37517A;
+        font-weight: 600;
+    }
+}
+.popover-kontrak {
+    h6 {
+        color: #184896;
+        font-weight: 400;
+    }
+    .container-popover {
+        div {
+            background-color: #E4EFFF;
+            color: #4285F1;
+            border-radius: 7px;
+            font-weight: 500;
+        }
+    }
+}
+.edit-core {
+    .detail-container {
+        color: #37517A;
+        font-weight: 600;
+    }
+    .kategori-container {
+        label {
+            color: #184896;
+        }
+        p {
+            color: #739DE8;
+            font-weight: 500;
+        }
+        .kategori-isi {
+            background-color: #EEF5FF;
+            max-height: 300px;
+            overflow: auto;
+            border-radius: 10px;
+
+            ul {
+                list-style-type: none;
+                padding-left: 1rem;
+            }
+        }
+    }
+}
+.modal-denah {
+    .lokasi {
+        color: #739DE8;
+    }
+    .legend {
+        color: #184896;
+
+        .d-flex {
+            span {
+                width: 20px;
+                height: 20px;
+                border-radius: 5px;
+            }
+            &:nth-child(1) {
+                span {
+                    background-color: #9CB3D7;
+                }
+            }
+            &:nth-child(2) {
+                span {
+                    background-color: #6296F2;
+                }
+            }
+        }
+    }
+    h6 {
+        color: #184896;
+        font-weight: 500;
+    }
+    .svg-denah-core {
+        g {
+            rect {
+                cursor: pointer;
+                transition: .15s ease-in-out;
+            }
+            &.active {
+                rect {
+                    fill: #6296F2;
+                }
+                path {
+                    fill: white;
+                }
+            }
+            &.ori-active {
+                rect {
+                    fill: #9CB3D7;
+                }
+                path {
+                    fill: white;
+                }
+            }
+        }
+    }
+    .btn {
+        &.disabled {
+            background-color: #BDCDE2 !important;
+            color: #FFFFFF;
+            font-weight: 600;
+            border-color: #BDCDE2 !important;
+        }
+        &.btn-danger {
+            background-color: #E47777;
+            color: white !important;
+            box-shadow: none !important;
+        }
+        &, &.disabled, &.btn-danger, &.btn-primary {
+            &:active {
+                box-shadow: none !important;
+            }
+            &:focus {
+                box-shadow: none !important;
+            }
+        }
+    }
+}
+.action-popover {
+    .btn {
+        color: #5987D0;
+        font-weight: 500;
+    }
+}

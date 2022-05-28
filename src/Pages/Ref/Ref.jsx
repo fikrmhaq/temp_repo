@@ -74,6 +74,7 @@ const Ref = memo(() => {
                                 id={section == 'Kategori' ? item.id_rincian : item.id_vendor} 
                                 label={section == 'Kategori' ? item.nama_rincian : section == 'Vendor' ? item.nama_vendor : ''} 
                                 date={{create:item.createdAt,update:item.updatedAt}}
+                                section={section}
                                 _delete={(id) => Delete(id)}
                                   />
                             </div>

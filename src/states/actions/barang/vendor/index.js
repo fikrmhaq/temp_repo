@@ -1,4 +1,4 @@
-import { ADD_VENDOR, DELETE_VENDOR } from "../../..";
+import { ADD_VENDOR, DELETE_VENDOR, EDIT_VENDOR } from "../../..";
 import barangModel from "../../../../models/barangModel";
 import vendor_data from '../../../sample/vendor.json'
 
@@ -38,6 +38,18 @@ const del = (data = null) => {
     }
 }
 
+const edit = (data = null) => {
+    return (dispatch) => {
+
+        const { nama, id } = data
+
+        barangModel.editVendor({nama}, id).then(res=>{
+            const { _id, nama_vendor, updatedAt, createdAt } = res.data.responseData.vendor
+            dispatch(replace({_id:id, items:[{id_vendor: _id, nama_vendor, updatedAt, createdAt}]}))
+        })
+    }
+}
+
 
 const add = (data = []) => {
     return {
@@ -45,6 +57,16 @@ const add = (data = []) => {
         payload:data
     }
 }
+
+const replace = (data = null) => {
+    return {
+        type:EDIT_VENDOR,
+        payload:data
+    }
+}
+
+
+
 
 const remove = (data = null) => {
     return {
@@ -57,5 +79,7 @@ export default {
     fetch,
     post,
     del,
+    edit,
+    replace,
     add
 }

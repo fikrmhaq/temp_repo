@@ -1,0 +1,255 @@
+// Bootstrap
+@import '../public/scss/bootstrap.scss';
+
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// Pages
+@import './custom/sidebar.scss';
+@import './custom/navbar.scss';
+@import './custom/dashboard.scss';
+@import './custom/core.scss';
+@import './custom/ruangan.scss';
+@import './custom/transaksi.scss';
+@import './custom/login.scss';
+@import './custom/ref.scss';
+
+// Component
+@import './component/card.scss';
+@import './component/popover.scss';
+
+$custom-padding: 13px;
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.bg-main {
+    background-color: #EDF2FF !important;
+    position: relative;
+}
+.popover {
+    border: 1px solid #CBDEFF;
+    background-color: white;
+    border-radius: 10px;
+}
+
+// Button
+.btn {
+    transition: .15s ease-in-out;
+    border-radius: 10px;
+
+    &:active {
+        transform: scale(.9);
+    }
+    &.btn-primary {
+        color: white !important;
+        background-color: #4285F1 !important;
+        border-color: #4285F1;
+        box-shadow: none !important;
+
+        &:hover, &:focus {
+            background-color: #366FCC !important;
+            border-color: #366FCC;
+        }
+    }
+    &.btn-danger {
+        box-shadow: none !important;
+        color: white !important;
+
+        &:hover, &:focus {
+            background-color: darken($color: $danger, $amount: 5);
+        }
+    }
+    &.btn-secondary {
+        box-shadow: none !important;
+        color: white !important;
+
+        &:hover, &:focus {
+            background-color: darken($color: $secondary, $amount: 5);
+        }
+    }
+}
+
+// Form Input
+.form-group {
+    label {
+        color: #184896;
+    }
+    .form-select, .form-control {
+        border: none !important;
+        color: #3470D0 !important;
+        font-weight: 500;
+        line-height: 27px;
+        letter-spacing: -0.01em;
+        border-radius: 7px;
+        background-color: #EEF5FF;
+
+        &::placeholder {
+            color: #9CB3D7;
+            font-weight: 400;
+        }
+        &.form-search {
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 1px 4px 10px 0px #0000000D;
+
+            &::placeholder {
+                color: #A9CAFF;
+            }
+        }
+    }
+
+    .form-control {
+        cursor: auto;
+    }
+}
+
+// Pagination
+.pagination {
+    .page-item {
+        &.active {
+            .page-link {
+                background-color: #528DFF;
+                color: white;
+
+                &:active, &:focus {
+                    box-shadow: none;
+                }
+            }
+        }
+        .page-link {
+            background-color: transparent;
+            border: none;
+            color: #739DE8;
+            border-radius: 7px;
+            font-weight: 500;
+        }
+    }
+}
+
+// Modal
+.modal {
+    .modal-content {
+        border-radius: 10px !important;
+    }
+    .modal-delete {
+        .modal-body {
+            h5 {
+                color: #3470D0 !important;
+                font-weight: 600 !important;
+    
+                &.modal-title {
+                    color: #184896 !important;
+                    font-weight: 500 !important;
+                }
+            }
+            p {
+                color: #739DE8 !important;
+            }
+        }
+    }
+    .modal-body {
+        .modal-title {
+            color: #184896;
+            font-weight: 500;
+
+            & ~ .btn {
+                color: #739DE8;
+
+                &:hover {
+                    color: #184896;
+                }
+            }
+        }
+        .modal-subtitle {
+            color: #739DE8;
+            font-weight: 500;
+        }
+    }
+}
+
+.navbar-toggler {
+    border: 1px solid $gray-200;
+
+    &:active {
+        border: 1px solid $gray-300;
+    }
+    &:focus {
+        box-shadow: 0 0 0 3px $gray-600 !important;
+    }
+}
+
+.no-item {
+    div {
+        img {
+            width: 30%;
+        }
+        h5 {
+            color: #184896;
+            font-weight: 500;
+        }
+        h6 {
+            color: #184896;
+        }
+    }
+}
+
+.close {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: $font-size-lg;
+}
+
+.modal-open {
+    padding: 0 !important;
+}
+
+// Breakpoints
+@include media-breakpoint-down(sm) {
+    #chartIncome {
+        height: 500px;
+    }
+}
+@include media-breakpoint-down(md) {
+    .grid-custom {
+        overflow: auto;
+        .transaksi {
+            width: 700px !important;
+            display: block;
+        }
+        .ruangan {
+            width: 600px !important;
+            display: block;
+        }
+        .dataTable {
+            width: 900px;
+        }
+    }
+}
+@include media-breakpoint-down(lg) {
+    .custom-input {
+        padding-top: $custom-padding;
+        padding-bottom: $custom-padding;
+        width: 100% !important;
+    }
+    .d-custom {
+        display: none !important;
+    }
+}
+@media (min-width: 1228px) {
+    .d-cslg-block {
+        display: block !important;
+    }
+    .d-custom {
+        display: none !important;
+    }
+}
+@media (max-width: 1228px) {
+    .w-cslg-100 {
+        width: 100% !important;
+    }
+    .d-cslg-flex {
+        display: flex;
+    }
+}
